@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         }
         setupBottomNavigation()
 
+        // 초기 클릭된 값이 없을 시 menu에서 homeFragment를 클릭 된 상태를 보여줌
         if (savedInstanceState == null) {
             binding.bottomNavigationView.selectedItemId = R.id.homeFragment
         }
@@ -52,6 +53,5 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
     }
 }

@@ -3,16 +3,16 @@
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_launcher_background"
-        android:title="123"/>
+        android:title="Home"/>
 
     <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/ic_launcher_background"
-        android:title="TODO" />
+        android:title="Search" />
 
     <item
         android:id="@+id/myPageFragment"
         android:icon="@drawable/ic_launcher_background"
-        android:title="qwer"/>
+        android:title="MyPage"/>
 
 </menu>
