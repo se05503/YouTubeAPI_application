@@ -8,6 +8,10 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.ssg_tube.databinding.ActivityMainBinding
+import com.example.ssg_tube.presentaion.ui.home.HomeFragment
+import com.example.ssg_tube.presentaion.ui.mypage.MyPageFragment
+import com.example.ssg_tube.presentaion.ui.search.SearchFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,11 +27,31 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        setupNavigation()
+        setupBottomNavigation()
+
+        if (savedInstanceState == null) {
+            binding.bottomNavigationView.selectedItemId = R.id.homeFragment
+        }
     }
 
-    private fun setupNavigation() {
-        val naviController = findNavController(R.id.main_navi)
-        binding.bottomNavigationView.setupWithNavController(naviController)
+    private fun setupBottomNavigation() {
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.homeFragment -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.frame_main, HomeFragment()).commit()
+                    true
+                }
+                R.id.searchFragment -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.frame_main, SearchFragment()).commit()
+                    true
+                }
+                R.id.myPageFragment -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.frame_main, MyPageFragment()).commit()
+                    true
+                }
+                else -> false
+            }
+        }
+
     }
 }
