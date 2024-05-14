@@ -8,9 +8,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-// YouTubAPI 접근
-// RetroClient.youTubeRetrofit. ~~
-
 object RetroClient {
     private val retrofit by lazy {
         Retrofit.Builder()
