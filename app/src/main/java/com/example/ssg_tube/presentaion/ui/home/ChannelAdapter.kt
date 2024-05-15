@@ -15,7 +15,7 @@ class ChannelAdapter(private val items: List<DetailModel>) :
     }
 
     override fun onBindViewHolder(holder: ChannelAdapter.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(items[position])
     }
 
     override fun getItemCount(): Int {
