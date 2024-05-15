@@ -11,6 +11,9 @@ class HomeFragment: Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private lateinit var popularVideoAdapter: PopularVideoAdapter
+    private lateinit var categoryVideoAdapter: CategoryVideoAdapter
+    private lateinit var channelAdapter: ChannelAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +27,38 @@ class HomeFragment: Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupAdapter()
+
+    }
+
+    private fun setupAdapter() {
+        setupPopularVideoAdapter()
+        setupCategoryVideoAdapter()
+        setupChannelAdapter()
+    }
+
+    private fun setupPopularVideoAdapter() {
+        popularVideoAdapter = PopularVideoAdapter(emptyList())
+        binding.rvPopularVideoArea.adapter = popularVideoAdapter
+    }
+
+    private fun setupCategoryVideoAdapter() {
+        categoryVideoAdapter = CategoryVideoAdapter(emptyList())
+        binding.rvCategoryArea.adapter = categoryVideoAdapter
+
+    }
+
+    private fun setupChannelAdapter() {
+        channelAdapter = ChannelAdapter(emptyList())
+        binding.rvChannelArea.adapter = channelAdapter
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+
     }
 }
