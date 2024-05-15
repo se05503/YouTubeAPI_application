@@ -1,7 +1,14 @@
 <resources>
     <string name="app_name">SSG_TUBE</string>
     <string-array name="Category">
+        <item>영화및 애니메이션</item>
+        <item>음악</item>
+        <item>애완동물및 동물</item>
+        <item>스포츠</item>
         <item>게임</item>
-        <item>운동</item>
+        <item>뉴스및 정치</item>
+        <item>과학및 기술</item>
+        <item>영화</item>
+        <item>공포</item>
     </string-array>
 </resources>
