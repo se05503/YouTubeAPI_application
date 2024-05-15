@@ -45,6 +45,8 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
     // Okhttp3
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    // Glide
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
