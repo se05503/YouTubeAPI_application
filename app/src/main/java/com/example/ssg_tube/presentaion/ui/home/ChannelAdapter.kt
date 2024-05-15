@@ -3,6 +3,7 @@ package com.example.ssg_tube.presentaion.ui.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.ssg_tube.databinding.RvChannelItemBinding
 import com.example.ssg_tube.presentaion.model.DetailModel
 
@@ -25,7 +26,11 @@ class ChannelAdapter(private val items: List<DetailModel>) :
     class ViewHolder(private val binding: RvChannelItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DetailModel) {
-
+            binding.apply {
+                Glide.with(ivArea.context)
+                    .load(item.thumbnail)
+                    .into(ivArea)
+            }
         }
     }
 }
