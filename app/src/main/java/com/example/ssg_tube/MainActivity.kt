@@ -28,16 +28,13 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
             insets
         }
-//        setupBottomNavigation()
-//        // 초기 클릭된 값이 없을 시 menu에서 homeFragment를 클릭 된 상태를 보여줌
-//        if (savedInstanceState == null) {
-//            binding.bottomNavigationView.selectedItemId = R.id.homeFragment
-//        }
+        setupBottomNavigation()
+        // 초기 클릭된 값이 없을 시 menu에서 homeFragment를 클릭 된 상태를 보여줌
+        if (savedInstanceState == null) {
+            binding.bottomNavigationView.selectedItemId = R.id.homeFragment
+        }
 
-        val fragmentManger = supportFragmentManager
-        val contactListFragment = DetailFragment()
-        val transaction = fragmentManger.beginTransaction()
-        transaction.add(R.id.frame_main, contactListFragment).commitAllowingStateLoss()
+
     }
 
     private fun setupBottomNavigation() {
