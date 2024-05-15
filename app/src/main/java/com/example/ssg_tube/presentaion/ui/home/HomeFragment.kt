@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.ssg_tube.databinding.FragmentHomeBinding
 
 class HomeFragment: Fragment() {
@@ -14,6 +15,7 @@ class HomeFragment: Fragment() {
     private lateinit var popularVideoAdapter: PopularVideoAdapter
     private lateinit var categoryVideoAdapter: CategoryVideoAdapter
     private lateinit var channelAdapter: ChannelAdapter
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
