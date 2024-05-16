@@ -24,6 +24,7 @@ class SearchViewModel(private val apiService: YouTubeAPI) : ViewModel() {
     fun videoResults(query: String) { // videoSearch 를 불러오기 위해선 suspend 를 사용해야 한다.
         resItems.clear()
         viewModelScope.launch {
+            // videModelScope는 fragment 가 파괴 될 때 중단시킴. 메모리 누수 방지. 비동기적 처리를 하다보니ㅁ
             requestResponse = apiService.videoSearch(
                 part = "snippet",
                 query = query,
