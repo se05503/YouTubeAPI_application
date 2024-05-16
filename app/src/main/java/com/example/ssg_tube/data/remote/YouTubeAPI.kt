@@ -1,5 +1,6 @@
 package com.example.ssg_tube.data.remote
 
+import android.telecom.Call
 import com.example.ssg_tube.Constants
 import com.example.ssg_tube.data.model.CategoryResponse
 import com.example.ssg_tube.data.model.ChannelResponse
@@ -52,12 +53,17 @@ interface YouTubeAPI {
     ): ChannelResponse
 
     // 비디오 검색
+    // https://developers.google.com/youtube/v3/docs/search/list?hl=ko
     @GET("search")
-    suspend fun videoSearch(
-        @Query("part") part: String,
-        @Query("q") query: String,
-        @Query("maxResults") maxResults: Int,
-        @Query("type") type: String,
+    fun videoSearch(
+        // 필수 매개변수
+        @Query("part") part: String, // part 매개변수는 API 응답이 포함하는 search 리소스 속성 하나 이상의 쉼표로 구분된 목록을 지정합니다. 매개변수 값을 snippet로 설정합니다.
+        // 선택 매개변수
+        @Query("q") query: String, // 검색어
+        @Query("order") order: String, // 기본값 : relevance (date: 시간순, rating: 평점순, viewCount: 조회수)
+        @Query("maxResults") maxResults: Int, // maxResults 매개변수는 결과 집합에 반환해야 하는 최대 항목 수를 지정합니다. 사용 가능한 값: 0~50 기본값은 5입니다.
+        @Query("type") type: String, // type 매개변수는 특정 유형의 리소스만 검색하도록 검색어를 제한합니다. 값은 쉼표로 구분된 리소스 유형 목록입니다. 기본값은 video,channel,playlist입니다.
+        @Query("videoType") videoType: String, // 특정 유형의 동영상으로 검색을 제한할 수 있습니다. 이 매개변수의 값을 지정하는 경우 type 매개변수의 값도 video로 설정해야 합니다. any - 모든 동영상 반환, episode - 에피소드, movie - 영화
         @Query("key") apiKey: String = Constants.AUTHORIZATION
     ): SearchResponse
 }

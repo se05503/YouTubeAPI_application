@@ -56,4 +56,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Glide (썸네일 부분에 필요하지 않을까 싶어서 추가했습니다)
+    implementation("com.github.bumptech.glide:glide:4.14.1")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.14.1")
 }

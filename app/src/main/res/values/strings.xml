@@ -2,4 +2,8 @@
     <string name="app_name">SSG_TUBE</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_hint">🔍  Search</string>
+    <string name="popular">인기순</string>
+    <string name="recent">최신순</string>
+    <string name="btn_search">검색하기</string>
 </resources>
