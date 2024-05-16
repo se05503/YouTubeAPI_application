@@ -13,7 +13,15 @@ data class ChannelItem(
 )
 
 data class ChannelSnippet(
-    @SerializedName("title") val title: String,
+    @SerializedName("title") val title: String?,
     @SerializedName("description") val description: String,
-    @SerializedName("thumbnails") val thumbnails: String = "default"
+    @SerializedName("thumbnails") val thumbnails: ThumbnailChannelDefault
+)
+
+data class ThumbnailChannelDefault(
+    @SerializedName("default") val default: ThumbnailChannelUrl
+)
+
+data class ThumbnailChannelUrl(
+    @SerializedName("url") val url: String?
 )

@@ -34,13 +34,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupAdapter()
+        viewModel.popularVideoResponse()
         setupObserve()
-        initView()
 
-    }
-
-    private fun initView() {
-        viewModel.popularVideoMapper()
     }
 
     private fun setupAdapter() {

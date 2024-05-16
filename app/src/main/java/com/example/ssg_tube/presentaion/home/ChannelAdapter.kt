@@ -7,8 +7,14 @@ import com.bumptech.glide.Glide
 import com.example.ssg_tube.databinding.RvChannelItemBinding
 import com.example.ssg_tube.presentaion.model.VideoModel
 
-class ChannelAdapter(private val items: List<VideoModel>) :
+class ChannelAdapter(private var items: List<VideoModel>) :
     RecyclerView.Adapter<ChannelAdapter.ViewHolder>() {
+
+    fun updateItem(newItems: List<VideoModel>) {
+        items = newItems
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             RvChannelItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
