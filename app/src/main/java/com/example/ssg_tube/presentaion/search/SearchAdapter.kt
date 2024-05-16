@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -31,14 +32,21 @@ class SearchAdapter(private val context: Context):RecyclerView.Adapter<SearchAda
     inner class SearchViewHolder(binding: SearchItemBinding):RecyclerView.ViewHolder(binding.root),View.OnClickListener {
         var tvTitle: TextView = binding.tvTitle
         var tvThumbnail: ImageView = binding.ivThumbnail
+        var view: ConstraintLayout = binding.clSearchView
+
+        init {
+            view.setOnClickListener(this)
+        }
 
         override fun onClick(v: View?) {
             val position = adapterPosition.takeIf { it != RecyclerView.NO_POSITION } ?: return // b type 해설 코드 참고했습니다!
             val item = items[position]
-            val fragment = DetailFragment.newInstance(item) // 문제 상황1) VideoModel에다가 SearchModel값을 넣기
+            val fragment = DetailFragment.newInstance(item)
             val activity = context as AppCompatActivity // search fragment 가 attach 된 액티비티
             activity.supportFragmentManager.commit {
                 replace(R.id.frame_main,fragment)
+                setReorderingAllowed(true)
+                addToBackStack("")
             }
         }
     }
