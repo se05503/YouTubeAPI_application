@@ -7,12 +7,14 @@ import com.bumptech.glide.Glide
 import com.example.ssg_tube.databinding.RvPopularVideoItemBinding
 import com.example.ssg_tube.presentaion.model.DetailModel
 
-class PopularVideoAdapter(private val items: List<DetailModel>) : RecyclerView.Adapter<PopularVideoAdapter.ViewHolder>() {
+class PopularVideoAdapter(private val items: List<DetailModel>) :
+    RecyclerView.Adapter<PopularVideoAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): PopularVideoAdapter.ViewHolder {
-        val binding = RvPopularVideoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            RvPopularVideoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -24,7 +26,8 @@ class PopularVideoAdapter(private val items: List<DetailModel>) : RecyclerView.A
         return items.size
     }
 
-    class ViewHolder(private val binding: RvPopularVideoItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: RvPopularVideoItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DetailModel) {
             binding.apply {
                 Glide.with(ivArea.context)

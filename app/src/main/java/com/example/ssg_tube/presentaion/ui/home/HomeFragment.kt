@@ -1,17 +1,14 @@
 package com.example.ssg_tube.presentaion.ui.home
 
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.example.ssg_tube.R
 import com.example.ssg_tube.databinding.FragmentHomeBinding
-import com.example.ssg_tube.presentaion.model.DetailModel
 
-class HomeFragment: Fragment() {
+class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -19,8 +16,6 @@ class HomeFragment: Fragment() {
     private lateinit var categoryVideoAdapter: CategoryVideoAdapter
     private lateinit var channelAdapter: ChannelAdapter
     private val viewModel: HomeViewModel by viewModels()
-
-    val dummyData = mutableListOf<DetailModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,36 +34,6 @@ class HomeFragment: Fragment() {
 
         setupAdapter()
 
-        dummyData.add(
-            DetailModel(
-            thumbnail = "https://img-store.theqoo.net/OgYDrF.webp",
-            title = "1",
-            date = "",
-            channelIcon = "",
-            channelName = "",
-            description = ""
-            ))
-
-        dummyData.add(
-            DetailModel(
-                thumbnail = "https://img-store.theqoo.net/OgYDrF.webp",
-                title = "1",
-                date = "",
-                channelIcon = "",
-                channelName = "",
-                description = ""
-            ))
-
-        dummyData.add(
-            DetailModel(
-                thumbnail = "https://img-store.theqoo.net/OgYDrF.webp",
-                title = "1",
-                date = "",
-                channelIcon = "",
-                channelName = "",
-                description = ""
-            ))
-
     }
 
     private fun setupAdapter() {
@@ -78,18 +43,18 @@ class HomeFragment: Fragment() {
     }
 
     private fun setupPopularVideoAdapter() {
-        popularVideoAdapter = PopularVideoAdapter(dummyData)
+        popularVideoAdapter = PopularVideoAdapter(emptyList())
         binding.rvPopularVideoArea.adapter = popularVideoAdapter
     }
 
     private fun setupCategoryVideoAdapter() {
-        categoryVideoAdapter = CategoryVideoAdapter(dummyData)
+        categoryVideoAdapter = CategoryVideoAdapter(emptyList())
         binding.rvCategoryArea.adapter = categoryVideoAdapter
 
     }
 
     private fun setupChannelAdapter() {
-        channelAdapter = ChannelAdapter(dummyData)
+        channelAdapter = ChannelAdapter(emptyList())
         binding.rvChannelArea.adapter = channelAdapter
     }
 
