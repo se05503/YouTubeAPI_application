@@ -24,7 +24,7 @@ interface YouTubeAPI {
         @Query("chart") chart: String,
         @Query("regionCode") regionCode: String,
         @Query("key") apiKey: String = Constants.AUTHORIZATION
-    ): VideoResponse
+    ): VideoResponse // 얘를 쓰자
 
     // 비디오 카테고리 ( 한국 카테고리 목록 )
     @GET("videoCategories")
