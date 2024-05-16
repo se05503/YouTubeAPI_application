@@ -18,9 +18,11 @@ class SearchAdapter(private val context: Context):RecyclerView.Adapter<SearchAda
     var items = ArrayList<SearchItemModel>()
 
     // 전체 아이템 삭제(매번 검색을 할 때마다 새로운 데이터가 저장되기 때문)
+    // notifyItemInserted()
     fun clearItem() {
         items.clear()
-        notifyDataSetChanged()
+        notifyDataSetChanged() // notifyDataSetChanged()는 모든 뷰를 삭제했다가 다시 갱신하기 때문에 성능저하가 발생할 수 있습니다.
+//        notifyItemInserted()
     }
 
     inner class SearchViewHolder(binding: SearchItemBinding):RecyclerView.ViewHolder(binding.root) {
