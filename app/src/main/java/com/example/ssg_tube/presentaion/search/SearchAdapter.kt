@@ -1,4 +1,4 @@
-package com.example.ssg_tube.presentaion.ui.search
+package com.example.ssg_tube.presentaion.search
 
 import android.content.Context
 import android.view.LayoutInflater

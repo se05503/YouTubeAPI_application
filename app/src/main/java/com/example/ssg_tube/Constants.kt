@@ -9,4 +9,7 @@ object Constants {
 
     // SharedPreference 파일 이름
     const val PREF = "pref"
+
+    // Detail 로 데이터를 넘기기위한 키
+    const val DETAIL_KEY = "detail_key"
 }
