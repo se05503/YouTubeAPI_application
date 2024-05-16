@@ -6,11 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.net.toUri
+import androidx.fragment.app.FragmentActivity
+import com.bumptech.glide.Glide
 import com.example.ssg_tube.databinding.FragmentDetailBinding
 import com.example.ssg_tube.presentaion.model.DetailModel
+import com.example.ssg_tube.presentaion.ui.detail.util.invisible
 
 class DetailFragment : Fragment() {
-    private lateinit var selectedVideoInfo : DetailModel
+    private lateinit var selectedVideoInfo: DetailModel
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
 
@@ -44,6 +47,7 @@ class DetailFragment : Fragment() {
         detailModel?.let {
             bindItem(it)
         }
+        (activity as? FragmentActivity)?.invisible()
     }
 
     override fun onDestroyView() {
@@ -52,10 +56,19 @@ class DetailFragment : Fragment() {
     }
 
 
-
     fun bindItem(detailModel: DetailModel) {
-        binding.ivThumbnail.setImageURI(detailModel.thumbnail.toUri())
-        binding.tvDescription.text = detailModel.description
-        binding.tvDetailPageVideoTitle.text = detailModel.title
+        binding.apply {
+            tvDescription.text = detailModel.description
+            tvDetailPageVideoTitle.text = detailModel.title
+            tvChannelName.text = detailModel.channelName
+            tvDetailPageVideoDate.text = detailModel.date
+            context?.let {
+                Glide.with(it).run {
+                    load(detailModel.thumbnail).into(ivThumbnail)
+                    load(detailModel.channelIcon).into(ivChannelImage)
+                }
+            }
+        }
+
     }
 }
