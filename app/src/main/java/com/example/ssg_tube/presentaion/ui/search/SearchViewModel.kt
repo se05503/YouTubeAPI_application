@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.ssg_tube.data.model.SearchResponse
 import com.example.ssg_tube.data.remote.YouTubeAPI
 import com.example.ssg_tube.presentaion.model.SearchItemModel
+import kotlinx.coroutines.launch
 import javax.security.auth.callback.Callback
 
 class SearchViewModel(private val apiService: YouTubeAPI) : ViewModel() {
@@ -17,17 +19,21 @@ class SearchViewModel(private val apiService: YouTubeAPI) : ViewModel() {
 
     var resItems: ArrayList<SearchItemModel> = ArrayList()
     var isSearchFinished = false
+    lateinit var requestResponse: SearchResponse
 
     fun videoResults(query: String) { // videoSearch 를 불러오기 위해선 suspend 를 사용해야 한다.
         resItems.clear()
-        val requestResponse = apiService.videoSearch(
-            part = "snippet",
-            query = query,
-            maxResults = 5,
-            order = "relevence",
-            type = "video",
-            videoType = "any"
-        )
+        viewModelScope.launch {
+            requestResponse = apiService.videoSearch(
+                part = "snippet",
+                query = query,
+                maxResults = 5,
+                order = "relevence",
+                type = "video",
+                videoType = "any"
+            )
+        }
+
         val items = requestResponse.items
         for (item in items) {
             val thumbnail = item.snippet.thumbnails.get("default")!!.url
