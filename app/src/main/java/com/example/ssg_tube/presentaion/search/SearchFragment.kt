@@ -22,7 +22,7 @@ class SearchFragment : Fragment() {
     private lateinit var adapter: SearchAdapter
     private lateinit var layoutManager: GridLayoutManager
     private var lastQuery = "" // 사용자가 검색창에 입력한 값
-    val apiServiceInstance = RetroClient.youTubeRetrofit
+    private val apiServiceInstance = RetroClient.youTubeRetrofit
 
     // 뷰 모델
     private val viewModel: SearchViewModel by viewModels {
@@ -56,21 +56,22 @@ class SearchFragment : Fragment() {
     }
 
     private fun setupViews() {
-        layoutManager = GridLayoutManager(requireContext(),2)
+        layoutManager = GridLayoutManager(requireContext(), 2)
 
         binding.rvSearch.layoutManager = layoutManager
         adapter = SearchAdapter(mContext)
 
         binding.apply {
             rvSearch.adapter = adapter
+            rvSearch.itemAnimator = null // 진혁님 피드백
             // ... 나중에 기능 추가
         }
     }
 
     private fun setupListeners() {
         binding.btnSearch.setOnClickListener {
-            if(binding.etSearch.text.toString()=="")
-                Toast.makeText(requireContext(),"검색어를 입력하세요!",Toast.LENGTH_SHORT).show()
+            if (binding.etSearch.text.toString() == "")
+                Toast.makeText(requireContext(), "검색어를 입력하세요!", Toast.LENGTH_SHORT).show()
             else {
                 // 사용자가 검색어를 입력한 경우
                 adapter.clearItem() // 검색어를 저장하기 전에 일단 전 데이터 삭제하기
