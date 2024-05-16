@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">SSG_TUBE</string>
-    <string-array name="Category">
+    <string-array name="Categories">
         <item>영화및 애니메이션</item>
         <item>음악</item>
         <item>애완동물및 동물</item>
