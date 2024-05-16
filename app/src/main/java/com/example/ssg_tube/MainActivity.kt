@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.ssg_tube.databinding.ActivityMainBinding
-import com.example.ssg_tube.presentaion.ui.home.HomeFragment
-import com.example.ssg_tube.presentaion.ui.mypage.MyPageFragment
-import com.example.ssg_tube.presentaion.ui.search.SearchFragment
+import com.example.ssg_tube.presentaion.home.HomeFragment
+import com.example.ssg_tube.presentaion.mypage.MyPageFragment
+import com.example.ssg_tube.presentaion.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
 

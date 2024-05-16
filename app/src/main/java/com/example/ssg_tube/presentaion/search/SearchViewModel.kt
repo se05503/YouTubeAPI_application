@@ -1,4 +1,4 @@
-package com.example.ssg_tube.presentaion.ui.search
+package com.example.ssg_tube.presentaion.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
