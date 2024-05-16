@@ -1,4 +1,4 @@
-package com.example.ssg_tube.presentaion.ui.home
+package com.example.ssg_tube.presentaion.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,13 +12,13 @@ class PopularVideoAdapter(private val items: List<DetailModel>) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): PopularVideoAdapter.ViewHolder {
+    ): ViewHolder {
         val binding =
             RvPopularVideoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: PopularVideoAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items[position])
     }
 

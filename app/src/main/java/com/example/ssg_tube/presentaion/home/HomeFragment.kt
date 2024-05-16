@@ -1,4 +1,4 @@
-package com.example.ssg_tube.presentaion.ui.home
+package com.example.ssg_tube.presentaion.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_color"
     android:clipToOutline="false"
-    tools:context=".presentaion.ui.detail.DetailFragment">
+    tools:context=".presentaion.detail.DetailFragment">
 
     <ImageView
         android:id="@+id/ivThumbnail"

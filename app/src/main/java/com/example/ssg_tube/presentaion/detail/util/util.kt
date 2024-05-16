@@ -1,4 +1,4 @@
-package com.example.ssg_tube.presentaion.ui.detail.util
+package com.example.ssg_tube.presentaion.detail.util
 
 import android.view.View
 import androidx.fragment.app.FragmentActivity

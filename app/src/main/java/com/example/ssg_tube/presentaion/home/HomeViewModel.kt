@@ -1,4 +1,4 @@
-package com.example.ssg_tube.presentaion.ui.home
+package com.example.ssg_tube.presentaion.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

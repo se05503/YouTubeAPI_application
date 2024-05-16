@@ -1,4 +1,4 @@
-package com.example.ssg_tube.presentaion.ui.detail
+package com.example.ssg_tube.presentaion.detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import com.example.ssg_tube.databinding.FragmentDetailBinding
 import com.example.ssg_tube.presentaion.model.DetailModel
-import com.example.ssg_tube.presentaion.ui.detail.util.invisible
+import com.example.ssg_tube.presentaion.detail.util.invisible
 
 class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
