@@ -1,4 +1,4 @@
-package com.example.ssg_tube.presentaion.ui.detail
+package com.example.ssg_tube.presentaion.detail
 
 import android.app.Activity
 import android.content.Context
