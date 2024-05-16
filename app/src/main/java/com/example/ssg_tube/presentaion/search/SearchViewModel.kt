@@ -5,42 +5,49 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.ssg_tube.data.model.SearchResponse
 import com.example.ssg_tube.data.remote.YouTubeAPI
-import com.example.ssg_tube.presentaion.model.SearchItemModel
+import com.example.ssg_tube.presentaion.model.VideoModel
 import kotlinx.coroutines.launch
-import javax.security.auth.callback.Callback
 
 class SearchViewModel(private val apiService: YouTubeAPI) : ViewModel() {
 
     // Livedata
-    private val _searchResults = MutableLiveData<List<SearchItemModel>>()
-    val searchResults: LiveData<List<SearchItemModel>> get() = _searchResults
+    private val _searchResults = MutableLiveData<List<VideoModel>>()
+    val searchResults: LiveData<List<VideoModel>> get() = _searchResults
 
-    var resItems: ArrayList<SearchItemModel> = ArrayList()
-    lateinit var requestResponse: SearchResponse
+    var resItems: ArrayList<VideoModel> = ArrayList()
 
     fun videoResults(query: String) { // videoSearch 를 불러오기 위해선 suspend 를 사용해야 한다.
         resItems.clear()
-        viewModelScope.launch {
+        viewModelScope.launch { // 코루틴을 사용하여 비동기적으로 실행
             // videModelScope는 fragment 가 파괴 될 때 중단되어 메모리 누수가 방지됨
-            requestResponse = apiService.videoSearch(
+            val requestResponse = apiService.videoSearch( // 비동기적으로 실행되기 때
                 part = "snippet",
                 query = query,
-                maxResults = 5,
-                order = "relevence",
+                maxResults = 20, // 해결 완료
+                order = "relevance",
                 type = "video",
                 videoType = "any"
             )
-        }
 
-        val items = requestResponse.items
-        for (item in items) {
-            val thumbnail = item.snippet.thumbnails.get("default")!!.url
-            val title = item.snippet.title
-            resItems.add(SearchItemModel(title = title, url = thumbnail))
+
+            val items = requestResponse.items
+            for (item in items) {
+                val thumbnail = item.snippet.thumbnails["default"]!!.url
+                val title = item.snippet.title
+                resItems.add(
+                    VideoModel(
+                        title = title,
+                        thumbnail = thumbnail,
+                        channelIcon = "",
+                        channelName = "",
+                        date = "",
+                        description = ""
+                    )
+                )
+            }
+            searchResult()
         }
-        searchResult()
     }
 
     // 검색 결과를 LiveData에 설정
