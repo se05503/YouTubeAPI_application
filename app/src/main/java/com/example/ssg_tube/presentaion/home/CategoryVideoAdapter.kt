@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ssg_tube.databinding.RvCategoryVideoItemBinding
-import com.example.ssg_tube.presentaion.model.DetailModel
+import com.example.ssg_tube.presentaion.model.VideoModel
 
-class CategoryVideoAdapter(private val items: List<DetailModel>) :
+class CategoryVideoAdapter(private val items: List<VideoModel>) :
     RecyclerView.Adapter<CategoryVideoAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -28,7 +28,7 @@ class CategoryVideoAdapter(private val items: List<DetailModel>) :
 
     class ViewHolder(private val binding: RvCategoryVideoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: DetailModel) {
+        fun bind(item: VideoModel) {
             binding.apply {
                 Glide.with(ivArea.context)
                     .load(item.thumbnail)

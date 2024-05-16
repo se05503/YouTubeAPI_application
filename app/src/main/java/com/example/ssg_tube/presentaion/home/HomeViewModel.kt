@@ -3,10 +3,10 @@ package com.example.ssg_tube.presentaion.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.ssg_tube.presentaion.model.DetailModel
+import com.example.ssg_tube.presentaion.model.VideoModel
 
 class HomeViewModel : ViewModel() {
-    private val _event: MutableLiveData<List<DetailModel>> = MutableLiveData()
-    val event: LiveData<List<DetailModel>> get() = _event
+    private val _event: MutableLiveData<List<VideoModel>> = MutableLiveData()
+    val event: LiveData<List<VideoModel>> get() = _event
 
 }

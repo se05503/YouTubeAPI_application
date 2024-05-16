@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import com.example.ssg_tube.databinding.FragmentDetailBinding
-import com.example.ssg_tube.presentaion.model.DetailModel
-import com.example.ssg_tube.presentaion.detail.util.invisible
+import com.example.ssg_tube.presentaion.model.VideoModel
+import com.example.ssg_tube.presentaion.util.invisible
 
 class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
@@ -17,10 +17,10 @@ class DetailFragment : Fragment() {
 
     //데이터 받는 부분
     companion object {
-        fun newInstance(detailModel: DetailModel): DetailFragment {
+        fun newInstance(videoModel: VideoModel): DetailFragment {
             val fragment = DetailFragment()
             val args = Bundle()
-            args.putParcelable("detailModel", detailModel)
+            args.putParcelable("detailModel", videoModel)
             fragment.arguments = args
             return fragment
         }
@@ -41,7 +41,7 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //받아온 데이터를 번들에있는걸 꺼냄
-        val detailPageItems = arguments?.getParcelable<DetailModel>("detailModel")
+        val detailPageItems = arguments?.getParcelable<VideoModel>("detailModel")
         detailPageItems?.let {
             bindItem(it)
         }
@@ -55,16 +55,16 @@ class DetailFragment : Fragment() {
     }
 
 
-    private fun bindItem(detailModel: DetailModel) {
+    private fun bindItem(videoModel: VideoModel) {
         binding.apply {
-            tvDescription.text = detailModel.description
-            tvDetailPageVideoTitle.text = detailModel.title
-            tvChannelName.text = detailModel.channelName
-            tvDetailPageVideoDate.text = detailModel.date
+            tvDescription.text = videoModel.description
+            tvDetailPageVideoTitle.text = videoModel.title
+            tvChannelName.text = videoModel.channelName
+            tvDetailPageVideoDate.text = videoModel.date
             context?.let {
                 Glide.with(it).run {
-                    load(detailModel.thumbnail).into(ivThumbnail)
-                    load(detailModel.channelIcon).into(ivChannelImage)
+                    load(videoModel.thumbnail).into(ivThumbnail)
+                    load(videoModel.channelIcon).into(ivChannelImage)
                 }
             }
         }
