@@ -1,5 +1,9 @@
 package com.example.ssg_tube.presentaion.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class DetailModel(
     val thumbnail: String,
     val title: String,
@@ -8,4 +12,12 @@ data class DetailModel(
     val channelName: String,
     val description: String,
     val liked: Boolean = false
-)
+) : Parcelable
+
+
+
+
+
+
+
+

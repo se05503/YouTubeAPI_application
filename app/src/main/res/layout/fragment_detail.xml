@@ -1,13 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detailFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:clipToOutline="false"
     tools:context=".presentaion.ui.detail.DetailFragment">
 
-    <TextView
+    <ImageView
+        android:id="@+id/ivThumbnail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="11" />
+        android:layout_height="200dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/dummyimage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+
+    <!--    타이틀 및 공유 좋아요 등-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cvDetailPageHeader"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/ivThumbnail">
+
+        <TextView
+            android:id="@+id/tvDetailPageVideoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="NBA 최악의 사나이"
+            app:layout_constraintStart_toStartOf="@+id/cvDetailPageHeader"
+            app:layout_constraintTop_toTopOf="@+id/cvDetailPageHeader" />
+
+        <TextView
+            android:id="@+id/tvDetailPageVideoDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="2024.05.14"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivHeart"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginEnd="50dp"
+            android:src="@drawable/ic_hearicon"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDetailPageVideoDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvDetailPageVideoDate" />
+
+        <ImageView
+            android:id="@+id/ivShare"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_shareicon"
+            app:layout_constraintBottom_toBottomOf="@+id/ivHeart"
+            app:layout_constraintStart_toEndOf="@+id/ivHeart"
+            app:layout_constraintTop_toTopOf="@+id/ivHeart" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--    유저정보 있는 부분-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cvDetailPageUserInfoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/cvDetailPageHeader">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivChannelImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/dummyiamge2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvChannelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:text="르브론의 독재노트"
+            app:layout_constraintBottom_toBottomOf="@+id/ivChannelImage"
+            app:layout_constraintStart_toEndOf="@+id/ivChannelImage"
+            app:layout_constraintTop_toTopOf="@+id/ivChannelImage" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnFakeFollowButton"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/button_round"
+            android:backgroundTint="@color/main_color"
+            android:text="Follow"
+            android:textColor="@color/white"
+            android:translationZ="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivChannelImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivChannelImage" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clDetailPageBody"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvDetailPageUserInfoLayout">
+
+        <ScrollView
+            android:id="@+id/svBodyContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="faeasdfm,a.djfaklejfklasdfm,a.djfaklejfklasdsfmakfdjfklajeklfjfaklejfklasdfm,a.dsfmakfdjfklajeklfjfaklejfklasdfm,a.dsfmakfdjfklajeklfjfaklejfklasdfm,a.dsfmakfdjfklajeklfjfaklejfklasdfm,a.dsfmakfdjfklajeklfjfaklejfklasdfm,a.dsfm" />
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
