@@ -6,11 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
-import com.example.ssg_tube.R
 import com.example.ssg_tube.databinding.FragmentHomeBinding
-import com.example.ssg_tube.presentaion.ui.detail.DetailFragment
-import com.example.ssg_tube.presentaion.ui.detail.util.invisible
-import com.example.ssg_tube.presentaion.ui.detail.util.testData
 import com.example.ssg_tube.presentaion.ui.detail.util.visible
 
 class HomeFragment : Fragment() {
@@ -33,13 +29,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btn.setOnClickListener {
-            val fragment = DetailFragment.newInstance(testData)
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.frame_main, fragment)
-                .addToBackStack(null)
-                .commit()
-        }
 
     }
 

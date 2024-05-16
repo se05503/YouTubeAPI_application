@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.net.toUri
 import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import com.example.ssg_tube.databinding.FragmentDetailBinding
@@ -13,7 +12,6 @@ import com.example.ssg_tube.presentaion.model.DetailModel
 import com.example.ssg_tube.presentaion.ui.detail.util.invisible
 
 class DetailFragment : Fragment() {
-    private lateinit var selectedVideoInfo: DetailModel
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
 
@@ -43,10 +41,11 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //받아온 데이터를 번들에있는걸 꺼냄
-        val detailModel = arguments?.getParcelable<DetailModel>("detailModel")
-        detailModel?.let {
+        val detailPageItems = arguments?.getParcelable<DetailModel>("detailModel")
+        detailPageItems?.let {
             bindItem(it)
         }
+        //네비게이션 바 지우는 코드
         (activity as? FragmentActivity)?.invisible()
     }
 
@@ -56,7 +55,7 @@ class DetailFragment : Fragment() {
     }
 
 
-    fun bindItem(detailModel: DetailModel) {
+    private fun bindItem(detailModel: DetailModel) {
         binding.apply {
             tvDescription.text = detailModel.description
             tvDetailPageVideoTitle.text = detailModel.title
