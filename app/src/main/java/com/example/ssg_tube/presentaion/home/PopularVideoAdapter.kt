@@ -7,8 +7,14 @@ import com.bumptech.glide.Glide
 import com.example.ssg_tube.databinding.RvPopularVideoItemBinding
 import com.example.ssg_tube.presentaion.model.VideoModel
 
-class PopularVideoAdapter(private val items: List<VideoModel>) :
+class PopularVideoAdapter(private var items: List<VideoModel>) :
     RecyclerView.Adapter<PopularVideoAdapter.ViewHolder>() {
+
+        fun updateItem(newItems: List<VideoModel>) {
+            items = newItems
+            notifyDataSetChanged()
+        }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

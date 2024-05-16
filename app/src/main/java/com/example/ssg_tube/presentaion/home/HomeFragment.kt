@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.example.ssg_tube.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -33,7 +34,13 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupAdapter()
+        setupObserve()
+        initView()
 
+    }
+
+    private fun initView() {
+        viewModel.popularVideoMapper()
     }
 
     private fun setupAdapter() {
@@ -56,6 +63,12 @@ class HomeFragment : Fragment() {
     private fun setupChannelAdapter() {
         channelAdapter = ChannelAdapter(emptyList())
         binding.rvChannelArea.adapter = channelAdapter
+    }
+
+    private fun setupObserve() {
+        viewModel.popularVideo.observe(viewLifecycleOwner, Observer { videos ->
+            popularVideoAdapter.updateItem(videos)
+        })
     }
 
     override fun onDestroyView() {
