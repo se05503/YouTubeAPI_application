@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -45,6 +46,8 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
     // Okhttp3
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    // CircleImageView
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -57,7 +60,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // Glide (썸네일 부분에 필요하지 않을까 싶어서 추가했습니다)
     implementation("com.github.bumptech.glide:glide:4.14.1")
     annotationProcessor("com.github.bumptech.glide:compiler:4.14.1")
 }
