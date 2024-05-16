@@ -55,7 +55,7 @@ interface YouTubeAPI {
     // 비디오 검색
     // https://developers.google.com/youtube/v3/docs/search/list?hl=ko
     @GET("search")
-    fun videoSearch(
+    suspend fun videoSearch(
         // 필수 매개변수
         @Query("part") part: String, // part 매개변수는 API 응답이 포함하는 search 리소스 속성 하나 이상의 쉼표로 구분된 목록을 지정합니다. 매개변수 값을 snippet로 설정합니다.
         // 선택 매개변수

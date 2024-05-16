@@ -18,13 +18,12 @@ class SearchViewModel(private val apiService: YouTubeAPI) : ViewModel() {
     val searchResults: LiveData<List<SearchItemModel>> get() = _searchResults
 
     var resItems: ArrayList<SearchItemModel> = ArrayList()
-    var isSearchFinished = false
     lateinit var requestResponse: SearchResponse
 
     fun videoResults(query: String) { // videoSearch 를 불러오기 위해선 suspend 를 사용해야 한다.
         resItems.clear()
         viewModelScope.launch {
-            // videModelScope는 fragment 가 파괴 될 때 중단시킴. 메모리 누수 방지. 비동기적 처리를 하다보니ㅁ
+            // videModelScope는 fragment 가 파괴 될 때 중단되어 메모리 누수가 방지됨
             requestResponse = apiService.videoSearch(
                 part = "snippet",
                 query = query,
@@ -42,10 +41,6 @@ class SearchViewModel(private val apiService: YouTubeAPI) : ViewModel() {
             resItems.add(SearchItemModel(title = title, url = thumbnail))
         }
         searchResult()
-    }
-
-    private fun checkSearchCompletion() {
-        if (isSearchFinished) searchResult()
     }
 
     // 검색 결과를 LiveData에 설정
