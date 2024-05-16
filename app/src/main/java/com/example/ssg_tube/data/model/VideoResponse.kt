@@ -17,7 +17,12 @@ data class VideoSnippet(
     @SerializedName("title") val title: String?,
     @SerializedName("description") val description: String,
     @SerializedName("channelTitle") val channelTitle: String,
-    @SerializedName("thumbnails") val thumbnails: VideoThumbnail
+    @SerializedName("thumbnails") val thumbnails: VideoThumbnailDefault
+)
+
+
+data class VideoThumbnailDefault(
+    @SerializedName("default") val default: VideoThumbnail
 )
 
 data class VideoThumbnail(

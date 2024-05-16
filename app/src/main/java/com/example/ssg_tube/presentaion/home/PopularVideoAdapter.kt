@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.ssg_tube.R
 import com.example.ssg_tube.databinding.RvPopularVideoItemBinding
 import com.example.ssg_tube.presentaion.model.VideoModel
 
@@ -38,6 +39,8 @@ class PopularVideoAdapter(private var items: List<VideoModel>) :
             binding.apply {
                 Glide.with(ivArea.context)
                     .load(item.thumbnail)
+                    // 테스트용
+                    .error(R.drawable.ic_launcher_background)
                     .into(ivArea)
                 tvTitle.text = item.title
             }

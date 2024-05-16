@@ -21,7 +21,7 @@ class HomeViewModel : ViewModel() {
             )
             val videoModel = response.items.map {
                 VideoModel(
-                    thumbnail = it.snippet.thumbnails.url ?: "",
+                    thumbnail = it.snippet.thumbnails.default.url ?: "",
                     title = it.snippet.title ?: "",
                     date = "",
                     channelIcon = "",
