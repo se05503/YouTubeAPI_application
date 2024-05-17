@@ -1,23 +1,16 @@
 package com.example.ssg_tube.presentaion.detail
 
-import android.app.Activity
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ssg_tube.data.model.ChannelItem
 import com.example.ssg_tube.network.RetroClient.youTubeRetrofit
 import com.example.ssg_tube.presentaion.model.VideoModel
 import kotlinx.coroutines.launch
-import okhttp3.HttpUrl.Companion.toHttpUrl
 
 class DetailViewModel : ViewModel() {
-//    private val _likedItems = MutableLiveData<List<VideoModel>>()
-//    val bookmarkedItems: LiveData<List<VideoModel>> get() = _likedItems
-
-    private val _channelDetails = MutableLiveData<List<VideoModel>>()
-    val channelDetails: LiveData<List<VideoModel>> = _channelDetails
+    private val _channelDetails = MutableLiveData<VideoModel>()
+    val channelDetails: LiveData<VideoModel> = _channelDetails
 
 
     fun loadChannelData(videoModel: VideoModel) {
@@ -34,7 +27,7 @@ class DetailViewModel : ViewModel() {
                     channelIcon = channelUrl,
                     channelName = channelName
                 )
-                _channelDetails.value = mutableListOf(updatedVideoModel)
+                _channelDetails.value = updatedVideoModel
             }
         }
     }

@@ -2,7 +2,6 @@ package com.example.ssg_tube.presentaion.detail
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -54,19 +53,13 @@ class DetailFragment : Fragment() {
             shareVideo(it)
         }
         observing()
-
-        //네비게이션 바 지우는 코드
-
     }
 
     private fun observing() {
         detailViewModel.channelDetails.observe(viewLifecycleOwner) { channelDetails ->
-            if (channelDetails.isNotEmpty()) {
-                bindItem(channelDetails[0])
-            }
+            bindItem(channelDetails)
         } //채널
     }
-
 
     override fun onResume() {
         super.onResume()

@@ -42,7 +42,7 @@ class SearchViewModel(private val apiService: YouTubeAPI) : ViewModel() {
                 val date = item.snippet.date
                 resItems.add(
                     VideoModel(
-                        id = id, // channel에서 요구하는 id값이랑 다름 (video id임)
+                        id = id,
                         title = title,
                         thumbnail = thumbnail,
                         channelIcon = "",
