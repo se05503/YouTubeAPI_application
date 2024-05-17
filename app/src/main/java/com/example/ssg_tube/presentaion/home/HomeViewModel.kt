@@ -31,7 +31,7 @@ class HomeViewModel : ViewModel() {
                 val popularVideos = it.items.map { item ->
                     VideoModel(
                         thumbnail = item.snippet.thumbnails.default.url,
-                        title = item.snippet.title ,
+                        title = item.snippet.title,
                         date = "",
                         channelIcon = "",
                         channelName = "",
@@ -63,6 +63,8 @@ class HomeViewModel : ViewModel() {
                     )
                 }
                 _categoriesVideo.postValue(categoryVideos)
+                // 채널을 카테고리별로 맞는 채널을 추출하기위해 카테고리에서 추출한 channelId값을 getChannel에 넣어줌
+                // 이로써 생성된 카테고리 비디오와 채널이 일치
                 val channelId = categoryVideos.map { it.channelId }
                 getChannel(channelId)
             }
