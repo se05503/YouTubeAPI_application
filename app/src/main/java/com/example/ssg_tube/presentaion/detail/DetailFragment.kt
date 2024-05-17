@@ -45,7 +45,7 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //받아온 데이터를 번들에있는걸 꺼냄, shareVideo에 그 데이터 전달
+        //받아온 데이터를 번들에있는걸 꺼냄, shareVideo에 그 데이터 전달ㅎ
         val detailPageItems = arguments?.getParcelable<VideoModel>("detailModel")
         detailPageItems?.let {
             detailViewModel.loadChannelData(it)
@@ -63,7 +63,7 @@ class DetailFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        (activity as? FragmentActivity)?.invisible()
+        (activity)?.invisible()
     }
 
     override fun onDestroyView() {
