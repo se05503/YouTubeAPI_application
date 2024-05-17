@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.ssg_tube.R
 import com.example.ssg_tube.databinding.RvChannelItemBinding
 import com.example.ssg_tube.presentaion.model.ChannelInfo
 
@@ -34,6 +35,8 @@ class ChannelAdapter(private var items: List<ChannelInfo>) :
             binding.apply {
                 Glide.with(ivArea.context)
                     .load(item.thumbnail)
+                    // item.thumbnail이 로드되지 않을 시 .error 이미지를 보여줌
+                    .error(R.drawable.ic_video_error)
                     .into(ivArea)
             }
         }

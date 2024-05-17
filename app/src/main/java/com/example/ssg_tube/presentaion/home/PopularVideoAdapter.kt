@@ -34,8 +34,8 @@ class PopularVideoAdapter(private var items: List<VideoModel>) :
             binding.apply {
                 Glide.with(ivArea.context)
                     .load(item.thumbnail)
-                    // 테스트용
-                    .error(R.drawable.ic_launcher_background)
+                    // item.thumbnail이 로드되지 않을 시 .error 이미지를 보여줌
+                    .error(R.drawable.ic_video_error)
                     .into(ivArea)
                 tvTitle.text = item.title
             }
