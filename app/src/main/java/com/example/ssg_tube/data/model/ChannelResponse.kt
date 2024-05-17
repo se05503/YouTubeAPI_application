@@ -15,7 +15,6 @@ data class ChannelItem(
 data class ChannelSnippet(
     @SerializedName("title") val title: String,
     @SerializedName("description") val description: String,
-    //확인해보니 동영상 디스크립션이 아닙니다
     @SerializedName("thumbnails") val thumbnails: ChannelThumbnails
 )
 

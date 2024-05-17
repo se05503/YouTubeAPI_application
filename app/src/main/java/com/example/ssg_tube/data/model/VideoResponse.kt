@@ -1,6 +1,7 @@
 package com.example.ssg_tube.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.util.Date
 
 // 비디오
 data class VideoResponse(
@@ -29,6 +30,8 @@ data class VideoThumbnailDefault(
 
 data class VideoThumbnail(
     @SerializedName("url") val url: String
+    @SerializedName("publishedAt") val publishedAt: Date,
+    @SerializedName("thumbnails") val thumbnails: String = "default"
 )
 
 data class VideoStatistics(
