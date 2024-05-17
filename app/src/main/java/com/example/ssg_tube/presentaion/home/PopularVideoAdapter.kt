@@ -11,10 +11,10 @@ import com.example.ssg_tube.presentaion.model.VideoModel
 class PopularVideoAdapter(private var items: List<VideoModel>) :
     RecyclerView.Adapter<PopularVideoAdapter.ViewHolder>() {
 
-        fun updateItem(newItems: List<VideoModel>) {
-            items = newItems
-            notifyDataSetChanged()
-        }
+    fun updateItem(newItems: List<VideoModel>) {
+        items = newItems
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

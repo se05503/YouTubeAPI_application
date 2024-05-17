@@ -18,8 +18,8 @@ class HomeViewModel : ViewModel() {
     private val _channel: MutableLiveData<List<VideoModel>> = MutableLiveData()
     val channel: LiveData<List<VideoModel>> get() = _channel
 
-    private val _categories = MutableLiveData<List<CategoryModel>>()
-    val categories: LiveData<List<CategoryModel>> get() = _categories
+    private val _categoriesVideo = MutableLiveData<List<VideoModel>>()
+    val categoriesVideo: LiveData<List<VideoModel>> get() = _categoriesVideo
 
     fun popularVideoResponse() {
         viewModelScope.launch {
@@ -36,14 +36,16 @@ class HomeViewModel : ViewModel() {
                     date = "",
                     channelIcon = "",
                     channelName = "",
-                    description = ""
+                    description = "",
+                    channelId = "",
+                    id = ""
                 )
             }
             _popularVideo.postValue(videoModel)
         }
     }
 
-    fun fetchVideosByCategory(categoryId: String) {
+    fun categoryVideo(categoryId: String) {
         viewModelScope.launch {
             val response = RetroClient.youTubeRetrofit.videoCategoriesList(
                 part = "snippet",
@@ -59,10 +61,12 @@ class HomeViewModel : ViewModel() {
                         date = "",
                         channelIcon = "",
                         channelName = "",
-                        description = ""
+                        description = "",
+                        channelId = "",
+                        id = ""
                     )
                 }
-                _popularVideo.postValue(videos)
+                _categoriesVideo.postValue(videos)
             }
         }
     }

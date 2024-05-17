@@ -72,6 +72,9 @@ class HomeFragment : Fragment() {
         viewModel.popularVideo.observe(viewLifecycleOwner, Observer { videos ->
             popularVideoAdapter.updateItem(videos)
         })
+        viewModel.categoriesVideo.observe(viewLifecycleOwner, Observer { categoryVideo ->
+            categoryVideoAdapter.updateItem(categoryVideo)
+        })
     }
 
     private fun setupSpinner() {
@@ -85,6 +88,32 @@ class HomeFragment : Fragment() {
             spinner.adapter = adapter
         }
 
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val categoryArray = resources.getStringArray(R.array.Categories)
+                val category = categoryArray[position]
+                viewModel.categoryVideo(getCategoryId(category))
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // 카테고리 설정이 안됐을때
+            }
+        }
+    }
+
+    private fun getCategoryId(categoryName: String): String {
+        return when (categoryName) {
+            "영화및 애니메이션" -> "1"
+            "음악" -> "10"
+            "애완동물및 동물" -> "15"
+            "스포츠" -> "17"
+            "게임" -> "20"
+            "뉴스및 정치" -> "25"
+            "과학및 기술" -> "28"
+            "영화" -> "30"
+            "공포" -> "40"
+            else -> ""
+        }
     }
 
     override fun onDestroyView() {
