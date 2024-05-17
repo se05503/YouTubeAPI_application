@@ -5,7 +5,7 @@ object Constants {
     const val BASE_URL = "https://www.googleapis.com/youtube/v3/"
 
     // YoutubeAPI 인증키
-    const val AUTHORIZATION = "AIzaSyBkh4ZRqsn20gBXut5uBmVoqzmTHw7Nl34"
+    const val AUTHORIZATION = "AIzaSyApH36Ag5Xwy2lRyRBCDcvfA-dQX9XTfRY"
 
     // SharedPreference 파일 이름
     const val PREF = "pref"
