@@ -22,24 +22,20 @@ class DetailViewModel : ViewModel() {
 
     fun loadChannelData(videoModel: VideoModel) {
         viewModelScope.launch {
-            val response = youTubeRetrofit.videoChannel(
+            val channelResponse = youTubeRetrofit.videoChannel(
                 part = "snippet",
                 id = videoModel.channelId
             )
-            val channelDetails = response.items.firstOrNull()
+            val channelDetails = channelResponse.items.firstOrNull()
             channelDetails?.let { channel ->
                 val channelUrl = channel.snippet.thumbnails.high.url
                 val channelName = channel.snippet.title
-                val description = channel.snippet.description
                 val updatedVideoModel = videoModel.copy(
                     channelIcon = channelUrl,
-                    channelName = channelName,
-                    description = description
+                    channelName = channelName
                 )
-                _channelDetails.value = listOf(updatedVideoModel)
+                _channelDetails.value = mutableListOf(updatedVideoModel)
             }
-
         }
-
     }
 }
