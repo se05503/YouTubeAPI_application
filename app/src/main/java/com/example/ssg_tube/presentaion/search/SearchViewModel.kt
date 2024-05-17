@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.ssg_tube.data.remote.YouTubeAPI
 import com.example.ssg_tube.presentaion.model.VideoModel
+import com.example.ssg_tube.presentaion.util.FormatManager
 import kotlinx.coroutines.launch
 
 class SearchViewModel(private val apiService: YouTubeAPI) : ViewModel() {
@@ -33,19 +34,21 @@ class SearchViewModel(private val apiService: YouTubeAPI) : ViewModel() {
 
             val items = requestResponse.items
             for (item in items) {
-                val thumbnail = item.snippet.thumbnails["default"]!!.url
+                val thumbnail = item.snippet.thumbnails["high"]!!.url
                 val title = item.snippet.title
                 val id = item.id.videoId
                 val channelId = item.snippet.channelId
+                val description = item.snippet.description
+                val date = item.snippet.date
                 resItems.add(
                     VideoModel(
-                        id = id, // channel에서 요구하는 id값이랑 다름 (video id임)
+                        id = id,
                         title = title,
                         thumbnail = thumbnail,
                         channelIcon = "",
                         channelName = "",
-                        date = "",
-                        description = "",
+                        date = FormatManager.dateFormat(date),
+                        description = description,
                         channelId = channelId
                     )
                 )
