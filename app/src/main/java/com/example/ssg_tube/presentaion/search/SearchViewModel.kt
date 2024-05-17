@@ -1,5 +1,6 @@
 package com.example.ssg_tube.presentaion.search
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,30 +25,35 @@ class SearchViewModel(private val apiService: YouTubeAPI) : ViewModel() {
             val requestResponse = apiService.videoSearch( // 비동기적으로 실행되기 때
                 part = "snippet",
                 query = query,
-                maxResults = 20, // 해결 완료
+                maxResults = 5, // 해결 완료
                 order = "relevance",
                 type = "video",
                 videoType = "any"
             )
 
-
             val items = requestResponse.items
             for (item in items) {
                 val thumbnail = item.snippet.thumbnails["default"]!!.url
                 val title = item.snippet.title
+                val id = item.id.videoId
+                val channelId = item.snippet.channelId
                 resItems.add(
                     VideoModel(
+                        id = id, // channel에서 요구하는 id값이랑 다름 (video id임)
                         title = title,
                         thumbnail = thumbnail,
                         channelIcon = "",
                         channelName = "",
                         date = "",
-                        description = ""
+                        description = "",
+                        channelId = channelId
                     )
                 )
             }
+            Log.d("check", "$resItems")
             searchResult()
         }
+
     }
 
     // 검색 결과를 LiveData에 설정

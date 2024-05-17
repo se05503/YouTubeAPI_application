@@ -1,11 +1,13 @@
 package com.example.ssg_tube.presentaion.detail
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.ssg_tube.databinding.FragmentDetailBinding
 import com.example.ssg_tube.presentaion.model.VideoModel
@@ -14,6 +16,7 @@ import com.example.ssg_tube.presentaion.util.invisible
 class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
+    private val detailViewModel: DetailViewModel by viewModels()
 
     //데이터 받는 부분
     companion object {
@@ -43,7 +46,18 @@ class DetailFragment : Fragment() {
         //받아온 데이터를 번들에있는걸 꺼냄
         val detailPageItems = arguments?.getParcelable<VideoModel>("detailModel")
         detailPageItems?.let {
+            detailViewModel.loadChannelData(it)
             bindItem(it)
+        }
+
+
+        detailViewModel.channelDetails.observe(viewLifecycleOwner){channelDetails->
+            if (channelDetails.isNotEmpty()){
+                bindItem(channelDetails.first())
+            }
+        } //채널
+        if (detailPageItems != null) {
+            Log.d("check2", detailPageItems.id)
         }
         //네비게이션 바 지우는 코드
         (activity as? FragmentActivity)?.invisible()

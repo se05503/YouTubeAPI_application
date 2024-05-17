@@ -15,12 +15,14 @@ data class SearchItem(
 
 data class SearchVideoId(
     @SerializedName("kind") val kind: String,
-    @SerializedName("videoId") val videoId: String
+    @SerializedName("videoId") val videoId: String,
+
 )
 
 data class VideoSearchSnippet(
     @SerializedName("title") val title:String, // 검색 결과의 제목입니다.
-    @SerializedName("thumbnails") val thumbnails: Map<String,Thumbnail>
+    @SerializedName("thumbnails") val thumbnails: Map<String,Thumbnail>,
+    @SerializedName("channelId") val channelId : String
 )
 
 data class Thumbnail(
