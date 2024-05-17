@@ -18,9 +18,5 @@ data class VideoModel(
 ) : Parcelable
 
 
-//채널 아이디 값이 있을 수가 없음. 클릭한 아이템의 채널아이템을 가져와야함
-
-
-
 
 

@@ -1,7 +1,7 @@
 package com.example.ssg_tube.presentaion.detail
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
+import com.example.ssg_tube.Constants
 import com.example.ssg_tube.R
 import com.example.ssg_tube.data.db.DBManager
 import com.example.ssg_tube.databinding.FragmentDetailBinding
@@ -20,6 +21,7 @@ class DetailFragment : Fragment() {
     private val binding get() = _binding!!
     private val detailViewModel: DetailViewModel by viewModels()
     private var detailPageItems: VideoModel? = null
+
 
     //데이터 받는 부분
     companion object {
@@ -67,24 +69,25 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //받아온 데이터를 번들에있는걸 꺼냄
+        //받아온 데이터를 번들에있는걸 꺼냄, shareVideo에 그 데이터 전달ㅎ
         detailPageItems = arguments?.getParcelable<VideoModel>("detailModel")
         detailPageItems?.let {
             detailViewModel.loadChannelData(it)
             bindItem(it)
+            shareVideo(it)
         }
+        observing()
+    }
 
-
+    private fun observing() {
         detailViewModel.channelDetails.observe(viewLifecycleOwner) { channelDetails ->
-            if (channelDetails.isNotEmpty()) {
-                bindItem(channelDetails.first())
-            }
+            bindItem(channelDetails.first())
         } //채널
-//        if (detailPageItems != null) {
-//            Log.d("check2", detailPageItems.id)
-//        }
-        //네비게이션 바 지우는 코드
-        (activity as? FragmentActivity)?.invisible()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity)?.invisible()
     }
 
     override fun onDestroyView() {
@@ -92,6 +95,18 @@ class DetailFragment : Fragment() {
         _binding = null
     }
 
+    //공유하는 기능
+    private fun shareVideo(detailPageItems : VideoModel) {
+        binding.ivShare.setOnClickListener {
+            val sharedVideoUrl = "${Constants.SHARE_YOUTUBE}${detailPageItems.id}"
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, sharedVideoUrl)
+                type = "text/plain"
+            }
+            startActivity(Intent.createChooser(shareIntent, "Share Video"))
+        }
+    }
 
     private fun bindItem(videoModel: VideoModel) {
         binding.apply {
