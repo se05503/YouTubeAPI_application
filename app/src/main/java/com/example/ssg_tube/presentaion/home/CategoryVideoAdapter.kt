@@ -5,12 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ssg_tube.databinding.RvCategoryVideoItemBinding
+import com.example.ssg_tube.presentaion.model.CategoryInfo
 import com.example.ssg_tube.presentaion.model.VideoModel
 
-class CategoryVideoAdapter(private var items: List<VideoModel>) :
+class CategoryVideoAdapter(private var items: List<CategoryInfo>) :
     RecyclerView.Adapter<CategoryVideoAdapter.ViewHolder>() {
 
-    fun updateItem(newItems: List<VideoModel>) {
+    fun updateItem(newItems: List<CategoryInfo>) {
         items = newItems
         notifyDataSetChanged()
     }
@@ -34,7 +35,7 @@ class CategoryVideoAdapter(private var items: List<VideoModel>) :
 
     class ViewHolder(private val binding: RvCategoryVideoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: VideoModel) {
+        fun bind(item: CategoryInfo) {
             binding.apply {
                 Glide.with(ivArea.context)
                     .load(item.thumbnail)
