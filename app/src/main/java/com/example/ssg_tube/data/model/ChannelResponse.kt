@@ -15,5 +15,15 @@ data class ChannelItem(
 data class ChannelSnippet(
     @SerializedName("title") val title: String,
     @SerializedName("description") val description: String,
-    @SerializedName("thumbnails") val thumbnails: String = "default"
+    //확인해보니 동영상 디스크립션이 아닙니다
+    @SerializedName("thumbnails") val thumbnails: ChannelThumbnails
+)
+
+data class ChannelThumbnail(
+    @SerializedName("url") val url: String,
+)
+data class ChannelThumbnails(
+    @SerializedName("high") val high: ChannelThumbnail,
+    @SerializedName("medium") val medium: ChannelThumbnail,
+    @SerializedName("default") val default: ChannelThumbnail
 )

@@ -1,6 +1,7 @@
 package com.example.ssg_tube.presentaion.search
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,6 +48,7 @@ class SearchAdapter(private val context: Context):RecyclerView.Adapter<SearchAda
                 replace(R.id.frame_main,fragment)
                 setReorderingAllowed(true)
                 addToBackStack("")
+                Log.d("checkItem","$item")
             }
         }
     }
