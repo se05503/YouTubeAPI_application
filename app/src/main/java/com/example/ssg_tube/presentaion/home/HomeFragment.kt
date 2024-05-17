@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.ssg_tube.R
 import com.example.ssg_tube.databinding.FragmentHomeBinding
+import com.example.ssg_tube.presentaion.util.CategoryType
 
 class HomeFragment : Fragment() {
 
@@ -90,29 +91,16 @@ class HomeFragment : Fragment() {
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                val categoryArray = resources.getStringArray(R.array.Categories)
-                val category = categoryArray[position]
-                viewModel.categoryVideo(getCategoryId(category))
+                val categoryName = parent.getItemAtPosition(position) as String
+                val category = CategoryType.from(categoryName)
+                category?.let {
+                    viewModel.categoryVideo(it.categoryId)
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // 카테고리 설정이 안됐을때
             }
-        }
-    }
-
-    private fun getCategoryId(categoryName: String): String {
-        return when (categoryName) {
-            "영화및 애니메이션" -> "1"
-            "음악" -> "10"
-            "애완동물및 동물" -> "15"
-            "스포츠" -> "17"
-            "게임" -> "20"
-            "뉴스및 정치" -> "25"
-            "과학및 기술" -> "28"
-            "영화" -> "30"
-            "공포" -> "40"
-            else -> ""
         }
     }
 
