@@ -81,7 +81,7 @@ class DetailFragment : Fragment() {
 
     private fun observing() {
         detailViewModel.channelDetails.observe(viewLifecycleOwner) { channelDetails ->
-            bindItem(channelDetails.first())
+            bindItem(channelDetails)
         } //채널
     }
 
