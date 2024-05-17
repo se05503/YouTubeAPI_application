@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ChannelModel(
+data class ChannelInfo(
     val id: String,
     val title: String,
     val thumbnail: String

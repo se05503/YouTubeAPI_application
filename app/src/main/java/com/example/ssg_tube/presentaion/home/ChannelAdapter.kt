@@ -5,13 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ssg_tube.databinding.RvChannelItemBinding
-import com.example.ssg_tube.presentaion.model.ChannelModel
-import com.example.ssg_tube.presentaion.model.VideoModel
+import com.example.ssg_tube.presentaion.model.ChannelInfo
 
-class ChannelAdapter(private var items: List<ChannelModel>) :
+class ChannelAdapter(private var items: List<ChannelInfo>) :
     RecyclerView.Adapter<ChannelAdapter.ViewHolder>() {
 
-    fun updateItem(newItems: List<ChannelModel>) {
+    fun updateItem(newItems: List<ChannelInfo>) {
         items = newItems
         notifyDataSetChanged()
     }
@@ -32,7 +31,7 @@ class ChannelAdapter(private var items: List<ChannelModel>) :
 
     class ViewHolder(private val binding: RvChannelItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ChannelModel) {
+        fun bind(item: ChannelInfo) {
             binding.apply {
                 Glide.with(ivArea.context)
                     .load(item.thumbnail)

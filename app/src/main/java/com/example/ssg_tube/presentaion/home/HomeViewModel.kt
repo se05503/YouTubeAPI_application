@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ssg_tube.network.RetroClient
-import com.example.ssg_tube.presentaion.model.ChannelModel
+import com.example.ssg_tube.presentaion.model.ChannelInfo
 import com.example.ssg_tube.presentaion.model.VideoModel
 import kotlinx.coroutines.launch
 
@@ -16,8 +16,8 @@ class HomeViewModel : ViewModel() {
     private val _categoriesVideo = MutableLiveData<List<VideoModel>>()
     val categoriesVideo: LiveData<List<VideoModel>> get() = _categoriesVideo
 
-    private val _channel: MutableLiveData<List<ChannelModel>> = MutableLiveData()
-    val channel: LiveData<List<ChannelModel>> get() = _channel
+    private val _channel: MutableLiveData<List<ChannelInfo>> = MutableLiveData()
+    val channel: LiveData<List<ChannelInfo>> get() = _channel
 
     fun getPopularVideo() {
         viewModelScope.launch {
@@ -80,7 +80,7 @@ class HomeViewModel : ViewModel() {
             )
             response.let {
                 val channels = it.items.map { item ->
-                    ChannelModel(
+                    ChannelInfo(
                         id = item.id,
                         title = item.snippet.title,
                         thumbnail = item.snippet.thumbnails.default.url
