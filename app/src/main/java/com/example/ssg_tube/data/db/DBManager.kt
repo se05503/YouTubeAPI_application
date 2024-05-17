@@ -1,9 +1,12 @@
 package com.example.ssg_tube.data.db
 
+import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.ssg_tube.Constants
+import com.example.ssg_tube.presentaion.model.VideoModel
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 
 object DBManager {
     private val gson = Gson()
@@ -30,6 +33,19 @@ object DBManager {
         val json = getPreferences(context, Constants.PREF).getString(key, null)
         //Log.d("LoadData", "저장된 값 $json")
         return json?.let { gson.fromJson(it, clazz) }
+    }
+
+    // shared prefence 에 저장된 아이템들을 모두 꺼내오는 함수입니다.
+    fun getPrefHeartItems(context: Context): ArrayList<VideoModel> {
+        val prefs = context.getSharedPreferences("pref", Activity.MODE_PRIVATE)
+        val allEntries: Map<String, *> = prefs.all
+        val heartItems = ArrayList<VideoModel>()
+        val gson = GsonBuilder().create()
+        for ((key, value) in allEntries) {
+            val item = gson.fromJson(value as String, VideoModel::class.java)
+            heartItems.add(item)
+        }
+        return heartItems
     }
 
     fun removeData(context: Context, key: String) {

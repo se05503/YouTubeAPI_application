@@ -13,7 +13,7 @@ data class VideoModel(
     val channelIcon: String,
     val channelName: String,
     val description: String,
-    val liked: Boolean = false,
+    var liked: Boolean = false,
     val channelId : String
 ) : Parcelable
 
