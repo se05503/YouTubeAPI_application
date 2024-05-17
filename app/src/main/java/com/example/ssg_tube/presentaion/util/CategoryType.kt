@@ -7,13 +7,11 @@ enum class CategoryType(val categoryId: String, val categoryName: String) {
     SPORTS("17", "스포츠"),
     GAMING("20", "게임"),
     NEWS_AND_POLITICS("25", "뉴스및 정치"),
-    SCIENCE_AND_TECHNOLOGY("28", "과학및 기술"),
-    MOVIES("30", "영화"),
-    HORROR("40", "공포");
+    SCIENCE_AND_TECHNOLOGY("28", "과학및 기술");
 
     companion object {
         fun from(categoryName: String): CategoryType? {
-            return values().find { it.categoryName == categoryName }
+            return entries.find { it.categoryName == categoryName }
         }
     }
 }

@@ -40,7 +40,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupSpinner()
         setupAdapter()
-        viewModel.popularVideoResponse()
+        viewModel.getPopularVideo()
         setupObserve()
     }
 
@@ -70,8 +70,11 @@ class HomeFragment : Fragment() {
         viewModel.popularVideo.observe(viewLifecycleOwner, Observer { videos ->
             popularVideoAdapter.updateItem(videos)
         })
-        viewModel.categoriesVideo.observe(viewLifecycleOwner, Observer { categoryVideo ->
-            categoryVideoAdapter.updateItem(categoryVideo)
+        viewModel.categoriesVideo.observe(viewLifecycleOwner, Observer { categoryVideos ->
+            categoryVideoAdapter.updateItem(categoryVideos)
+        })
+        viewModel.channel.observe(viewLifecycleOwner, Observer { channels ->
+            channelAdapter.updateItem(channels)
         })
     }
 
@@ -88,7 +91,7 @@ class HomeFragment : Fragment() {
             spinner.adapter = adapter
         }
 
-        // OnItemSelectedListener가 인터페이스 형식이라서 굳이 fragment에 상속하지 않고 object형식으로 변경
+        // OnItemSelectedListener가 인터페이스 형식이라서 유연성을 위해 fragment에 상속하지 않고 object형식으로 변경
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             // 카테고리를 선택 했을때 이벤트 설정
             override fun onItemSelected(
@@ -104,7 +107,7 @@ class HomeFragment : Fragment() {
                 val category = CategoryType.from(categoryName)
                 category?.let {
                     // 뷰모델의 categoryVideo를 호출해서 해당하는 카테고리의 비디오를 가져옴
-                    viewModel.categoryVideo(it.categoryId)
+                    viewModel.getCategoryVideo(it.categoryId)
                 }
             }
 

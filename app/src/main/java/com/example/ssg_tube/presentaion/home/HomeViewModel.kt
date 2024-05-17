@@ -18,43 +18,18 @@ class HomeViewModel : ViewModel() {
     private val _channel: MutableLiveData<List<VideoModel>> = MutableLiveData()
     val channel: LiveData<List<VideoModel>> get() = _channel
 
-    fun popularVideoResponse() {
+    fun getPopularVideo() {
         viewModelScope.launch {
             val response = RetroClient.youTubeRetrofit.videoPopularList(
                 part = "snippet",
                 chart = "mostPopular",
                 regionCode = "KR"
             )
-            // videos API
-            val videoModel = response.items.map {
-                VideoModel(
-                    thumbnail = it.snippet.thumbnails.default.url ?: "",
-                    title = it.snippet.title ?: "",
-                    date = "",
-                    channelIcon = "",
-                    channelName = "",
-                    description = "",
-                    channelId = "",
-                    id = ""
-                )
-            }
-            _popularVideo.postValue(videoModel)
-        }
-    }
-
-    fun categoryVideo(categoryId: String) {
-        viewModelScope.launch {
-            val response = RetroClient.youTubeRetrofit.videoCategoriesList(
-                part = "snippet",
-                chart = "mostPopular",
-                regionCode = "KR",
-                videoCategoryId = categoryId
-            )
-                // videos API
-                val videos = response.items.map {
+            response.let {
+                val popularVideos = it.items.map { item ->
                     VideoModel(
-                        thumbnail = it.snippet.thumbnails.default.url ?: "",
-                        title = it.snippet.title ?: "",
+                        thumbnail = item.snippet.thumbnails.default.url,
+                        title = item.snippet.title ,
                         date = "",
                         channelIcon = "",
                         channelName = "",
@@ -63,7 +38,60 @@ class HomeViewModel : ViewModel() {
                         id = ""
                     )
                 }
-                _categoriesVideo.postValue(videos)
+                _popularVideo.postValue(popularVideos)
+            }
+        }
+    }
+
+    fun getCategoryVideo(categoryId: String) {
+        viewModelScope.launch {
+            val response = RetroClient.youTubeRetrofit.videoCategoriesList(
+                part = "snippet",
+                chart = "mostPopular",
+                regionCode = "KR",
+                videoCategoryId = categoryId
+            )
+            response.let {
+                val categoryVideos = it.items.map { item ->
+                    VideoModel(
+                        thumbnail = item.snippet.thumbnails.default.url,
+                        title = item.snippet.title,
+                        date = "",
+                        channelIcon = "",
+                        channelName = "",
+                        description = "",
+                        channelId = "",
+                        id = ""
+                    )
+                }
+                _categoriesVideo.postValue(categoryVideos)
+            }
+        }
+    }
+
+    fun getChannel(channelIds: String) {
+        viewModelScope.launch {
+            val response = RetroClient.youTubeRetrofit.videoChannel(
+                part = "snippet",
+                id = channelIds
+            )
+            response.let {
+                val channels = it.items.map { item ->
+                    item.snippet.thumbnails.default.url.let { url ->
+                        VideoModel(
+                            thumbnail = url,
+                            title = "",
+                            date = "",
+                            channelIcon = url,
+                            channelName = "",
+                            description = "",
+                            channelId = channelIds,
+                            id = ""
+                        )
+                    }
+                }
+                _channel.postValue(channels)
+            }
         }
     }
 
