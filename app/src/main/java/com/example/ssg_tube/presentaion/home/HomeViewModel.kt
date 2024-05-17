@@ -1,13 +1,10 @@
 package com.example.ssg_tube.presentaion.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ssg_tube.data.model.CategoryItem
 import com.example.ssg_tube.network.RetroClient
-import com.example.ssg_tube.presentaion.model.CategoryModel
 import com.example.ssg_tube.presentaion.model.VideoModel
 import kotlinx.coroutines.launch
 
@@ -15,11 +12,11 @@ class HomeViewModel : ViewModel() {
     private val _popularVideo: MutableLiveData<List<VideoModel>> = MutableLiveData()
     val popularVideo: LiveData<List<VideoModel>> get() = _popularVideo
 
-    private val _channel: MutableLiveData<List<VideoModel>> = MutableLiveData()
-    val channel: LiveData<List<VideoModel>> get() = _channel
-
     private val _categoriesVideo = MutableLiveData<List<VideoModel>>()
     val categoriesVideo: LiveData<List<VideoModel>> get() = _categoriesVideo
+
+    private val _channel: MutableLiveData<List<VideoModel>> = MutableLiveData()
+    val channel: LiveData<List<VideoModel>> get() = _channel
 
     fun popularVideoResponse() {
         viewModelScope.launch {
@@ -53,7 +50,7 @@ class HomeViewModel : ViewModel() {
                 regionCode = "KR",
                 videoCategoryId = categoryId
             )
-            if (response.items.isNotEmpty()) {
+                // videos API
                 val videos = response.items.map {
                     VideoModel(
                         thumbnail = it.snippet.thumbnails.default.url ?: "",
@@ -67,7 +64,6 @@ class HomeViewModel : ViewModel() {
                     )
                 }
                 _categoriesVideo.postValue(videos)
-            }
         }
     }
 

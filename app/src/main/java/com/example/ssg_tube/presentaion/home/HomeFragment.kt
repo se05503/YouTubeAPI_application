@@ -38,13 +38,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupSpinner()
-
         setupAdapter()
         viewModel.popularVideoResponse()
         setupObserve()
-
     }
 
     private fun setupAdapter() {
@@ -78,8 +75,10 @@ class HomeFragment : Fragment() {
         })
     }
 
+    // spinner 공식문서 참조
     private fun setupSpinner() {
         spinner = binding.spCategory
+        // ArrayAdapter를 생성
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.Categories,
@@ -89,17 +88,28 @@ class HomeFragment : Fragment() {
             spinner.adapter = adapter
         }
 
+        // OnItemSelectedListener가 인터페이스 형식이라서 굳이 fragment에 상속하지 않고 object형식으로 변경
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            // 카테고리를 선택 했을때 이벤트 설정
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                // parent로 접근하고 Adapter에 접근하고 getItemAtPosition에서 선택된 카테고리의 이름을 가져옴
                 val categoryName = parent.getItemAtPosition(position) as String
+                // Util패키지의 CategoryType에 categoryName과 일치하는 enum 객체를 가져옴
+                // 참고: 현재 Spinner의 Adapter에는 strings에 정의된 Cateogries가 있다.
                 val category = CategoryType.from(categoryName)
                 category?.let {
+                    // 뷰모델의 categoryVideo를 호출해서 해당하는 카테고리의 비디오를 가져옴
                     viewModel.categoryVideo(it.categoryId)
                 }
             }
 
+            // 카테고리를 선택하지 않았을때 이벤트 설정
             override fun onNothingSelected(parent: AdapterView<*>) {
-                // 카테고리 설정이 안됐을때
             }
         }
     }
@@ -107,6 +117,5 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-
     }
 }
