@@ -6,6 +6,7 @@ import com.example.ssg_tube.data.model.CategoryResponse
 import com.example.ssg_tube.data.model.ChannelResponse
 import com.example.ssg_tube.data.model.SearchResponse
 import com.example.ssg_tube.data.model.VideoResponse
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -24,7 +25,7 @@ interface YouTubeAPI {
         @Query("chart") chart: String,
         @Query("regionCode") regionCode: String,
         @Query("key") apiKey: String = Constants.AUTHORIZATION
-    ): VideoResponse // 얘를 쓰자
+    ): VideoResponse
 
     // 비디오 카테고리 ( 한국 카테고리 목록 )
     @GET("videoCategories")

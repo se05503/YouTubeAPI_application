@@ -21,7 +21,6 @@ data class VideoSnippet(
     @SerializedName("publishedAt") val publishedAt: String
 )
 
-
 data class VideoThumbnailDefault(
     @SerializedName("default") val default: VideoThumbnail
 )
