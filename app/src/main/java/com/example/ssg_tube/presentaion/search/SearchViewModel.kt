@@ -19,14 +19,14 @@ class SearchViewModel(private val apiService: YouTubeAPI) : ViewModel() {
 
     var resItems: ArrayList<VideoModel> = ArrayList()
 
-    fun videoResults(query: String, order: String) { // videoSearch 를 불러오기 위해선 suspend 를 사용해야 한다.
-        resItems.clear()
+    fun videoResults(query: String, order: String) {
+        resItems.clear() // 기존 값 제거
         viewModelScope.launch { // 코루틴을 사용하여 비동기적으로 실행
             // videModelScope는 fragment 가 파괴 될 때 중단되어 메모리 누수가 방지됨
-            val requestResponse = apiService.videoSearch( // 비동기적으로 실행되기 때
+            val requestResponse = apiService.videoSearch(
                 part = "snippet",
                 query = query,
-                maxResults = 1, // 해결 완료
+                maxResults = 20,
                 order = order,
                 type = "video",
                 videoType = "any"
@@ -36,13 +36,13 @@ class SearchViewModel(private val apiService: YouTubeAPI) : ViewModel() {
             for (item in items) {
                 val thumbnail = item.snippet.thumbnails["high"]!!.url
                 val title = item.snippet.title
-                val id = item.id.videoId
+                val videoId = item.id.videoId
                 val channelId = item.snippet.channelId
                 val description = item.snippet.description
                 val date = item.snippet.date
                 resItems.add(
                     VideoModel(
-                        id = id,
+                        videoId = videoId,
                         title = title,
                         thumbnail = thumbnail,
                         channelIcon = "",

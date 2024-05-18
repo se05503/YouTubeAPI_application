@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class VideoModel(
-    val id : String,
+    val videoId : String, // Id 라고 쓰면 channelId 랑 의미 구분이 불분명해서 videoId로 바꾸었습니다!
     val thumbnail: String,
     val title: String,
     val date: String,

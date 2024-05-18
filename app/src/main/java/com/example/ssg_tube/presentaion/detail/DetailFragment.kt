@@ -1,7 +1,9 @@
 package com.example.ssg_tube.presentaion.detail
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,12 +22,11 @@ class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
     private val detailViewModel: DetailViewModel by viewModels()
-    private var detailPageItems: VideoModel? = null
-
+    private var detailPageItem: VideoModel? = null
 
     //데이터 받는 부분
     companion object {
-        fun newInstance(videoModel: VideoModel): DetailFragment {
+        fun newInstance(videoModel: VideoModel): DetailFragment { // 해당 코드 리팩토링이 필요해보입니다.
             val fragment = DetailFragment()
             val args = Bundle()
             args.putParcelable("detailModel", videoModel)
@@ -34,55 +35,71 @@ class DetailFragment : Fragment() {
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.d("DetailFragment","onAttach")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("DetailFragment","onCreate")
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.d("DetailFragment","onCreateView")
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
+        setupViews()
         setupListeners()
         return binding.root
     }
 
+    private fun setupViews() {
+        //받아온 데이터를 번들에있는걸 꺼냄, shareVideo에 데이터 전달
+        detailPageItem = arguments?.getParcelable("detailModel")
+        detailPageItem?.let {
+            detailViewModel.loadChannelData(it)
+            bindItem(it)
+        }
+    }
+
+    // 토글 값
     private fun setupListeners() {
-        binding.apply {
+        _binding?.apply {
             ivHeart.tag = "unliked" // 초기 상태
             ivHeart.setOnClickListener {
                 if (ivHeart.tag == "unliked") {
                     ivHeart.setImageResource(R.drawable.ic_full_heart)
                     ivHeart.tag = "liked"
-                    detailPageItems?.liked = true
-                    detailPageItems?.let { it -> DBManager.saveData(requireContext(), it.id, it) }
+                    detailPageItem?.liked = true
+                    detailPageItem?.let { it -> DBManager.saveData(requireContext(), it.videoId, it) }
                 } else {
                     // 이미 좋아요가 되어 있는 경우
                     ivHeart.setImageResource(R.drawable.ic_blank_heart)
                     ivHeart.tag = "unliked"
-                    detailPageItems?.liked = false
-                    detailPageItems?.let { it -> DBManager.removeData(requireContext(), it.id) }
+                    detailPageItem?.liked = false
+                    detailPageItem?.let { it -> DBManager.removeData(requireContext(), it.videoId) }
                 }
+            }
+
+            ivShare.setOnClickListener {
+                detailPageItem?.let { it1 -> shareVideo(it1) }
             }
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //받아온 데이터를 번들에있는걸 꺼냄, shareVideo에 그 데이터 전달ㅎ
-        detailPageItems = arguments?.getParcelable<VideoModel>("detailModel")
-        detailPageItems?.let {
-            detailViewModel.loadChannelData(it)
-            bindItem(it)
-            shareVideo(it)
-        }
+        Log.d("DetailFragment","onViewCreated")
         observing()
     }
 
     private fun observing() {
         detailViewModel.channelDetails.observe(viewLifecycleOwner) { channelDetails ->
             bindItem(channelDetails)
-        } //채널
+        }
     }
 
     override fun onResume() {
@@ -97,15 +114,13 @@ class DetailFragment : Fragment() {
 
     //공유하는 기능
     private fun shareVideo(detailPageItems : VideoModel) {
-        binding.ivShare.setOnClickListener {
-            val sharedVideoUrl = "${Constants.SHARE_YOUTUBE}${detailPageItems.id}"
-            val shareIntent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, sharedVideoUrl)
-                type = "text/plain"
-            }
-            startActivity(Intent.createChooser(shareIntent, "Share Video"))
+        val sharedVideoUrl = "${Constants.SHARE_YOUTUBE}${detailPageItems.videoId}"
+        val shareIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, sharedVideoUrl)
+            type = "text/plain"
         }
+        startActivity(Intent.createChooser(shareIntent, "Share Video"))
     }
 
     private fun bindItem(videoModel: VideoModel) {
@@ -120,7 +135,8 @@ class DetailFragment : Fragment() {
                     load(videoModel.channelIcon).into(ivChannelImage)
                 }
             }
+            if (ivHeart.tag =="liked") ivHeart.setImageResource(R.drawable.ic_full_heart)
+            else if(ivHeart.tag == "unliked") ivHeart.setImageResource(R.drawable.ic_blank_heart)
         }
-
     }
 }
