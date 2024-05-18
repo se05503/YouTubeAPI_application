@@ -40,6 +40,10 @@ class CategoryVideoAdapter(private var items: List<CategoryInfo>) :
                     .error(R.drawable.ic_video_error)
                     .into(ivArea)
                 tvTitle.text = item.title
+
+                ivArea.setOnClickListener {
+
+                }
             }
 
         }

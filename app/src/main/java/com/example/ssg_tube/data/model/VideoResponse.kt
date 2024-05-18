@@ -29,7 +29,7 @@ data class VideoThumbnailDefault(
 )
 
 data class VideoThumbnail(
-    @SerializedName("url") val url: String
+    @SerializedName("url") val url: String,
     @SerializedName("publishedAt") val publishedAt: Date,
     @SerializedName("thumbnails") val thumbnails: String = "default"
 )

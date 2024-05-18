@@ -38,6 +38,10 @@ class PopularVideoAdapter(private var items: List<VideoModel>) :
                     .error(R.drawable.ic_video_error)
                     .into(ivArea)
                 tvTitle.text = item.title
+
+                ivArea.setOnClickListener {
+
+                }
             }
         }
     }
