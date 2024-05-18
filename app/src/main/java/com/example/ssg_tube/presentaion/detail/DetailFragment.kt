@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -70,10 +71,12 @@ class DetailFragment : Fragment() {
         _binding?.apply {
             ivHeart.setOnClickListener {
                 if (detailPageItem?.liked == true) {
+                    Toast.makeText(requireContext(),"해당 동영상이 보관함에서 삭제되었습니다.",Toast.LENGTH_SHORT).show() // 나중에 확장 함수로 빼기
                     ivHeart.setImageResource(R.drawable.ic_blank_heart)
                     detailPageItem?.liked = false
                     detailPageItem?.let { it -> DBManager.removeData(requireContext(), it.videoId) }
                 } else {
+                    Toast.makeText(requireContext(),"해당 동영상이 보관함에 추가되었습니다.",Toast.LENGTH_SHORT).show() // 나중에 확장 함수로 빼기
                     ivHeart.setImageResource(R.drawable.ic_full_heart)
                     detailPageItem?.liked = true
                     detailPageItem?.let { it -> DBManager.saveData(requireContext(), it.videoId, it) }
