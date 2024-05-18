@@ -7,22 +7,33 @@
     android:background="@color/bg_color">
 
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/svScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"
+                android:layout_margin="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
 
             <ImageView
                 android:id="@+id/ivThumbnail"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="300dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/dummyimage"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +55,7 @@
                     android:layout_marginStart="25dp"
                     android:layout_marginTop="20dp"
                     android:maxWidth="350dp"
-                    android:text="NBA 최악의 사나이"
+                    android:text="글에 대한 제목"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="@+id/cvDetailPageHeader"
                     app:layout_constraintTop_toTopOf="@+id/cvDetailPageHeader" />
@@ -55,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:layout_marginBottom="20dp"
-                    android:text="2024.05.14"
+                    android:text="게시물 날짜"
                     android:textSize="11sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -106,7 +117,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="17dp"
-                    android:text="르브론의 독재노트"
+                    android:text="채널 이름"
                     app:layout_constraintBottom_toBottomOf="@+id/ivChannelImage"
                     app:layout_constraintStart_toEndOf="@+id/ivChannelImage"
                     app:layout_constraintTop_toTopOf="@+id/ivChannelImage" />
@@ -118,7 +129,7 @@
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/button_round"
                     android:backgroundTint="@color/main_color"
-                    android:text="Follow"
+                    android:text="@string/btn_follow"
                     android:textColor="@color/white"
                     android:translationZ="10dp"
                     app:layout_constraintBottom_toBottomOf="@+id/ivChannelImage"
@@ -130,7 +141,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clDetailPageBody"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginTop="15dp"
                 android:background="@color/white"
                 android:minHeight="440dp"
@@ -141,7 +152,7 @@
                     android:layout_width="375dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
-                    android:text="asdlkakflasdflksaflkdaslfk"
+                    android:text="동영상 설명"
                     android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -151,5 +162,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
