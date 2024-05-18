@@ -68,19 +68,15 @@ class DetailFragment : Fragment() {
     // 토글 값
     private fun setupListeners() {
         _binding?.apply {
-            ivHeart.tag = "unliked" // 초기 상태
             ivHeart.setOnClickListener {
-                if (ivHeart.tag == "unliked") {
-                    ivHeart.setImageResource(R.drawable.ic_full_heart)
-                    ivHeart.tag = "liked"
-                    detailPageItem?.liked = true
-                    detailPageItem?.let { it -> DBManager.saveData(requireContext(), it.videoId, it) }
-                } else {
-                    // 이미 좋아요가 되어 있는 경우
+                if (detailPageItem?.liked == true) {
                     ivHeart.setImageResource(R.drawable.ic_blank_heart)
-                    ivHeart.tag = "unliked"
                     detailPageItem?.liked = false
                     detailPageItem?.let { it -> DBManager.removeData(requireContext(), it.videoId) }
+                } else {
+                    ivHeart.setImageResource(R.drawable.ic_full_heart)
+                    detailPageItem?.liked = true
+                    detailPageItem?.let { it -> DBManager.saveData(requireContext(), it.videoId, it) }
                 }
             }
 
@@ -135,8 +131,8 @@ class DetailFragment : Fragment() {
                     load(videoModel.channelIcon).into(ivChannelImage)
                 }
             }
-            if (ivHeart.tag =="liked") ivHeart.setImageResource(R.drawable.ic_full_heart)
-            else if(ivHeart.tag == "unliked") ivHeart.setImageResource(R.drawable.ic_blank_heart)
+            if (detailPageItem?.liked == true) ivHeart.setImageResource(R.drawable.ic_full_heart)
+            else ivHeart.setImageResource(R.drawable.ic_blank_heart)
         }
     }
 }
