@@ -70,15 +70,15 @@ class HomeFragment : Fragment(), OnClickListener {
     }
 
     private fun setupObserve() {
-        viewModel.popularVideo.observe(viewLifecycleOwner, Observer { videos ->
+        viewModel.popularVideo.observe(viewLifecycleOwner) { videos ->
             popularVideoAdapter.updateItem(videos)
-        })
-        viewModel.categoriesVideo.observe(viewLifecycleOwner, Observer { categoryVideos ->
+        }
+        viewModel.categoriesVideo.observe(viewLifecycleOwner) { categoryVideos ->
             categoryVideoAdapter.updateItem(categoryVideos)
-        })
-        viewModel.channel.observe(viewLifecycleOwner, Observer { channels ->
+        }
+        viewModel.channel.observe(viewLifecycleOwner) { channels ->
             channelAdapter.updateItem(channels)
-        })
+        }
     }
 
     // spinner 공식문서 참조
