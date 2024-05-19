@@ -59,7 +59,7 @@ class HomeFragment : Fragment(), OnClickListener {
     }
 
     private fun setupCategoryVideoAdapter() {
-        categoryVideoAdapter = CategoryVideoAdapter(emptyList())
+        categoryVideoAdapter = CategoryVideoAdapter(emptyList(), this)
         binding.rvCategoryArea.adapter = categoryVideoAdapter
 
     }

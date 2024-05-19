@@ -14,8 +14,8 @@ class HomeViewModel : ViewModel() {
     private val _popularVideo: MutableLiveData<List<VideoModel>> = MutableLiveData()
     val popularVideo: LiveData<List<VideoModel>> get() = _popularVideo
 
-    private val _categoriesVideo = MutableLiveData<List<CategoryInfo>>()
-    val categoriesVideo: LiveData<List<CategoryInfo>> get() = _categoriesVideo
+    private val _categoriesVideo = MutableLiveData<List<VideoModel>>()
+    val categoriesVideo: LiveData<List<VideoModel>> get() = _categoriesVideo
 
     private val _channel: MutableLiveData<List<ChannelInfo>> = MutableLiveData()
     val channel: LiveData<List<ChannelInfo>> get() = _channel
@@ -55,11 +55,15 @@ class HomeViewModel : ViewModel() {
             )
             response.let {
                 val categoryVideos = it.items.map { item ->
-                    CategoryInfo(
-                        id = item.id,
+                    VideoModel(
                         thumbnail = item.snippet.thumbnails.default.url,
                         title = item.snippet.title,
-                        channelId = item.snippet.channelId
+                        date = item.snippet.publishedAt,
+                        channelIcon = "",
+                        channelName = "",
+                        description = item.snippet.description,
+                        channelId = item.snippet.channelId,
+                        id = item.id
                     )
                 }
                 _categoriesVideo.postValue(categoryVideos)

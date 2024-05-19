@@ -8,11 +8,12 @@ import com.example.ssg_tube.R
 import com.example.ssg_tube.databinding.RvCategoryVideoItemBinding
 import com.example.ssg_tube.presentaion.model.CategoryInfo
 import com.example.ssg_tube.presentaion.model.VideoModel
+import com.example.ssg_tube.presentaion.util.OnClickListener
 
-class CategoryVideoAdapter(private var items: List<CategoryInfo>) :
+class CategoryVideoAdapter(private var items: List<VideoModel>, private val onClickListener: OnClickListener) :
     RecyclerView.Adapter<CategoryVideoAdapter.ViewHolder>() {
 
-    fun updateItem(newItems: List<CategoryInfo>) {
+    fun updateItem(newItems: List<VideoModel>) {
         items = newItems
         notifyDataSetChanged()
     }
@@ -23,7 +24,7 @@ class CategoryVideoAdapter(private var items: List<CategoryInfo>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items[position], onClickListener)
     }
 
     override fun getItemCount(): Int {
@@ -32,7 +33,7 @@ class CategoryVideoAdapter(private var items: List<CategoryInfo>) :
 
     class ViewHolder(private val binding: RvCategoryVideoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: CategoryInfo) {
+        fun bind(item: VideoModel, onClickListener: OnClickListener) {
             binding.apply {
                 Glide.with(ivArea.context)
                     .load(item.thumbnail)
@@ -42,7 +43,7 @@ class CategoryVideoAdapter(private var items: List<CategoryInfo>) :
                 tvTitle.text = item.title
 
                 ivArea.setOnClickListener {
-
+                    onClickListener.onClick(item)
                 }
             }
 
