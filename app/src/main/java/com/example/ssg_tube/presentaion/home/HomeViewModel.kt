@@ -32,11 +32,11 @@ class HomeViewModel : ViewModel() {
                     VideoModel(
                         thumbnail = item.snippet.thumbnails.default.url,
                         title = item.snippet.title,
-                        date = "",
+                        date = item.snippet.publishedAt,
                         channelIcon = "",
                         channelName = "",
-                        description = "",
-                        channelId = "",
+                        description = item.snippet.description,
+                        channelId = item.snippet.channelId,
                         id = item.id
                     )
                 }

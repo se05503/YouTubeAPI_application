@@ -12,9 +12,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.ssg_tube.R
 import com.example.ssg_tube.databinding.FragmentHomeBinding
+import com.example.ssg_tube.presentaion.detail.DetailFragment
+import com.example.ssg_tube.presentaion.model.VideoModel
 import com.example.ssg_tube.presentaion.util.CategoryType
+import com.example.ssg_tube.presentaion.util.OnClickListener
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), OnClickListener {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -51,7 +54,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupPopularVideoAdapter() {
-        popularVideoAdapter = PopularVideoAdapter(emptyList())
+        popularVideoAdapter = PopularVideoAdapter(emptyList(), this)
         binding.rvPopularVideoArea.adapter = popularVideoAdapter
     }
 
@@ -120,5 +123,14 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onClick(videoModel: VideoModel) {
+        val detailFragment = DetailFragment.newInstance(videoModel)
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.frame_main, detailFragment)
+            .setReorderingAllowed(true)
+            .addToBackStack(null)
+            .commit()
     }
 }
