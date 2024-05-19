@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.ssg_tube.databinding.FragmentMyPageBinding
+import com.example.ssg_tube.presentaion.util.visible
 
 class MyPageFragment : Fragment() {
 
@@ -49,10 +50,11 @@ class MyPageFragment : Fragment() {
             rvMyPage.layoutManager = GridLayoutManager(requireContext(),2)
             rvMyPage.adapter = adapter
         }
+
+        viewModel.getHeartItems(mContext)
     }
 
     private fun observeViewModel() {
-        viewModel.getHeartItems(mContext)
         viewModel.likedItems.observe(viewLifecycleOwner) { items ->
             adapter.items = items.toMutableList()
             adapter.notifyDataSetChanged()
@@ -63,5 +65,10 @@ class MyPageFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity)?.visible()
     }
 }

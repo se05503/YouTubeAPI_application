@@ -42,7 +42,7 @@ class MyPageAdapter(private val context: Context): RecyclerView.Adapter<MyPageAd
             val activity = context as AppCompatActivity // my page fragment 가 attach 된 메인 액티비티
             // 현재 상황: 마이 페이지에서 아이템을 클릭 했을 때 디테일 프래그먼트로 이동한다
             activity.supportFragmentManager.commit {
-                replace(R.id.frame_main,fragment)
+                replace(R.id.flMain,fragment)
                 setReorderingAllowed(true)
                 addToBackStack(null)
             }

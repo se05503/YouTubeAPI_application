@@ -1,6 +1,5 @@
 package com.example.ssg_tube.data.remote
 
-import android.telecom.Call
 import com.example.ssg_tube.Constants
 import com.example.ssg_tube.data.model.CategoryResponse
 import com.example.ssg_tube.data.model.ChannelResponse
@@ -53,7 +52,6 @@ interface YouTubeAPI {
     ): ChannelResponse
 
     // 비디오 검색
-    // https://developers.google.com/youtube/v3/docs/search/list?hl=ko
     @GET("search")
     suspend fun videoSearch(
         // 필수 매개변수

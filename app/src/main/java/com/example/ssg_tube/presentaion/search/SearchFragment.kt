@@ -2,6 +2,7 @@ package com.example.ssg_tube.presentaion.search
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -35,17 +36,20 @@ class SearchFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        Log.d("Search fragmnet","onAttach")
         mContext = context // Glide 설정하면 어댑터에 넘겨줘야 함
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("Search fragmnet","onCreate")
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.d("Search fragmnet","onCreateView")
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
 
         setupViews()
@@ -56,6 +60,7 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("Search fragmnet","onViewCreated")
         observeViewModel()
     }
 
@@ -109,11 +114,13 @@ class SearchFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        (activity as? FragmentActivity)?.visible() // 네비게이션 바 안보이는 현상 해결
+        Log.d("Search fragmnet","onResume")
+        (activity)?.visible() // 네비게이션 바 안보이는 현상 해결
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Log.d("Search fragmnet","onDestroyView")
         _binding = null
     }
 }

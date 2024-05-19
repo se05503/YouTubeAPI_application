@@ -45,7 +45,7 @@ class SearchAdapter(private val context: Context):RecyclerView.Adapter<SearchAda
             val fragment = DetailFragment.newInstance(item)
             val activity = context as AppCompatActivity // search fragment 가 attach 된 액티비티
             activity.supportFragmentManager.commit {
-                replace(R.id.frame_main,fragment)
+                replace(R.id.flMain,fragment)
                 setReorderingAllowed(true)
                 addToBackStack("")
                 Log.d("checkItem","$item")
