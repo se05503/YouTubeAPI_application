@@ -8,8 +8,7 @@
         <item>게임</item>
         <item>뉴스및 정치</item>
         <item>과학및 기술</item>
-        <item>영화</item>
-        <item>공포</item>
+
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
