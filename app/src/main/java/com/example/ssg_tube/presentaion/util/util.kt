@@ -5,8 +5,6 @@ import androidx.fragment.app.FragmentActivity
 import com.example.ssg_tube.Constants.DATE_FORMAT
 import com.example.ssg_tube.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
-import com.google.android.material.tabs.TabLayout
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

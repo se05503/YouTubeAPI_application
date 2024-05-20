@@ -52,7 +52,6 @@ interface YouTubeAPI {
     ): ChannelResponse
 
     // 비디오 검색
-    // https://developers.google.com/youtube/v3/docs/search/list?hl=ko
     @GET("search")
     suspend fun videoSearch(
         // 필수 매개변수

@@ -66,7 +66,6 @@ class HomeFragment : Fragment(), OnClickListener {
     private fun setupCategoryVideoAdapter() {
         categoryVideoAdapter = CategoryVideoAdapter(emptyList(), this)
         binding.rvCategoryArea.adapter = categoryVideoAdapter
-
     }
 
     private fun setupChannelAdapter() {
@@ -125,6 +124,11 @@ class HomeFragment : Fragment(), OnClickListener {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        activity?.visible()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -133,7 +137,7 @@ class HomeFragment : Fragment(), OnClickListener {
     override fun onClick(videoModel: VideoModel) {
         val detailFragment = DetailFragment.newInstance(videoModel)
         parentFragmentManager.beginTransaction()
-            .replace(R.id.frame_main, detailFragment)
+            .replace(R.id.flMain, detailFragment)
             .setReorderingAllowed(true)
             .addToBackStack(null)
             .commit()

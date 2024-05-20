@@ -66,5 +66,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnPopular" />
 
+    <Button
+        android:id="@+id/btnRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="평점순"
+        app:layout_constraintStart_toEndOf="@+id/btnRecent"
+        app:layout_constraintTop_toBottomOf="@+id/etSearch" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
