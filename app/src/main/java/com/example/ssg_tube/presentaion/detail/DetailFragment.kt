@@ -1,15 +1,12 @@
 package com.example.ssg_tube.presentaion.detail
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -31,7 +28,7 @@ class DetailFragment : Fragment() {
 
     //데이터 받는 부분
     companion object {
-        fun newInstance(videoModel: VideoModel): DetailFragment { // 해당 코드 리팩토링이 필요해보입니다.
+        fun newInstance(videoModel: VideoModel): DetailFragment {
             val fragment = DetailFragment()
             val args = Bundle()
             args.putParcelable("detailModel", videoModel)
@@ -40,21 +37,10 @@ class DetailFragment : Fragment() {
         }
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        Log.d("DetailFragment", "onAttach")
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d("DetailFragment", "onCreate")
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.d("DetailFragment", "onCreateView")
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
         setupViews()
         setupListeners()
@@ -72,14 +58,14 @@ class DetailFragment : Fragment() {
 
     // 토글 값
     private fun setupListeners() {
-        _binding?.apply {
+        binding.apply {
             ivHeart.setOnClickListener {
                 if (detailPageItem?.liked == true) {
                     Toast.makeText(requireContext(), "해당 동영상이 보관함에서 삭제되었습니다.", Toast.LENGTH_SHORT)
                         .show() // 나중에 확장 함수로 빼기
                     ivHeart.setImageResource(R.drawable.ic_blank_heart)
                     detailPageItem?.liked = false
-                    detailPageItem?.let { it ->
+                    detailPageItem?.let {
                         DBManager.removeData(requireContext(), it.videoId)
                         sharedViewModel.addItemId(it.videoId)
                     }
@@ -88,7 +74,7 @@ class DetailFragment : Fragment() {
                         .show() // 나중에 확장 함수로 빼기
                     ivHeart.setImageResource(R.drawable.ic_full_heart)
                     detailPageItem?.liked = true
-                    detailPageItem?.let { it ->
+                    detailPageItem?.let {
                         DBManager.saveData(requireContext(), it.videoId, it)
                         sharedViewModel.deleteItemId(it.videoId)
                     }
@@ -103,7 +89,6 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("DetailFragment", "onViewCreated")
         observing()
     }
 
@@ -115,24 +100,12 @@ class DetailFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        Log.d("DetailFragment", "onResume")
         (activity)?.invisible()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.d("DetailFragment", "onDestroyView")
         _binding = null
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("DetailFragment", "onDestroy")
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        Log.d("DetailFragment", "onDetach")
     }
 
     //공유하는 기능

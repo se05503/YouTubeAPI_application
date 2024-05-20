@@ -15,10 +15,16 @@ data class ChannelItem(
 data class ChannelSnippet(
     @SerializedName("title") val title: String, // 채널의 제목입니다.
     @SerializedName("description") val description: String, // 채널의 설명입니다.
-    @SerializedName("thumbnails") val thumbnails: Map<String, ChannelThumbnail> // 리팩토링을 위해 수정했습니다.
+    @SerializedName("thumbnails") val thumbnails: ChannelThumbnailKey
 )
 
-data class ChannelThumbnail(
+data class ChannelThumbnailKey(
+    @SerializedName("default") val default: ChannelThumbnailValue,
+    @SerializedName("medium") val medium: ChannelThumbnailValue,
+    @SerializedName("high") val high: ChannelThumbnailValue
+)
+
+data class ChannelThumbnailValue(
     @SerializedName("url") val url: String
 )
 

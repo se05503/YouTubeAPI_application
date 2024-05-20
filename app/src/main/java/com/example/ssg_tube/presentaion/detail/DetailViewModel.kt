@@ -20,7 +20,7 @@ class DetailViewModel : ViewModel() {
             )
             val channelDetails = channelResponse.items.firstOrNull()
                 channelDetails?.let { channel ->
-                    val channelUrl = channel.snippet.thumbnails["high"]!!.url
+                    val channelUrl = channel.snippet.thumbnails.high.url
                     val channelName = channel.snippet.title
                     val updatedVideoModel = videoModel.copy(
                     channelIcon = channelUrl,

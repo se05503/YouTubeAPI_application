@@ -1,6 +1,5 @@
 package com.example.ssg_tube.presentaion.search
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -34,7 +33,7 @@ class SearchViewModel(private val apiService: YouTubeAPI) : ViewModel() {
 
             val items = requestResponse.items
             for (item in items) {
-                val thumbnail = item.snippet.thumbnails["high"]!!.url
+                val thumbnail = item.snippet.thumbnails.high.url
                 val title = item.snippet.title
                 val videoId = item.id.videoId
                 val channelId = item.snippet.channelId
@@ -53,7 +52,6 @@ class SearchViewModel(private val apiService: YouTubeAPI) : ViewModel() {
                     )
                 )
             }
-            Log.d("check", "$resItems")
             searchResult()
         }
 

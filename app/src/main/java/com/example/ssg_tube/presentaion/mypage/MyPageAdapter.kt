@@ -1,15 +1,13 @@
 package com.example.ssg_tube.presentaion.mypage
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ssg_tube.databinding.SearchItemBinding
-import com.example.ssg_tube.presentaion.detail.DetailFragment
 import com.example.ssg_tube.presentaion.model.VideoModel
 
-class MyPageAdapter(private val context: Context): RecyclerView.Adapter<MyPageAdapter.MyPageViewHolder>() {
+class MyPageAdapter: RecyclerView.Adapter<MyPageAdapter.MyPageViewHolder>() {
 
     // 좋아요한 아이템들
     var items = mutableListOf<VideoModel>()
@@ -24,12 +22,12 @@ class MyPageAdapter(private val context: Context): RecyclerView.Adapter<MyPageAd
         this.clickListener = listener
     }
 
-    inner class MyPageViewHolder(val binding: SearchItemBinding, val context: Context):RecyclerView.ViewHolder(binding.root) {
+    inner class MyPageViewHolder(val binding: SearchItemBinding):RecyclerView.ViewHolder(binding.root) {
         var view = binding.clSearchView
 
         fun bind(item: VideoModel) {
             binding.apply {
-                Glide.with(context)
+                Glide.with(ivThumbnail.context)
                     .load(item.thumbnail)
                     .into(ivThumbnail)
                 tvTitle.text = item.title
@@ -39,7 +37,7 @@ class MyPageAdapter(private val context: Context): RecyclerView.Adapter<MyPageAd
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyPageViewHolder {
         val binding = SearchItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return MyPageViewHolder(binding, context)
+        return MyPageViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyPageViewHolder, position: Int) {

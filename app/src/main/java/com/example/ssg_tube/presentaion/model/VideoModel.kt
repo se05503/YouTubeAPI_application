@@ -1,7 +1,6 @@
 package com.example.ssg_tube.presentaion.model
 
 import android.os.Parcelable
-import com.example.ssg_tube.data.model.SearchVideoId
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

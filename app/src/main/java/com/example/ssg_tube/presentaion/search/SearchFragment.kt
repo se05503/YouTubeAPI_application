@@ -1,22 +1,17 @@
 package com.example.ssg_tube.presentaion.search
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.ssg_tube.databinding.FragmentSearchBinding
 import com.example.ssg_tube.network.RetroClient
 import com.example.ssg_tube.presentaion.SharedViewModel
-import com.example.ssg_tube.presentaion.detail.DetailFragment
-import com.example.ssg_tube.presentaion.util.invisible
 import com.example.ssg_tube.presentaion.util.visible
 
 class SearchFragment : Fragment() {
@@ -25,7 +20,6 @@ class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var mContext: Context
     private lateinit var adapter: SearchAdapter
     private lateinit var layoutManager: GridLayoutManager
     private var lastQuery = "" // 사용자가 검색창에 입력한 값
@@ -36,36 +30,22 @@ class SearchFragment : Fragment() {
         SearchViewModelFactory(apiServiceInstance)
     }
 
-    val sharedViewModel by activityViewModels<SharedViewModel>()
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        Log.d("Search fragmnet","onAttach")
-        mContext = context // Glide 설정하면 어댑터에 넘겨줘야 함
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d("Search fragmnet","onCreate")
-    }
+    private val sharedViewModel by activityViewModels<SharedViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.d("Search fragmnet","onCreateView")
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
-
-        sharedViewModel.notifyLiveDataChanged()
-        setupViews()
-        setupListeners()
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("Search fragmnet","onViewCreated")
+        setupViews()
+        setupListeners()
+
+        sharedViewModel.notifyLiveDataChanged()
         observeViewModel()
     }
 
@@ -73,12 +53,11 @@ class SearchFragment : Fragment() {
         layoutManager = GridLayoutManager(requireContext(), 2)
 
         binding.rvSearch.layoutManager = layoutManager
-        adapter = SearchAdapter(mContext)
+        adapter = SearchAdapter()
 
         binding.apply {
             rvSearch.adapter = adapter
-            rvSearch.itemAnimator = null // 진혁님 피드백
-            // ... 나중에 기능 추가
+            rvSearch.itemAnimator = null
         }
     }
 
@@ -131,13 +110,11 @@ class SearchFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        Log.d("Search fragmnet","onResume")
-        (activity)?.visible() // 네비게이션 바 안보이는 현상 해결
+        (activity)?.visible()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.d("Search fragmnet","onDestroyView")
         _binding = null
     }
 }

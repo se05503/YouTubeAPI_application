@@ -84,7 +84,7 @@ class HomeViewModel : ViewModel() {
                 val channels = it.items.map { item ->
                     ChannelInfo(
                         id = item.id,
-                        thumbnail = item.snippet.thumbnails["default"]!!.url
+                        thumbnail = item.snippet.thumbnails.default.url
                     )
                 }
                 _channel.postValue(channels)
