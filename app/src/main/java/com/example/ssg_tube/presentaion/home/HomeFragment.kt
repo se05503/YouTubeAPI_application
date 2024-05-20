@@ -15,6 +15,7 @@ import com.example.ssg_tube.presentaion.detail.DetailFragment
 import com.example.ssg_tube.presentaion.model.VideoModel
 import com.example.ssg_tube.presentaion.util.CategoryType
 import com.example.ssg_tube.presentaion.util.OnClickListener
+import com.example.ssg_tube.presentaion.util.visible
 
 class HomeFragment : Fragment(), OnClickListener {
 
@@ -60,7 +61,6 @@ class HomeFragment : Fragment(), OnClickListener {
     private fun setupCategoryVideoAdapter() {
         categoryVideoAdapter = CategoryVideoAdapter(emptyList(), this)
         binding.rvCategoryArea.adapter = categoryVideoAdapter
-
     }
 
     private fun setupChannelAdapter() {
@@ -119,6 +119,11 @@ class HomeFragment : Fragment(), OnClickListener {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        activity?.visible()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -127,7 +132,7 @@ class HomeFragment : Fragment(), OnClickListener {
     override fun onClick(videoModel: VideoModel) {
         val detailFragment = DetailFragment.newInstance(videoModel)
         parentFragmentManager.beginTransaction()
-            .replace(R.id.frame_main, detailFragment)
+            .replace(R.id.flMain, detailFragment)
             .setReorderingAllowed(true)
             .addToBackStack(null)
             .commit()

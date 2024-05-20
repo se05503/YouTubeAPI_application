@@ -8,21 +8,23 @@ data class ChannelResponse(
 )
 
 data class ChannelItem(
-    @SerializedName("id") val id: String,
+    @SerializedName("id") val id: String, // YouTube가 채널을 고유하게 식별하는 데 사용하는 ID입니다.
     @SerializedName("snippet") val snippet: ChannelSnippet
 )
 
 data class ChannelSnippet(
-    @SerializedName("title") val title: String,
-    @SerializedName("description") val description: String,
-    @SerializedName("thumbnails") val thumbnails: ChannelThumbnails
+    @SerializedName("title") val title: String, // 채널의 제목입니다.
+    @SerializedName("description") val description: String, // 채널의 설명입니다.
+    @SerializedName("thumbnails") val thumbnails: ChannelThumbnailKey
 )
 
-data class ChannelThumbnail(
-    @SerializedName("url") val url: String,
+data class ChannelThumbnailKey(
+    @SerializedName("default") val default: ChannelThumbnailValue,
+    @SerializedName("medium") val medium: ChannelThumbnailValue,
+    @SerializedName("high") val high: ChannelThumbnailValue
 )
-data class ChannelThumbnails(
-    @SerializedName("high") val high: ChannelThumbnail,
-    @SerializedName("medium") val medium: ChannelThumbnail,
-    @SerializedName("default") val default: ChannelThumbnail
+
+data class ChannelThumbnailValue(
+    @SerializedName("url") val url: String
 )
+

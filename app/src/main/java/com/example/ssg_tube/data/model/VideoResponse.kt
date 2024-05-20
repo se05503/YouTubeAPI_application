@@ -11,7 +11,7 @@ data class VideoResponse(
 data class VideoItem(
     @SerializedName("id") val id: String,
     @SerializedName("snippet") val snippet: VideoSnippet,
-    @SerializedName("statistics") val statistics: VideoStatistics?
+    @SerializedName("statistics") val statistics: VideoStatistics
 )
 
 data class VideoSnippet(
@@ -36,6 +36,6 @@ data class VideoThumbnail(
 
 data class VideoStatistics(
     @SerializedName("viewCount") val viewCount: String,
-    @SerializedName("likeCount") val likeCount: String?
+    @SerializedName("likeCount") val likeCount: String
 )
 

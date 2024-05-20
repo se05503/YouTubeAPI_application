@@ -36,7 +36,7 @@ class HomeViewModel : ViewModel() {
                         channelName = "",
                         description = item.snippet.description,
                         channelId = item.snippet.channelId,
-                        id = item.id
+                        videoId = item.id
                     )
                 }
                 _popularVideo.postValue(popularVideos)
@@ -62,7 +62,7 @@ class HomeViewModel : ViewModel() {
                         channelName = "",
                         description = item.snippet.description,
                         channelId = item.snippet.channelId,
-                        id = item.id
+                        videoId = item.id
                     )
                 }
                 _categoriesVideo.postValue(categoryVideos)
