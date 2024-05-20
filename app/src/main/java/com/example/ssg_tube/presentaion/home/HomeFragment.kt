@@ -62,6 +62,7 @@ class HomeFragment : Fragment(), OnClickListener {
         categoryVideoAdapter = CategoryVideoAdapter(emptyList(), this)
         binding.rvCategoryArea.adapter = categoryVideoAdapter
         //..
+        //..
     }
 
     private fun setupChannelAdapter() {
