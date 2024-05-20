@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ssg_tube.network.RetroClient
-import com.example.ssg_tube.presentaion.model.CategoryInfo
 import com.example.ssg_tube.presentaion.model.ChannelInfo
 import com.example.ssg_tube.presentaion.model.VideoModel
 import kotlinx.coroutines.launch

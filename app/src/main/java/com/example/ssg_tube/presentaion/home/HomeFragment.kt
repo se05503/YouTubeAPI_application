@@ -9,7 +9,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.example.ssg_tube.R
 import com.example.ssg_tube.databinding.FragmentHomeBinding
 import com.example.ssg_tube.presentaion.detail.DetailFragment

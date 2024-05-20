@@ -1,12 +1,10 @@
 package com.example.ssg_tube.data.remote
 
-import android.telecom.Call
 import com.example.ssg_tube.Constants
 import com.example.ssg_tube.data.model.CategoryResponse
 import com.example.ssg_tube.data.model.ChannelResponse
 import com.example.ssg_tube.data.model.SearchResponse
 import com.example.ssg_tube.data.model.VideoResponse
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 

@@ -17,7 +17,8 @@ class ChannelAdapter(private var items: List<ChannelInfo>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = RvChannelItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            RvChannelItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 

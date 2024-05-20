@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ssg_tube.R
 import com.example.ssg_tube.databinding.RvCategoryVideoItemBinding
-import com.example.ssg_tube.presentaion.model.CategoryInfo
 import com.example.ssg_tube.presentaion.model.VideoModel
 import com.example.ssg_tube.presentaion.util.OnClickListener
 
-class CategoryVideoAdapter(private var items: List<VideoModel>, private val onClickListener: OnClickListener) :
+class CategoryVideoAdapter(
+    private var items: List<VideoModel>,
+    private val onClickListener: OnClickListener
+) :
     RecyclerView.Adapter<CategoryVideoAdapter.ViewHolder>() {
 
     fun updateItem(newItems: List<VideoModel>) {
@@ -19,7 +21,8 @@ class CategoryVideoAdapter(private var items: List<VideoModel>, private val onCl
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = RvCategoryVideoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            RvCategoryVideoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 

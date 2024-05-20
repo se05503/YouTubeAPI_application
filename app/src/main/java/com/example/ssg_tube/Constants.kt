@@ -5,14 +5,13 @@ object Constants {
     const val BASE_URL = "https://www.googleapis.com/youtube/v3/"
 
     // YoutubeAPI 인증키
-    const val AUTHORIZATION = "AIzaSyDuz3qn4XoGDo_PvB7CwrzgUAO_Fb71hjg"
+    const val AUTHORIZATION = ""
 
     // SharedPreference 파일 이름
     const val PREF = "pref"
 
     // Detail 로 데이터를 넘기기위한 키
     const val DETAIL_KEY = "detail_key"
-
 
     //동영상 날짜를 동일한 형태로 받아 오기 위한 상수
     const val DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
