@@ -15,6 +15,7 @@ import com.example.ssg_tube.presentaion.detail.DetailFragment
 import com.example.ssg_tube.presentaion.model.VideoModel
 import com.example.ssg_tube.presentaion.util.CategoryType
 import com.example.ssg_tube.presentaion.util.OnClickListener
+import com.example.ssg_tube.presentaion.util.visible
 
 class HomeFragment : Fragment(), OnClickListener {
 
@@ -44,6 +45,11 @@ class HomeFragment : Fragment(), OnClickListener {
         setupAdapter()
         viewModel.getPopularVideo()
         setupObserve()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity)?.visible()
     }
 
     private fun setupAdapter() {
