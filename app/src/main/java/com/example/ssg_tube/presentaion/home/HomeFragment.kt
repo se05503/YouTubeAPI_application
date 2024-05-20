@@ -49,7 +49,7 @@ class HomeFragment : Fragment(), OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        (activity)?.visible()
+        activity?.visible()
     }
 
     private fun setupAdapter() {
