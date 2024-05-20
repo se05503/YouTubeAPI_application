@@ -7,10 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.ssg_tube.R
 import com.example.ssg_tube.databinding.FragmentMyPageBinding
+import com.example.ssg_tube.presentaion.SharedViewModel
 import com.example.ssg_tube.presentaion.detail.DetailFragment
 import com.example.ssg_tube.presentaion.model.VideoModel
 import com.example.ssg_tube.presentaion.util.visible
@@ -22,6 +24,7 @@ class MyPageFragment : Fragment() {
 
     private lateinit var mContext: Context
     private lateinit var adapter: MyPageAdapter
+
     private val viewModel: MyPageViewModel by viewModels()
 
     override fun onAttach(context: Context) {
@@ -61,10 +64,7 @@ class MyPageFragment : Fragment() {
                     .addToBackStack(null)
                     .replace(R.id.flMain,fragment)
                     .commit()
-
-
             }
-
         })
     }
 

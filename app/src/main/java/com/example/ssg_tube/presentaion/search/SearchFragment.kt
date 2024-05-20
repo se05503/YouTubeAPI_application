@@ -9,10 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.ssg_tube.databinding.FragmentSearchBinding
 import com.example.ssg_tube.network.RetroClient
+import com.example.ssg_tube.presentaion.SharedViewModel
 import com.example.ssg_tube.presentaion.detail.DetailFragment
 import com.example.ssg_tube.presentaion.util.invisible
 import com.example.ssg_tube.presentaion.util.visible
@@ -33,6 +35,8 @@ class SearchFragment : Fragment() {
     private val viewModel: SearchViewModel by viewModels {
         SearchViewModelFactory(apiServiceInstance)
     }
+
+    val sharedViewModel by activityViewModels<SharedViewModel>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -109,6 +113,18 @@ class SearchFragment : Fragment() {
         viewModel.searchResults.observe(viewLifecycleOwner) { items ->
             adapter.items.addAll(items)
             adapter.notifyDataSetChanged()
+        }
+
+        sharedViewModel.unlikedItemsUrl.observe(viewLifecycleOwner) { videoIds ->
+            videoIds.forEach { videoId ->
+                val targetItem = adapter.items.find { it.videoId == videoId }
+                targetItem?.let {
+                    it.liked = false
+                    val targetItemIndex = adapter.items.indexOf(it)
+                    adapter.notifyItemChanged(targetItemIndex)
+                }
+//                sharedViewModel.clearItemUrl()
+            }
         }
     }
 

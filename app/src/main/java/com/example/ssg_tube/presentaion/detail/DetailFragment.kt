@@ -10,12 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.ssg_tube.Constants
 import com.example.ssg_tube.R
 import com.example.ssg_tube.data.db.DBManager
 import com.example.ssg_tube.databinding.FragmentDetailBinding
+import com.example.ssg_tube.presentaion.SharedViewModel
 import com.example.ssg_tube.presentaion.model.VideoModel
 import com.example.ssg_tube.presentaion.util.invisible
 
@@ -24,6 +26,8 @@ class DetailFragment : Fragment() {
     private val binding get() = _binding!!
     private val detailViewModel: DetailViewModel by viewModels()
     private var detailPageItem: VideoModel? = null
+
+    private val sharedViewModel by activityViewModels<SharedViewModel>()
 
     //데이터 받는 부분
     companion object {
@@ -74,7 +78,10 @@ class DetailFragment : Fragment() {
                     Toast.makeText(requireContext(),"해당 동영상이 보관함에서 삭제되었습니다.",Toast.LENGTH_SHORT).show() // 나중에 확장 함수로 빼기
                     ivHeart.setImageResource(R.drawable.ic_blank_heart)
                     detailPageItem?.liked = false
-                    detailPageItem?.let { it -> DBManager.removeData(requireContext(), it.videoId) }
+                    detailPageItem?.let { it ->
+                        DBManager.removeData(requireContext(), it.videoId)
+                        sharedViewModel.addUnlikedItemUrl(it.videoId)
+                    }
                 } else {
                     Toast.makeText(requireContext(),"해당 동영상이 보관함에 추가되었습니다.",Toast.LENGTH_SHORT).show() // 나중에 확장 함수로 빼기
                     ivHeart.setImageResource(R.drawable.ic_full_heart)
