@@ -42,19 +42,19 @@ class DetailFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        Log.d("DetailFragment","onAttach")
+        Log.d("DetailFragment", "onAttach")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("DetailFragment","onCreate")
+        Log.d("DetailFragment", "onCreate")
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.d("DetailFragment","onCreateView")
+        Log.d("DetailFragment", "onCreateView")
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
         setupViews()
         setupListeners()
@@ -75,18 +75,23 @@ class DetailFragment : Fragment() {
         _binding?.apply {
             ivHeart.setOnClickListener {
                 if (detailPageItem?.liked == true) {
-                    Toast.makeText(requireContext(),"해당 동영상이 보관함에서 삭제되었습니다.",Toast.LENGTH_SHORT).show() // 나중에 확장 함수로 빼기
+                    Toast.makeText(requireContext(), "해당 동영상이 보관함에서 삭제되었습니다.", Toast.LENGTH_SHORT)
+                        .show() // 나중에 확장 함수로 빼기
                     ivHeart.setImageResource(R.drawable.ic_blank_heart)
                     detailPageItem?.liked = false
                     detailPageItem?.let { it ->
                         DBManager.removeData(requireContext(), it.videoId)
-                        sharedViewModel.addUnlikedItemUrl(it.videoId)
+                        sharedViewModel.addItemId(it.videoId)
                     }
                 } else {
-                    Toast.makeText(requireContext(),"해당 동영상이 보관함에 추가되었습니다.",Toast.LENGTH_SHORT).show() // 나중에 확장 함수로 빼기
+                    Toast.makeText(requireContext(), "해당 동영상이 보관함에 추가되었습니다.", Toast.LENGTH_SHORT)
+                        .show() // 나중에 확장 함수로 빼기
                     ivHeart.setImageResource(R.drawable.ic_full_heart)
                     detailPageItem?.liked = true
-                    detailPageItem?.let { it -> DBManager.saveData(requireContext(), it.videoId, it) }
+                    detailPageItem?.let { it ->
+                        DBManager.saveData(requireContext(), it.videoId, it)
+                        sharedViewModel.deleteItemId(it.videoId)
+                    }
                 }
             }
 
@@ -98,7 +103,7 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("DetailFragment","onViewCreated")
+        Log.d("DetailFragment", "onViewCreated")
         observing()
     }
 
@@ -110,16 +115,28 @@ class DetailFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        Log.d("DetailFragment", "onResume")
         (activity)?.invisible()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Log.d("DetailFragment", "onDestroyView")
         _binding = null
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("DetailFragment", "onDestroy")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.d("DetailFragment", "onDetach")
+    }
+
     //공유하는 기능
-    private fun shareVideo(detailPageItems : VideoModel) {
+    private fun shareVideo(detailPageItems: VideoModel) {
         val sharedVideoUrl = "${Constants.SHARE_YOUTUBE}${detailPageItems.videoId}"
         val shareIntent = Intent().apply {
             action = Intent.ACTION_SEND

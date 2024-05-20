@@ -56,6 +56,7 @@ class SearchFragment : Fragment() {
         Log.d("Search fragmnet","onCreateView")
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
 
+        sharedViewModel.notifyLiveDataChanged()
         setupViews()
         setupListeners()
 
@@ -123,8 +124,8 @@ class SearchFragment : Fragment() {
                     val targetItemIndex = adapter.items.indexOf(it)
                     adapter.notifyItemChanged(targetItemIndex)
                 }
-//                sharedViewModel.clearItemUrl()
             }
+            sharedViewModel.clearItemUrl()
         }
     }
 
