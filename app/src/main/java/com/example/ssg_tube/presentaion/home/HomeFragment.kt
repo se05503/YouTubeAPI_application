@@ -124,11 +124,6 @@ class HomeFragment : Fragment(), OnClickListener {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        activity?.visible()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
