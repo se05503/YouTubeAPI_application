@@ -125,6 +125,12 @@ class SearchFragment : Fragment(),OnClickListener {
     override fun onClick(videoModel: VideoModel) {
         val fragment = DetailFragment.newInstance(videoModel)
         parentFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.slide_in, // enter
+                R.anim.fade_out, // exit
+                R.anim.fade_in, // popEnter(back stack)
+                R.anim.slide_out // popExit(back stack)
+            )
             .replace(R.id.flMain,fragment)
             .addToBackStack(null)
             .setReorderingAllowed(true)

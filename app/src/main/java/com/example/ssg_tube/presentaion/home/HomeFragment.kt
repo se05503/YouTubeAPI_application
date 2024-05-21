@@ -152,6 +152,12 @@ class HomeFragment : Fragment(), OnClickListener {
     override fun onClick(videoModel: VideoModel) {
         val detailFragment = DetailFragment.newInstance(videoModel)
         parentFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.slide_in, // enter
+                R.anim.fade_out, // exit
+                R.anim.fade_in, // popEnter(back stack)
+                R.anim.slide_out // popExit(back stack)
+            )
             .replace(R.id.flMain, detailFragment)
             .setReorderingAllowed(true)
             .addToBackStack(null)
