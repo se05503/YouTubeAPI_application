@@ -1,5 +1,8 @@
 package com.example.ssg_tube.data.repository
 
+import com.example.ssg_tube.data.model.toDomainChannelModel
+import com.example.ssg_tube.data.model.toDomainSearchModel
+import com.example.ssg_tube.data.model.toDomainVideoModel
 import com.example.ssg_tube.data.remote.YouTubeAPI
 import com.example.ssg_tube.presentaion.model.ChannelInfo
 import com.example.ssg_tube.presentaion.model.VideoModel
@@ -13,18 +16,7 @@ class YoutubeRepositoryImpl(private val apiService: YouTubeAPI) : YoutubeReposit
             chart = "mostPopular",
             regionCode = "KR"
         )
-        return response.items.map { item ->
-            VideoModel(
-                thumbnail = item.snippet.thumbnails.default.url,
-                title = item.snippet.title,
-                date = item.snippet.publishedAt,
-                channelIcon = "",
-                channelName = "",
-                description = item.snippet.description,
-                channelId = item.snippet.channelId,
-                videoId = item.id
-            )
-        }
+        return response.items.map { it.toDomainVideoModel()}
     }
 
     override suspend fun getCategoryVideos(categoryId: String): List<VideoModel> {
@@ -34,18 +26,7 @@ class YoutubeRepositoryImpl(private val apiService: YouTubeAPI) : YoutubeReposit
             regionCode = "KR",
             videoCategoryId = categoryId
         )
-        return response.items.map { item ->
-            VideoModel(
-                thumbnail = item.snippet.thumbnails.default.url,
-                title = item.snippet.title,
-                date = item.snippet.publishedAt,
-                channelIcon = "",
-                channelName = "",
-                description = item.snippet.description,
-                channelId = item.snippet.channelId,
-                videoId = item.id
-            )
-        }
+        return response.items.map { it.toDomainVideoModel() }
     }
 
     override suspend fun getChannel(channelId: List<String>): List<ChannelInfo> {
@@ -53,12 +34,7 @@ class YoutubeRepositoryImpl(private val apiService: YouTubeAPI) : YoutubeReposit
             part = "snippet",
             id = channelId.joinToString(",")
         )
-        return response.items.map { item ->
-            ChannelInfo(
-                id = item.id,
-                thumbnail = item.snippet.thumbnails.default.url
-            )
-        }
+        return response.items.map { it.toDomainChannelModel() }
     }
 
     override suspend fun getSearch(query: String, order: String): List<VideoModel> {
@@ -70,17 +46,6 @@ class YoutubeRepositoryImpl(private val apiService: YouTubeAPI) : YoutubeReposit
             type = "video",
             videoType = "any"
         )
-        return response.items.map {item ->
-            VideoModel(
-                videoId = item.id.videoId,
-                title = item.snippet.title,
-                thumbnail = item.snippet.thumbnails.high.url,
-                channelIcon = "",
-                channelName = "",
-                date = FormatManager.dateFormat(item.snippet.date),
-                description = item.snippet.description,
-                channelId = item.snippet.channelId
-            )
-        }
+        return response.items.map { it.toDomainSearchModel() }
     }
 }
