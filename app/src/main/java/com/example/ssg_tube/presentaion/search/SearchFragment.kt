@@ -1,10 +1,12 @@
 package com.example.ssg_tube.presentaion.search
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -74,6 +76,10 @@ class SearchFragment : Fragment(),OnClickListener {
                 adapter.clearItem() // 검색어를 저장하기 전에 일단 전 데이터 삭제하기
                 lastQuery = binding.etSearch.text.toString()
                 viewModel.videoResults(lastQuery,"relevance") // relevance: 검색어와의 관련성을 기준으로 리소스를 정렬합니다. 이 매개변수의 기본값입니다.
+
+                // 검색 이후 키보드 내리는 코드
+                val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(binding.etSearch.windowToken,0)
             }
         }
 
@@ -90,6 +96,11 @@ class SearchFragment : Fragment(),OnClickListener {
         binding.btnRating.setOnClickListener {
             adapter.clearItem()
             viewModel.videoResults(lastQuery,"rating") // rating: 높은 평점에서 낮은 평점순으로 리소스가 정렬됩니다.
+        }
+
+        // 플로팅 버튼 누르면 다시 맨 처음으로 돌아오는 기능
+        binding.fbSearch.setOnClickListener {
+            binding.rvSearch.smoothScrollToPosition(0)
         }
     }
 
