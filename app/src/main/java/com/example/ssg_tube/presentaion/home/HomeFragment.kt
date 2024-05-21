@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.viewModels
 import com.example.ssg_tube.R
-import com.example.ssg_tube.data.repository.VideoRepositoryImpl
+import com.example.ssg_tube.data.repository.YoutubeRepositoryImpl
 import com.example.ssg_tube.databinding.FragmentHomeBinding
 import com.example.ssg_tube.network.RetroClient
 import com.example.ssg_tube.presentaion.detail.DetailFragment
@@ -29,7 +29,7 @@ class HomeFragment : Fragment(), OnClickListener {
     private lateinit var channelAdapter: ChannelAdapter
 
     private val api by lazy { RetroClient.youTubeRetrofit }
-    private val repository by lazy { VideoRepositoryImpl(api) }
+    private val repository by lazy { YoutubeRepositoryImpl(api) }
     private val viewModel: HomeViewModel by viewModels { HomeViewModelFactory(repository)}
 
     private lateinit var spinner: Spinner

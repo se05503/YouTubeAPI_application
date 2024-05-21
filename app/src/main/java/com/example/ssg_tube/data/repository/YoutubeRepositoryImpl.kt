@@ -5,7 +5,7 @@ import com.example.ssg_tube.presentaion.model.ChannelInfo
 import com.example.ssg_tube.presentaion.model.VideoModel
 import com.example.ssg_tube.presentaion.repository.YoutubeRepository
 
-class VideoRepositoryImpl(private val api: YouTubeAPI) : YoutubeRepository {
+class YoutubeRepositoryImpl(private val api: YouTubeAPI) : YoutubeRepository {
     override suspend fun getPopularVideos(): List<VideoModel> {
         val response = api.videoPopularList(
             part = "snippet",
