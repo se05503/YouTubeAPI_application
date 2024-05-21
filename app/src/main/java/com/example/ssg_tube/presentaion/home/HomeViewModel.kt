@@ -7,10 +7,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.ssg_tube.presentaion.model.ChannelInfo
 import com.example.ssg_tube.presentaion.model.VideoModel
-import com.example.ssg_tube.presentaion.repository.VideoRepository
+import com.example.ssg_tube.presentaion.repository.YoutubeRepository
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val repository: VideoRepository) : ViewModel() {
+class HomeViewModel(private val repository: YoutubeRepository) : ViewModel() {
     private val _popularVideo: MutableLiveData<List<VideoModel>> = MutableLiveData()
     val popularVideo: LiveData<List<VideoModel>> get() = _popularVideo
 
@@ -46,12 +46,9 @@ class HomeViewModel(private val repository: VideoRepository) : ViewModel() {
     }
 }
 
-class HomeViewModelFactory(private val repository: VideoRepository) : ViewModelProvider.Factory {
+// Factory
+class HomeViewModelFactory(private val repository: YoutubeRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
             return HomeViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
