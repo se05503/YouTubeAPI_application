@@ -99,7 +99,7 @@ class SearchFragment : Fragment(),OnClickListener {
             adapter.notifyDataSetChanged()
         }
 
-        sharedViewModel.unlikedItemsUrl.observe(viewLifecycleOwner) { videoIds ->
+        sharedViewModel.unlikedItemsId.observe(viewLifecycleOwner) { videoIds ->
             videoIds.forEach { videoId ->
                 val targetItem = adapter.items.find { it.videoId == videoId }
                 targetItem?.let {

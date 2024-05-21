@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.example.ssg_tube.R
 import com.example.ssg_tube.databinding.FragmentHomeBinding
+import com.example.ssg_tube.presentaion.SharedViewModel
 import com.example.ssg_tube.presentaion.detail.DetailFragment
 import com.example.ssg_tube.presentaion.model.VideoModel
 import com.example.ssg_tube.presentaion.util.CategoryType
@@ -24,11 +26,15 @@ class HomeFragment : Fragment(), OnClickListener {
     private lateinit var popularVideoAdapter: PopularVideoAdapter
     private lateinit var categoryVideoAdapter: CategoryVideoAdapter
     private lateinit var channelAdapter: ChannelAdapter
+
     private val viewModel: HomeViewModel by viewModels()
+    private val sharedViewModel by activityViewModels<SharedViewModel>()
+
     private lateinit var spinner: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        sharedViewModel.notifyLiveDataChanged()
     }
 
     override fun onCreateView(
@@ -78,6 +84,20 @@ class HomeFragment : Fragment(), OnClickListener {
         viewModel.channel.observe(viewLifecycleOwner) { channels ->
             channelAdapter.updateItem(channels)
         }
+
+//        sharedViewModel.unlikedItemsId.observe(viewLifecycleOwner) { videoIds ->
+//            videoIds.forEach { videoId ->
+//                val targetItem = popularVideoAdapter.getItem().find {
+//                    it.videoId == videoId
+//                }
+//                targetItem?.let {
+//                    it.liked = false
+//                    val targetItemIndex = popularVideoAdapter.getItem().indexOf(it)
+//                    popularVideoAdapter.notifyItemChanged(targetItemIndex)
+//                }
+//            }
+//            sharedViewModel.clearItemUrl()
+//        }
     }
 
     // spinner 공식문서 참조
