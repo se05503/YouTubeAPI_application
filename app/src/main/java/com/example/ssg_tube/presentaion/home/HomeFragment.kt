@@ -10,7 +10,9 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.viewModels
 import com.example.ssg_tube.R
+import com.example.ssg_tube.data.repository.VideoRepositoryImpl
 import com.example.ssg_tube.databinding.FragmentHomeBinding
+import com.example.ssg_tube.network.RetroClient
 import com.example.ssg_tube.presentaion.detail.DetailFragment
 import com.example.ssg_tube.presentaion.model.VideoModel
 import com.example.ssg_tube.presentaion.util.CategoryType
@@ -21,10 +23,15 @@ class HomeFragment : Fragment(), OnClickListener {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
     private lateinit var popularVideoAdapter: PopularVideoAdapter
     private lateinit var categoryVideoAdapter: CategoryVideoAdapter
     private lateinit var channelAdapter: ChannelAdapter
-    private val viewModel: HomeViewModel by viewModels()
+
+    private val api by lazy { RetroClient.youTubeRetrofit }
+    private val repository by lazy { VideoRepositoryImpl(api) }
+    private val viewModel: HomeViewModel by viewModels { HomeViewModelFactory(repository)}
+
     private lateinit var spinner: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
