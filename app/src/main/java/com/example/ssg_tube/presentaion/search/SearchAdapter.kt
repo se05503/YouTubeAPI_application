@@ -10,10 +10,11 @@ import com.bumptech.glide.Glide
 import com.example.ssg_tube.R
 import com.example.ssg_tube.databinding.SearchItemBinding
 import com.example.ssg_tube.presentaion.model.VideoModel
+import com.example.ssg_tube.presentaion.util.OnClickListener
 
-class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(){
+class SearchAdapter(private val onClickListener: OnClickListener): RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(){
 
-    // 해당 어댑터에서 리사이클러뷰에 뿌려줄 아이템
+    // 해당 어댑터에서 리사이클러뷰에 뿌려줄 아이템)
     val items = ArrayList<VideoModel>()
 
     // 전체 아이템 삭제(매번 검색을 할 때마다 새로운 데이터가 저장되기 때문)
@@ -39,6 +40,9 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(){
             .load(items[position].thumbnail)
             .placeholder(R.drawable.ic_loading)
             .into(holder.tvThumbnail)
+        holder.view.setOnClickListener {
+            onClickListener.onClick(items[position])
+        }
     }
 
     override fun getItemCount(): Int {

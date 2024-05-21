@@ -9,12 +9,16 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.ssg_tube.R
 import com.example.ssg_tube.databinding.FragmentSearchBinding
 import com.example.ssg_tube.network.RetroClient
 import com.example.ssg_tube.presentaion.SharedViewModel
+import com.example.ssg_tube.presentaion.detail.DetailFragment
+import com.example.ssg_tube.presentaion.model.VideoModel
+import com.example.ssg_tube.presentaion.util.OnClickListener
 import com.example.ssg_tube.presentaion.util.visible
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(),OnClickListener {
 
     // 뷰 바인딩
     private var _binding: FragmentSearchBinding? = null
@@ -53,7 +57,7 @@ class SearchFragment : Fragment() {
         layoutManager = GridLayoutManager(requireContext(), 2)
 
         binding.rvSearch.layoutManager = layoutManager
-        adapter = SearchAdapter()
+        adapter = SearchAdapter(this)
 
         binding.apply {
             rvSearch.adapter = adapter
@@ -116,5 +120,14 @@ class SearchFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onClick(videoModel: VideoModel) {
+        val fragment = DetailFragment.newInstance(videoModel)
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.flMain,fragment)
+            .addToBackStack(null)
+            .setReorderingAllowed(true)
+            .commit()
     }
 }
