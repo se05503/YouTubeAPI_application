@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.ssg_tube.data.repository.YoutubeRepositoryImpl
 import com.example.ssg_tube.databinding.FragmentSearchBinding
 import com.example.ssg_tube.network.RetroClient
 import com.example.ssg_tube.presentaion.SharedViewModel
@@ -23,11 +24,13 @@ class SearchFragment : Fragment() {
     private lateinit var adapter: SearchAdapter
     private lateinit var layoutManager: GridLayoutManager
     private var lastQuery = "" // 사용자가 검색창에 입력한 값
+
     private val apiServiceInstance = RetroClient.youTubeRetrofit
+    private val repository by lazy { YoutubeRepositoryImpl(apiServiceInstance) }
 
     // 뷰 모델
     private val viewModel: SearchViewModel by viewModels {
-        SearchViewModelFactory(apiServiceInstance)
+        SearchViewModelFactory(repository)
     }
 
     private val sharedViewModel by activityViewModels<SharedViewModel>()
@@ -69,23 +72,23 @@ class SearchFragment : Fragment() {
                 // 사용자가 검색어를 입력한 경우
                 adapter.clearItem() // 검색어를 저장하기 전에 일단 전 데이터 삭제하기
                 lastQuery = binding.etSearch.text.toString()
-                viewModel.videoResults(lastQuery,"relevance") // relevance: 검색어와의 관련성을 기준으로 리소스를 정렬합니다. 이 매개변수의 기본값입니다.
+                viewModel.getSearch(lastQuery,"relevance") // relevance: 검색어와의 관련성을 기준으로 리소스를 정렬합니다. 이 매개변수의 기본값입니다.
             }
         }
 
         binding.btnPopular.setOnClickListener {
             adapter.clearItem()
-            viewModel.videoResults(lastQuery, "viewCount") // viewCount: 리소스가 조회수가 높은 순에서 낮은 순으로 정렬됩니다.
+            viewModel.getSearch(lastQuery, "viewCount") // viewCount: 리소스가 조회수가 높은 순에서 낮은 순으로 정렬됩니다.
         }
 
         binding.btnRecent.setOnClickListener {
             adapter.clearItem()
-            viewModel.videoResults(lastQuery,"date") // date: 리소스를 만든 날짜를 기준으로 최근 항목부터 시간 순서대로 리소스를 정렬합니다.
+            viewModel.getSearch(lastQuery,"date") // date: 리소스를 만든 날짜를 기준으로 최근 항목부터 시간 순서대로 리소스를 정렬합니다.
         }
 
         binding.btnRating.setOnClickListener {
             adapter.clearItem()
-            viewModel.videoResults(lastQuery,"rating") // rating: 높은 평점에서 낮은 평점순으로 리소스가 정렬됩니다.
+            viewModel.getSearch(lastQuery,"rating") // rating: 높은 평점에서 낮은 평점순으로 리소스가 정렬됩니다.
         }
     }
 
