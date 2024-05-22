@@ -9,8 +9,8 @@ data class VideoModel(
     val thumbnail: String,
     val title: String,
     val date: String,
-    val channelIcon: String,
-    val channelName: String,
+    val channelIcon: String = "",
+    val channelName: String = "",
     val description: String,
     var liked: Boolean = false,
     val channelId : String

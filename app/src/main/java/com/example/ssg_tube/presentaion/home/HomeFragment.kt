@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.example.ssg_tube.R
+import com.example.ssg_tube.data.repository.YoutubeRepositoryImpl
 import com.example.ssg_tube.databinding.FragmentHomeBinding
-import com.example.ssg_tube.presentaion.SharedViewModel
+import com.example.ssg_tube.network.RetroClient
 import com.example.ssg_tube.presentaion.detail.DetailFragment
 import com.example.ssg_tube.presentaion.model.VideoModel
 import com.example.ssg_tube.presentaion.util.CategoryType
@@ -23,18 +23,19 @@ class HomeFragment : Fragment(), OnClickListener {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
     private lateinit var popularVideoAdapter: PopularVideoAdapter
     private lateinit var categoryVideoAdapter: CategoryVideoAdapter
     private lateinit var channelAdapter: ChannelAdapter
 
-    private val viewModel: HomeViewModel by viewModels()
-    private val sharedViewModel by activityViewModels<SharedViewModel>()
+    private val api by lazy { RetroClient.youTubeRetrofit }
+    private val repository by lazy { YoutubeRepositoryImpl(api) }
+    private val viewModel: HomeViewModel by viewModels { HomeViewModelFactory(repository) }
 
     private lateinit var spinner: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        sharedViewModel.notifyLiveDataChanged()
     }
 
     override fun onCreateView(
@@ -51,6 +52,11 @@ class HomeFragment : Fragment(), OnClickListener {
         setupAdapter()
         viewModel.getPopularVideo()
         setupObserve()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.visible()
     }
 
     private fun setupAdapter() {
@@ -84,20 +90,6 @@ class HomeFragment : Fragment(), OnClickListener {
         viewModel.channel.observe(viewLifecycleOwner) { channels ->
             channelAdapter.updateItem(channels)
         }
-
-//        sharedViewModel.unlikedItemsId.observe(viewLifecycleOwner) { videoIds ->
-//            videoIds.forEach { videoId ->
-//                val targetItem = popularVideoAdapter.getItem().find {
-//                    it.videoId == videoId
-//                }
-//                targetItem?.let {
-//                    it.liked = false
-//                    val targetItemIndex = popularVideoAdapter.getItem().indexOf(it)
-//                    popularVideoAdapter.notifyItemChanged(targetItemIndex)
-//                }
-//            }
-//            sharedViewModel.clearItemUrl()
-//        }
     }
 
     // spinner 공식문서 참조
@@ -139,11 +131,6 @@ class HomeFragment : Fragment(), OnClickListener {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        activity?.visible()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -152,12 +139,6 @@ class HomeFragment : Fragment(), OnClickListener {
     override fun onClick(videoModel: VideoModel) {
         val detailFragment = DetailFragment.newInstance(videoModel)
         parentFragmentManager.beginTransaction()
-            .setCustomAnimations(
-                R.anim.slide_in, // enter
-                R.anim.fade_out, // exit
-                R.anim.fade_in, // popEnter(back stack)
-                R.anim.slide_out // popExit(back stack)
-            )
             .replace(R.id.flMain, detailFragment)
             .setReorderingAllowed(true)
             .addToBackStack(null)

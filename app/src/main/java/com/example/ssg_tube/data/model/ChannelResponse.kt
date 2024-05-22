@@ -9,7 +9,10 @@ data class ChannelResponse(
 
 data class ChannelItem(
     @SerializedName("id") val id: String, // YouTube가 채널을 고유하게 식별하는 데 사용하는 ID입니다.
-    @SerializedName("snippet") val snippet: ChannelSnippet
+    @SerializedName("snippet") val snippet: ChannelSnippet,
+    @SerializedName("nextTokenPage") val nextTokenPage: String,
+    @SerializedName("prevTokenPage") val prevTokenPage: String,
+    @SerializedName("pageInfo") val pageInfo: ChannelPageInfoItem
 )
 
 data class ChannelSnippet(
@@ -26,5 +29,10 @@ data class ChannelThumbnailKey(
 
 data class ChannelThumbnailValue(
     @SerializedName("url") val url: String
+)
+
+data class ChannelPageInfoItem(
+    @SerializedName("totalResults") val totalResults: Int,
+    @SerializedName("resultsPerPage") val resultsPerPage: Int
 )
 

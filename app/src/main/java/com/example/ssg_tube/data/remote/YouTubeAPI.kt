@@ -22,6 +22,7 @@ interface YouTubeAPI {
         @Query("part") part: String,
         @Query("chart") chart: String,
         @Query("regionCode") regionCode: String,
+        @Query("pageToken") pageToken: String,
         @Query("key") apiKey: String = Constants.AUTHORIZATION
     ): VideoResponse
 
@@ -40,6 +41,7 @@ interface YouTubeAPI {
         @Query("chart") chart: String,
         @Query("regionCode") regionCode: String,
         @Query("videoCategoryId") videoCategoryId: String,
+        @Query("pageToken") pageToken: String,
         @Query("key") apiKey: String = Constants.AUTHORIZATION
     ): VideoResponse
 
@@ -48,6 +50,7 @@ interface YouTubeAPI {
     suspend fun videoChannel(
         @Query("part") part: String,
         @Query("id") id: String,
+        @Query("pageToken") pageToken: String,
         @Query("key") apiKey: String = Constants.AUTHORIZATION
     ): ChannelResponse
 
@@ -62,6 +65,7 @@ interface YouTubeAPI {
         @Query("maxResults") maxResults: Int, // maxResults 매개변수는 결과 집합에 반환해야 하는 최대 항목 수를 지정합니다. 사용 가능한 값: 0~50 기본값은 5입니다.
         @Query("type") type: String, // type 매개변수는 특정 유형의 리소스만 검색하도록 검색어를 제한합니다. 값은 쉼표로 구분된 리소스 유형 목록입니다. 기본값은 video,channel,playlist입니다.
         @Query("videoType") videoType: String, // 특정 유형의 동영상으로 검색을 제한할 수 있습니다. 이 매개변수의 값을 지정하는 경우 type 매개변수의 값도 video로 설정해야 합니다. any - 모든 동영상 반환, episode - 에피소드, movie - 영화
-        @Query("key") apiKey: String = Constants.AUTHORIZATION
+        @Query("pageToken") pageToken: String,
+        @Query("key") apiKey: String = Constants.AUTHORIZATION,
     ): SearchResponse
 }
