@@ -12,7 +12,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.ssg_tube.R
 import com.example.ssg_tube.databinding.FragmentSearchBinding
 import com.example.ssg_tube.network.RetroClient
@@ -32,12 +31,6 @@ class SearchFragment : Fragment(), OnClickListener {
     private lateinit var layoutManager: GridLayoutManager
     private var lastQuery = "" // 사용자가 검색창에 입력한 값
     private val apiServiceInstance = RetroClient.youTubeRetrofit
-
-    // 검색 상태 변수
-    private var pastVisibleItems = 0
-    private var visibleItemCount = 0
-    private var totalItemCount = 0
-
 
     // 뷰 모델
     private val viewModel: SearchViewModel by viewModels {
@@ -128,6 +121,7 @@ class SearchFragment : Fragment(), OnClickListener {
 
     private fun observeViewModel() {
         viewModel.searchResults.observe(viewLifecycleOwner) { items ->
+//            adapter.clearItem()
             adapter.items.addAll(items)
             adapter.notifyDataSetChanged()
         }
@@ -173,14 +167,6 @@ class SearchFragment : Fragment(), OnClickListener {
     private var onScrollListener: RecyclerView.OnScrollListener =
         object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                visibleItemCount = layoutManager.childCount
-                totalItemCount = layoutManager.itemCount
-                pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
-
-                if(visibleItemCount + pastVisibleItems >= totalItemCount) {
-                    viewModel.currentPageCount +=1
-                    viewModel.videoResults(lastQuery, viewModel.currentPageCount) // 페이지가 넘어갈때마다 불림
-                }
 
                 if(binding.fbSearch.visibility != View.VISIBLE && dy>0) // dy>0 : 아래로 스크롤 하는 경우, dy<0: 위로 스크롤 하는 경우
                     binding.fbSearch.show()
@@ -189,10 +175,10 @@ class SearchFragment : Fragment(), OnClickListener {
                     binding.fbSearch.hide()
                 }
 
-//                if(!recyclerView.canScrollVertically(1)) {
-//                    // 최하단 기준(1) 아래쪽으로 스크롤이 안되는 경우 → 뷰모델에 추가 데이터를 요청한다.
-//                    viewModel.nextList()
-//                }
+                if(!recyclerView.canScrollVertically(1)) {
+                    // 최하단 기준(1) 아래쪽으로 스크롤이 안되는 경우 → 뷰모델에 추가 데이터를 요청한다.
+                    viewModel.nextList() // next token
+                }
             }
         }
 }
