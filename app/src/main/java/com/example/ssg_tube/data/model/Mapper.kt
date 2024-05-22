@@ -30,5 +30,6 @@ fun SearchItem.toVideoModel(): VideoModel {
         date = FormatManager.dateFormat(this.snippet.date),
         description = this.snippet.description,
         channelId = this.snippet.channelId
+
     )
 }

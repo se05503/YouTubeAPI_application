@@ -1,21 +1,28 @@
 package com.example.ssg_tube.presentaion.search
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.ssg_tube.R
 import com.example.ssg_tube.data.repository.YoutubeRepositoryImpl
 import com.example.ssg_tube.databinding.FragmentSearchBinding
 import com.example.ssg_tube.network.RetroClient
 import com.example.ssg_tube.presentaion.SharedViewModel
+import com.example.ssg_tube.presentaion.detail.DetailFragment
+import com.example.ssg_tube.presentaion.model.VideoModel
+import com.example.ssg_tube.presentaion.util.OnClickListener
 import com.example.ssg_tube.presentaion.util.visible
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), OnClickListener {
 
     // 뷰 바인딩
     private var _binding: FragmentSearchBinding? = null
@@ -24,6 +31,10 @@ class SearchFragment : Fragment() {
     private lateinit var adapter: SearchAdapter
     private lateinit var layoutManager: GridLayoutManager
     private var lastQuery = "" // 사용자가 검색창에 입력한 값
+
+    private var pastVisibleItems = 0
+    private var visibleItemCount = 0
+    private var totalItemCount = 0
 
     private val apiServiceInstance = RetroClient.youTubeRetrofit
     private val repository by lazy { YoutubeRepositoryImpl(apiServiceInstance) }
@@ -56,11 +67,12 @@ class SearchFragment : Fragment() {
         layoutManager = GridLayoutManager(requireContext(), 2)
 
         binding.rvSearch.layoutManager = layoutManager
-        adapter = SearchAdapter()
+        adapter = SearchAdapter(this)
 
-        binding.apply {
-            rvSearch.adapter = adapter
-            rvSearch.itemAnimator = null
+        binding.rvSearch.run {
+            adapter = adapter
+            itemAnimator = null
+            addOnScrollListener(onScrollListener)
         }
     }
 
@@ -73,6 +85,10 @@ class SearchFragment : Fragment() {
                 adapter.clearItem() // 검색어를 저장하기 전에 일단 전 데이터 삭제하기
                 lastQuery = binding.etSearch.text.toString()
                 viewModel.getSearch(lastQuery,"relevance") // relevance: 검색어와의 관련성을 기준으로 리소스를 정렬합니다. 이 매개변수의 기본값입니다.
+
+                val imm =
+                    requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(binding.etSearch.windowToken, 0)
             }
         }
 
@@ -90,6 +106,10 @@ class SearchFragment : Fragment() {
             adapter.clearItem()
             viewModel.getSearch(lastQuery,"rating") // rating: 높은 평점에서 낮은 평점순으로 리소스가 정렬됩니다.
         }
+
+        binding.fbSearch.setOnClickListener {
+            binding.rvSearch.smoothScrollToPosition(0)
+        }
     }
 
     private fun observeViewModel() {
@@ -98,7 +118,7 @@ class SearchFragment : Fragment() {
             adapter.notifyDataSetChanged()
         }
 
-        sharedViewModel.unlikedItemsUrl.observe(viewLifecycleOwner) { videoIds ->
+        sharedViewModel.unlikedItemsId.observe(viewLifecycleOwner) { videoIds ->
             videoIds.forEach { videoId ->
                 val targetItem = adapter.items.find { it.videoId == videoId }
                 targetItem?.let {
@@ -120,4 +140,42 @@ class SearchFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    override fun onClick(videoModel: VideoModel) {
+        val fragment = DetailFragment.newInstance(videoModel)
+        parentFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.slide_in, // enter
+                R.anim.fade_out, // exit
+                R.anim.fade_in, // popEnter(back stack)
+                R.anim.slide_out // popExit(back stack)
+            )
+            .replace(R.id.flMain, fragment)
+            .addToBackStack(null)
+            .setReorderingAllowed(true)
+            .commit()
+    }
+
+    private var onScrollListener: RecyclerView.OnScrollListener =
+        object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
+                visibleItemCount = layoutManager.childCount
+                totalItemCount = layoutManager.itemCount
+                pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
+
+                if(binding.fbSearch.visibility != View.VISIBLE && dy>0) // dy>0 : 아래로 스크롤 하는 경우, dy<0: 위로 스크롤 하는 경우
+                    binding.fbSearch.show()
+
+                if(!recyclerView.canScrollVertically(-1)) { // 최상단 기준(-1) 위쪽으로 스크롤이 안될 때 플로팅 버튼을 숨긴다.
+                    binding.fbSearch.hide()
+                }
+
+                if(!recyclerView.canScrollVertically(1)) {
+                    // 최하단 기준(1) 아래쪽으로 스크롤이 안되는 경우 → 뷰모델에 추가 데이터를 요청한다.
+                    viewModel.currentPageCount += 1
+                    viewModel.loadNextPage(lastQuery)
+                }
+            }
+        }
 }

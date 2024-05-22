@@ -15,10 +15,22 @@ class SearchViewModel(private val repository: YoutubeRepository) : ViewModel() {
     private val _searchResults = MutableLiveData<List<VideoModel>>()
     val searchResults: LiveData<List<VideoModel>> get() = _searchResults
 
+    private var nextPageToken: String? = null
+    var currentOrder = ""
+
     fun getSearch(query: String, order: String) {
         viewModelScope.launch {
             val search = repository.getSearch(query, order, "")
+            search
             _searchResults.postValue(search)
+        }
+    }
+
+    fun loadNextPage(query: String) {
+        nextPageToken?.let {token ->
+            viewModelScope.launch {
+                repository.getSearch(query, )
+            }
         }
     }
 }
