@@ -16,6 +16,6 @@
     <string name="popular">인기순</string>
     <string name="recent">최신순</string>
     <string name="btn_search">검색하기</string>
-    <string name="btn_follow">구독하기</string>
+    <string name="btn_follow">구독</string>
     <string name="liked_videos">Liked Videos</string>
 </resources>

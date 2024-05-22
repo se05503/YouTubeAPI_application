@@ -1,166 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/detailFragment2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_color">
-
+    android:orientation="vertical"
+    android:background="@color/bg_color"
+    tools:context=".presentaion.detail.DetailFragment">
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/svScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:fillViewport="true">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_back"
-                android:layout_margin="10dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
-
-
-            <ImageView
-                android:id="@+id/ivThumbnail"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/dummyimage"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cvDetailPageHeader"
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/white"
-                app:layout_constraintTop_toBottomOf="@+id/ivThumbnail">
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <ImageView
+                    android:id="@+id/ivThumbnail"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/dummyimage"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_back"
+                    android:layout_margin="10dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="@color/white">
 
                 <TextView
                     android:id="@+id/tvDetailPageVideoTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="20dp"
-                    android:maxWidth="350dp"
                     android:text="글에 대한 제목"
                     android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="@+id/cvDetailPageHeader"
-                    app:layout_constraintTop_toTopOf="@+id/cvDetailPageHeader" />
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tvDetailPageVideoDate"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginBottom="20dp"
                     android:text="게시물 날짜"
                     android:textSize="11sp"
+                    android:layout_margin="15dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <ImageView
-                    android:id="@+id/ivHeart"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="50dp"
-                    android:src="@drawable/ic_blank_heart"
-                    app:layout_constraintBottom_toBottomOf="@+id/tvDetailPageVideoDate"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tvDetailPageVideoDate" />
-
+                    app:layout_constraintEnd_toStartOf="@+id/ivHeart"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDetailPageVideoTitle" />
 
                 <ImageView
                     android:id="@+id/ivShare"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="10dp"
                     android:src="@drawable/ic_shareicon"
-                    app:layout_constraintBottom_toBottomOf="@+id/ivHeart"
-                    app:layout_constraintStart_toEndOf="@+id/ivHeart"
-                    app:layout_constraintTop_toTopOf="@+id/ivHeart" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDetailPageVideoTitle" />
 
+                <ImageView
+                    android:id="@+id/ivHeart"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_blank_heart"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/ivShare"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDetailPageVideoTitle" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
+            
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cvDetailPageUserInfoLayout"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/white"
-                app:layout_constraintTop_toBottomOf="@+id/cvDetailPageHeader">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="@color/white">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/ivChannelImage"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="15dp"
-                    android:src="@drawable/dummyiamge2"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    app:cardCornerRadius="50dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivChannelImage"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/dummyiamge2" />
+                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:id="@+id/tvChannelName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="17dp"
+                    android:layout_margin="15dp"
                     android:text="채널 이름"
-                    app:layout_constraintBottom_toBottomOf="@+id/ivChannelImage"
-                    app:layout_constraintStart_toEndOf="@+id/ivChannelImage"
-                    app:layout_constraintTop_toTopOf="@+id/ivChannelImage" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_back"
+                    app:layout_constraintStart_toEndOf="@+id/cardView2"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnFakeFollowButton"
-                    android:layout_width="130dp"
+                    android:id="@+id/btn_back"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
                     android:background="@drawable/button_round"
-                    android:backgroundTint="@color/main_color"
-                    android:text="@string/btn_follow"
+                    android:text="구독"
                     android:textColor="@color/white"
-                    android:translationZ="10dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/ivChannelImage"
+                    android:layout_margin="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/ivChannelImage" />
-
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/clDetailPageBody"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/white"
-                android:minHeight="440dp"
-                app:layout_constraintTop_toBottomOf="@+id/cvDetailPageUserInfoLayout">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="@color/white">
 
                 <TextView
                     android:id="@+id/tvDescription"
-                    android:layout_width="375dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:text="비디오 설명"
                     android:layout_margin="15dp"
-                    android:text="동영상 설명"
-                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
