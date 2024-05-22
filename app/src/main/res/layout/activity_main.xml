@@ -5,6 +5,7 @@
     android:id="@+id/clMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_color"
     tools:context=".MainActivity">
 
     <FrameLayout
@@ -22,6 +23,7 @@
         android:layout_height="0dp"
         app:menu="@menu/menu_navi"
         app:labelVisibilityMode="unlabeled"
+        android:background="@drawable/bg_navigation_bar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
