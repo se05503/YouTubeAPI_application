@@ -23,11 +23,11 @@ data class SearchVideoId(
 )
 
 data class VideoSearchSnippet(
-    @SerializedName("publishedAt") val date : Date, // 검색 결과가 식별하는 리소스의 생성 날짜 및 시간입니다
-    @SerializedName("title") val title:String, // 검색 결과의 제목입니다.
+    @SerializedName("publishedAt") val date: Date, // 검색 결과가 식별하는 리소스의 생성 날짜 및 시간입니다
+    @SerializedName("title") val title: String, // 검색 결과의 제목입니다.
     @SerializedName("thumbnails") val thumbnails: ThumbnailKey, // 키는 미리보기 이미지의 이름이고 값은 미리보기 이미지에 대한 기타 정보를 포함하는 개체입니다.
-    @SerializedName("description") val description : String, // 검색 결과의 설명입니다.
-    @SerializedName("channelId") val channelId : String // YouTube가 검색 결과로 식별하는 리소스(비디오)를 게시한 채널을 고유하게 식별하는 데 사용하는 값입니다.
+    @SerializedName("description") val description: String, // 검색 결과의 설명입니다.
+    @SerializedName("channelId") val channelId: String // YouTube가 검색 결과로 식별하는 리소스(비디오)를 게시한 채널을 고유하게 식별하는 데 사용하는 값입니다.
 
 )
 

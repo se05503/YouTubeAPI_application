@@ -49,7 +49,6 @@ class CategoryVideoAdapter(
                     onClickListener.onClick(item)
                 }
             }
-
         }
     }
 }

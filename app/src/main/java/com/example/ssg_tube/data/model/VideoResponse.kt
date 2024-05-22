@@ -1,7 +1,6 @@
 package com.example.ssg_tube.data.model
 
 import com.google.gson.annotations.SerializedName
-import java.util.Date
 
 // 비디오
 data class VideoResponse(

@@ -30,7 +30,7 @@ class HomeFragment : Fragment(), OnClickListener {
 
     private val api by lazy { RetroClient.youTubeRetrofit }
     private val repository by lazy { YoutubeRepositoryImpl(api) }
-    private val viewModel: HomeViewModel by viewModels { HomeViewModelFactory(repository)}
+    private val viewModel: HomeViewModel by viewModels { HomeViewModelFactory(repository) }
 
     private lateinit var spinner: Spinner
 

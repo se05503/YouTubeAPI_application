@@ -15,10 +15,13 @@ class YoutubeRepositoryImpl(private val apiService: YouTubeAPI) : YoutubeReposit
             regionCode = "KR",
             pageToken = pageToken
         )
-        return response.items.map { it.toVideoModel()}
+        return response.items.map { it.toVideoModel() }
     }
 
-    override suspend fun getCategoryVideos(categoryId: String, pageToken: String): List<VideoModel> {
+    override suspend fun getCategoryVideos(
+        categoryId: String,
+        pageToken: String
+    ): List<VideoModel> {
         val response = apiService.videoCategoriesList(
             part = "snippet",
             chart = "mostPopular",
@@ -38,7 +41,11 @@ class YoutubeRepositoryImpl(private val apiService: YouTubeAPI) : YoutubeReposit
         return response.items.map { it.toChannelInfo() }
     }
 
-    override suspend fun getSearch(query: String, order: String, pageToken: String): List<VideoModel> {
+    override suspend fun getSearch(
+        query: String,
+        order: String,
+        pageToken: String
+    ): List<VideoModel> {
         val response = apiService.videoSearch(
             part = "snippet",
             query = query,
