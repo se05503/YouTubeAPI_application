@@ -8,41 +8,45 @@ import com.example.ssg_tube.presentaion.model.VideoModel
 import com.example.ssg_tube.presentaion.repository.YoutubeRepository
 
 class YoutubeRepositoryImpl(private val apiService: YouTubeAPI) : YoutubeRepository {
-    override suspend fun getPopularVideos(): List<VideoModel> {
+    override suspend fun getPopularVideos(pageToken: String): List<VideoModel> {
         val response = apiService.videoPopularList(
             part = "snippet",
             chart = "mostPopular",
-            regionCode = "KR"
+            regionCode = "KR",
+            pageToken = pageToken
         )
         return response.items.map { it.toVideoModel()}
     }
 
-    override suspend fun getCategoryVideos(categoryId: String): List<VideoModel> {
+    override suspend fun getCategoryVideos(categoryId: String, pageToken: String): List<VideoModel> {
         val response = apiService.videoCategoriesList(
             part = "snippet",
             chart = "mostPopular",
             regionCode = "KR",
-            videoCategoryId = categoryId
+            videoCategoryId = categoryId,
+            pageToken = pageToken
         )
         return response.items.map { it.toVideoModel() }
     }
 
-    override suspend fun getChannel(channelId: List<String>): List<ChannelInfo> {
+    override suspend fun getChannel(channelId: List<String>, pageToken: String): List<ChannelInfo> {
         val response = apiService.videoChannel(
             part = "snippet",
-            id = channelId.joinToString(",")
+            id = channelId.joinToString(","),
+            pageToken = pageToken
         )
         return response.items.map { it.toChannelInfo() }
     }
 
-    override suspend fun getSearch(query: String, order: String): List<VideoModel> {
+    override suspend fun getSearch(query: String, order: String, pageToken: String): List<VideoModel> {
         val response = apiService.videoSearch(
             part = "snippet",
             query = query,
             maxResults = 20,
             order = order,
             type = "video",
-            videoType = "any"
+            videoType = "any",
+            pageToken = pageToken
         )
         return response.items.map { it.toVideoModel() }
     }

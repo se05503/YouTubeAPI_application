@@ -16,7 +16,8 @@ class DetailViewModel : ViewModel() {
         viewModelScope.launch {
             val channelResponse = youTubeRetrofit.videoChannel(
                 part = "snippet",
-                id = videoModel.channelId
+                id = videoModel.channelId,
+                pageToken = ""
             )
             val channelDetails = channelResponse.items.firstOrNull()
                 channelDetails?.let { channel ->

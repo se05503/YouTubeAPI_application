@@ -7,7 +7,7 @@ import com.example.ssg_tube.presentaion.util.FormatManager
 fun VideoItem.toVideoModel(): VideoModel {
     return VideoModel(
         videoId = this.id,
-        thumbnail = this.snippet.thumbnails.default.url,
+        thumbnail = this.snippet.thumbnails.high.url,
         title = this.snippet.title,
         date = this.snippet.publishedAt,
         description = this.snippet.description,

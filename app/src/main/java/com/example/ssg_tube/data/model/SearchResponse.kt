@@ -10,7 +10,10 @@ data class SearchResponse(
 
 data class SearchItem(
     @SerializedName("id") val id: SearchVideoId,
-    @SerializedName("snippet") val snippet: VideoSearchSnippet
+    @SerializedName("snippet") val snippet: VideoSearchSnippet,
+    @SerializedName("nextTokenPage") val nextTokenPage: String,
+    @SerializedName("prevTokenPage") val prevTokenPage: String,
+    @SerializedName("pageInfo") val pageInfo: SearchPageInfoItem
 )
 
 data class SearchVideoId(
@@ -36,4 +39,9 @@ data class ThumbnailKey(
 
 data class ThumbnailValue(
     @SerializedName("url") val url: String
+)
+
+data class SearchPageInfoItem(
+    @SerializedName("totalResults") val totalResults: Int,
+    @SerializedName("resultsPerPage") val resultsPerPage: Int
 )

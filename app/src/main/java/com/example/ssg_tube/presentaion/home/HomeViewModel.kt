@@ -22,14 +22,14 @@ class HomeViewModel(private val repository: YoutubeRepository) : ViewModel() {
 
     fun getPopularVideo() {
         viewModelScope.launch {
-            val videos = repository.getPopularVideos()
+            val videos = repository.getPopularVideos("")
             _popularVideo.postValue(videos)
         }
     }
 
     fun getCategoryVideo(categoryId: String) {
         viewModelScope.launch {
-            val videos = repository.getCategoryVideos(categoryId)
+            val videos = repository.getCategoryVideos(categoryId,"")
             _categoriesVideo.postValue(videos)
             // 채널을 카테고리별로 맞는 채널을 추출하기위해 카테고리에서 추출한 channelId값을 getChannel에 넣어줌
             // 이로써 생성된 카테고리 비디오와 채널이 일치
@@ -40,7 +40,7 @@ class HomeViewModel(private val repository: YoutubeRepository) : ViewModel() {
 
     private fun getChannel(channelId: List<String>) {
         viewModelScope.launch {
-            val channels = repository.getChannel(channelId)
+            val channels = repository.getChannel(channelId,"")
             _channel.postValue(channels)
         }
     }

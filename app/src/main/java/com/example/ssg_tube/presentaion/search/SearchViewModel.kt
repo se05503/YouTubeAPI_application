@@ -17,7 +17,7 @@ class SearchViewModel(private val repository: YoutubeRepository) : ViewModel() {
 
     fun getSearch(query: String, order: String) {
         viewModelScope.launch {
-            val search = repository.getSearch(query, order)
+            val search = repository.getSearch(query, order, "")
             _searchResults.postValue(search)
         }
     }
