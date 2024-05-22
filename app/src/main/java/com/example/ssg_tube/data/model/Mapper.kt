@@ -4,7 +4,7 @@ import com.example.ssg_tube.presentaion.model.ChannelInfo
 import com.example.ssg_tube.presentaion.model.VideoModel
 import com.example.ssg_tube.presentaion.util.FormatManager
 
-fun VideoItem.toDomainVideoModel(): VideoModel {
+fun VideoItem.toVideoModel(): VideoModel {
     return VideoModel(
         videoId = this.id,
         thumbnail = this.snippet.thumbnails.default.url,
@@ -15,14 +15,14 @@ fun VideoItem.toDomainVideoModel(): VideoModel {
     )
 }
 
-fun ChannelItem.toDomainChannelModel(): ChannelInfo {
+fun ChannelItem.toChannelInfo(): ChannelInfo {
     return ChannelInfo(
         id = this.id,
         thumbnail = this.snippet.thumbnails.high.url
     )
 }
 
-fun SearchItem.toDomainSearchModel(): VideoModel {
+fun SearchItem.toVideoModel(): VideoModel {
     return VideoModel(
         videoId = this.id.videoId,
         title = this.snippet.title,
