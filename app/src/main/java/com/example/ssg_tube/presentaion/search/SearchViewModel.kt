@@ -16,10 +16,18 @@ class SearchViewModel(private val apiService: YouTubeAPI) : ViewModel() {
     private val _searchResults = MutableLiveData<List<VideoModel>>()
     val searchResults: LiveData<List<VideoModel>> get() = _searchResults
 
-    var resItems: ArrayList<VideoModel> = ArrayList()
+    private var resItems: ArrayList<VideoModel> = ArrayList()
+    var currentPageCount = 1
+    var maxVideoPage = 1
 
-    fun videoResults(query: String, order: String) {
+    fun doSearch(query: String, page: Int) {
         resItems.clear() // 기존 값 제거
+        if(page <= maxVideoPage) {
+            videoResults(query,page)
+        }
+    }
+
+    fun videoResults(query: String, order: String, page: Int) {
         viewModelScope.launch { // 코루틴을 사용하여 비동기적으로 실행
             // videModelScope는 fragment 가 파괴 될 때 중단되어 메모리 누수가 방지됨
             val requestResponse = apiService.videoSearch(
@@ -54,7 +62,11 @@ class SearchViewModel(private val apiService: YouTubeAPI) : ViewModel() {
             }
             searchResult()
         }
+    }
 
+    fun nextList() {
+        val currentList = _searchResults.value ?: return // 기존 아이템들
+        val nextList = videoResults()
     }
 
     // 검색 결과를 LiveData에 설정
