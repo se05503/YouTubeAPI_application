@@ -27,19 +27,12 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        // bottomNavigationView가 가려지는 부분이 있어 코드 변경
         ViewCompat.setOnApplyWindowInsetsListener(binding.clMain) { view, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemGestures())
-            // Apply the insets as padding to the view. Here, set all the dimensions
-            // as appropriate to your layout. You can also update the view's margin if
-            // more appropriate.
             view.updatePadding(0, insets.top, 0, insets.bottom)
-
-            // Return CONSUMED if you don't want the window insets to keep passing down
-            // to descendant views.
             WindowInsetsCompat.CONSUMED
         }
-
         setupBottomNavigation()
         // 초기 클릭된 값이 없을 시 menu에서 homeFragment를 클릭 된 상태를 보여줌
         if (savedInstanceState == null) {
