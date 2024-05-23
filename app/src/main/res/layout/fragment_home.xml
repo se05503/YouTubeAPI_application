@@ -23,8 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:elevation="5dp"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:elevation="5dp">
 
                 <TextView
                     android:id="@+id/tv_top"
@@ -55,15 +55,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
-                android:elevation="5dp"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:elevation="5dp">
 
                 <Spinner
                     android:id="@+id/sp_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
                     android:entries="@array/Categories"
+                    android:padding="5dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -86,8 +86,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
-                android:elevation="5dp"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:elevation="5dp">
 
                 <TextView
                     android:id="@+id/tv_bottom"
