@@ -20,6 +20,10 @@ class PopularVideoAdapter(
         notifyDataSetChanged()
     }
 
+    fun getItem(): List<VideoModel> {
+        return items
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             RvPopularVideoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)

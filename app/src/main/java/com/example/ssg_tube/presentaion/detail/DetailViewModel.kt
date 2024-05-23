@@ -19,6 +19,7 @@ class DetailViewModel : ViewModel() {
                 id = videoModel.channelId,
                 pageToken = ""
             )
+
             val channelDetails = channelResponse.items.firstOrNull()
             channelDetails?.let { channel ->
                 val channelUrl = channel.snippet.thumbnails.high.url

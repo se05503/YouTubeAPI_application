@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.ssg_tube.R
@@ -42,6 +43,12 @@ class MyPageFragment : Fragment() {
             override fun onItemClick(item: VideoModel, position: Int) {
                 val fragment = DetailFragment.newInstance(item)
                 parentFragmentManager.beginTransaction() // 이거 나중에 util 쪽으로 빼놔도 좋을 것 같습니다
+                    .setCustomAnimations(
+                        R.anim.slide_in, // enter
+                        R.anim.fade_out, // exit
+                        R.anim.fade_in, // popEnter(back stack)
+                        R.anim.slide_out // popExit(back stack)
+                    )
                     .setReorderingAllowed(true)
                     .addToBackStack(null)
                     .replace(R.id.flMain,fragment)
@@ -79,3 +86,5 @@ class MyPageFragment : Fragment() {
         (activity)?.visible()
     }
 }
+
+

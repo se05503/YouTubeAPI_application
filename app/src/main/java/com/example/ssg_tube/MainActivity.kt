@@ -45,7 +45,10 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.homeFragment -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.flMain, HomeFragment()).commit()
+                        .replace(R.id.flMain, HomeFragment())
+                        .addToBackStack(null)
+                        .setReorderingAllowed(true)
+                        .commit()
                     true
                 }
 
