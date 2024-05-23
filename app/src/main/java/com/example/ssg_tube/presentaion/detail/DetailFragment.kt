@@ -83,6 +83,7 @@ class DetailFragment : Fragment() {
                 detailPageItem?.let { it1 -> shareVideo(it1) }
             }
         }
+        backButton()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -133,6 +134,13 @@ class DetailFragment : Fragment() {
             }
             if (detailPageItem?.liked == true) ivHeart.setImageResource(R.drawable.ic_full_heart)
             else ivHeart.setImageResource(R.drawable.ic_blank_heart)
+        }
+    }
+
+    private fun backButton() {
+        binding.ivBack.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+
         }
     }
 }
