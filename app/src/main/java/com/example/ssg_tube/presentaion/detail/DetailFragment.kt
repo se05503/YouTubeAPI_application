@@ -31,7 +31,7 @@ class DetailFragment : Fragment() {
         fun newInstance(videoModel: VideoModel): DetailFragment {
             val fragment = DetailFragment()
             val args = Bundle()
-            args.putParcelable("detailModel", videoModel)
+            args.putParcelable(Constants.DETAIL_KEY, videoModel)
             fragment.arguments = args
             return fragment
         }
@@ -49,7 +49,7 @@ class DetailFragment : Fragment() {
 
     private fun setupViews() {
         //받아온 데이터를 번들에있는걸 꺼냄, shareVideo에 데이터 전달
-        detailPageItem = arguments?.getParcelable("detailModel")
+        detailPageItem = arguments?.getParcelable(Constants.DETAIL_KEY)
         detailPageItem?.let {
             detailViewModel.loadChannelData(it)
             bindItem(it)
@@ -85,6 +85,7 @@ class DetailFragment : Fragment() {
                 detailPageItem?.let { it1 -> shareVideo(it1) }
             }
         }
+        backButton()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -133,6 +134,13 @@ class DetailFragment : Fragment() {
             }
             if (detailPageItem?.liked == true) ivHeart.setImageResource(R.drawable.ic_full_heart)
             else ivHeart.setImageResource(R.drawable.ic_blank_heart)
+        }
+    }
+
+    private fun backButton() {
+        binding.ivBack.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+
         }
     }
 }
