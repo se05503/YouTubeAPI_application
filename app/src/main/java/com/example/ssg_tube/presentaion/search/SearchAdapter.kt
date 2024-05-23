@@ -12,7 +12,8 @@ import com.example.ssg_tube.databinding.SearchItemBinding
 import com.example.ssg_tube.presentaion.model.VideoModel
 import com.example.ssg_tube.presentaion.util.OnClickListener
 
-class SearchAdapter(private val onClickListener: OnClickListener): RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(){
+class SearchAdapter(private val onClickListener: OnClickListener) :
+    RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
     // 해당 어댑터에서 리사이클러뷰에 뿌려줄 아이템)
     var items = arrayListOf<VideoModel>()
@@ -23,14 +24,14 @@ class SearchAdapter(private val onClickListener: OnClickListener): RecyclerView.
         notifyDataSetChanged() // notifyDataSetChanged()는 모든 뷰를 삭제했다가 다시 갱신하기 때문에 성능저하가 발생할 수 있습니다.
     }
 
-    class SearchViewHolder(binding: SearchItemBinding): RecyclerView.ViewHolder(binding.root) {
+    class SearchViewHolder(binding: SearchItemBinding) : RecyclerView.ViewHolder(binding.root) {
         var tvTitle: TextView = binding.tvTitle
         var tvThumbnail: ImageView = binding.ivThumbnail
         var view: ConstraintLayout = binding.clSearchView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-        val binding = SearchItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = SearchItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SearchViewHolder(binding)
     }
 
