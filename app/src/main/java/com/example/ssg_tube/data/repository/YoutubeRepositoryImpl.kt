@@ -4,6 +4,7 @@ import com.example.ssg_tube.data.model.toChannelInfo
 import com.example.ssg_tube.data.model.toVideoModel
 import com.example.ssg_tube.data.remote.YouTubeAPI
 import com.example.ssg_tube.presentaion.model.ChannelInfo
+import com.example.ssg_tube.presentaion.model.SearchToken
 import com.example.ssg_tube.presentaion.model.VideoModel
 import com.example.ssg_tube.presentaion.repository.YoutubeRepository
 
@@ -45,7 +46,7 @@ class YoutubeRepositoryImpl(private val apiService: YouTubeAPI) : YoutubeReposit
         query: String,
         order: String,
         pageToken: String
-    ): List<VideoModel> {
+    ): SearchToken {
         val response = apiService.videoSearch(
             part = "snippet",
             query = query,
@@ -55,6 +56,9 @@ class YoutubeRepositoryImpl(private val apiService: YouTubeAPI) : YoutubeReposit
             videoType = "any",
             pageToken = pageToken
         )
-        return response.items.map { it.toVideoModel() }
+
+        val nextPageToken = response.nextPageToken // 무한 스크롤 뷰를 위해 nextPageToken 값을 받아옵니다.
+        val videoModels = response.items.map { it.toVideoModel() }
+        return SearchToken(items = videoModels, nextToken = nextPageToken)
     }
 }

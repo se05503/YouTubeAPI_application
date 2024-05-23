@@ -15,7 +15,7 @@ import com.example.ssg_tube.presentaion.util.OnClickListener
 class SearchAdapter(private val onClickListener: OnClickListener): RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(){
 
     // 해당 어댑터에서 리사이클러뷰에 뿌려줄 아이템)
-    var items = ArrayList<VideoModel>()
+    var items = arrayListOf<VideoModel>()
 
     // 전체 아이템 삭제(매번 검색을 할 때마다 새로운 데이터가 저장되기 때문)
     fun clearItem() {

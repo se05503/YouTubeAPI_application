@@ -5,8 +5,8 @@ import java.util.Date
 
 // 검색
 data class SearchResponse(
-    @SerializedName("nextPageToken") val nextTokenPage: String?, // pageToken 매개변수의 값으로 사용하여 결과 집합의 다음 페이지를 검색할 수 있는 토큰입니다.
-    @SerializedName("prevPageToken") val prevTokenPage: String?, // pageToken 매개변수의 값으로 사용하여 결과 집합의 이전 페이지를 검색할 수 있는 토큰입니다.
+    @SerializedName("nextPageToken") val nextPageToken: String?, // pageToken 매개변수의 값으로 사용하여 결과 집합의 다음 페이지를 검색할 수 있는 토큰입니다 → 무한 스크롤 기능시 필요
+    @SerializedName("prevPageToken") val prevPageToken: String?, // pageToken 매개변수의 값으로 사용하여 결과 집합의 이전 페이지를 검색할 수 있는 토큰입니다.
     @SerializedName("pageInfo") val pageInfo: SearchPageInfoItem, // pageInfo 객체는 결과 집합의 페이지 정보를 요약합니다.
     @SerializedName("items") val items: List<SearchItem>
 )

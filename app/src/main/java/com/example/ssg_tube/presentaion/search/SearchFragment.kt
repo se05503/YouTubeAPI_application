@@ -2,6 +2,7 @@ package com.example.ssg_tube.presentaion.search
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -58,7 +59,6 @@ class SearchFragment : Fragment(), OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
         setupListeners()
-
         sharedViewModel.notifyLiveDataChanged()
         observeViewModel()
     }
@@ -69,7 +69,7 @@ class SearchFragment : Fragment(), OnClickListener {
         binding.rvSearch.layoutManager = layoutManager
         adapter = SearchAdapter(this)
 
-        binding.rvSearch.run {
+        binding.rvSearch.apply {
             adapter = adapter
             itemAnimator = null
             addOnScrollListener(onScrollListener)
@@ -84,7 +84,11 @@ class SearchFragment : Fragment(), OnClickListener {
                 // 사용자가 검색어를 입력한 경우
                 adapter.clearItem() // 검색어를 저장하기 전에 일단 전 데이터 삭제하기
                 lastQuery = binding.etSearch.text.toString()
-                viewModel.getSearch(lastQuery,"relevance") // relevance: 검색어와의 관련성을 기준으로 리소스를 정렬합니다. 이 매개변수의 기본값입니다.
+                viewModel.currentOrder = "relevance" // infinite scroll
+                viewModel.getSearch(
+                    lastQuery,
+                    "relevance"
+                ) // relevance: 검색어와의 관련성을 기준으로 리소스를 정렬합니다. 이 매개변수의 기본값입니다.
 
                 val imm =
                     requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -94,17 +98,23 @@ class SearchFragment : Fragment(), OnClickListener {
 
         binding.btnPopular.setOnClickListener {
             adapter.clearItem()
+            viewModel.currentOrder = "viewCount"
             viewModel.getSearch(lastQuery, "viewCount") // viewCount: 리소스가 조회수가 높은 순에서 낮은 순으로 정렬됩니다.
         }
 
         binding.btnRecent.setOnClickListener {
             adapter.clearItem()
-            viewModel.getSearch(lastQuery,"date") // date: 리소스를 만든 날짜를 기준으로 최근 항목부터 시간 순서대로 리소스를 정렬합니다.
+            viewModel.currentOrder = "date"
+            viewModel.getSearch(
+                lastQuery,
+                "date"
+            ) // date: 리소스를 만든 날짜를 기준으로 최근 항목부터 시간 순서대로 리소스를 정렬합니다.
         }
 
         binding.btnRating.setOnClickListener {
             adapter.clearItem()
-            viewModel.getSearch(lastQuery,"rating") // rating: 높은 평점에서 낮은 평점순으로 리소스가 정렬됩니다.
+            viewModel.currentOrder = "rating"
+            viewModel.getSearch(lastQuery, "rating") // rating: 높은 평점에서 낮은 평점순으로 리소스가 정렬됩니다.
         }
 
         binding.fbSearch.setOnClickListener {
@@ -114,6 +124,9 @@ class SearchFragment : Fragment(), OnClickListener {
 
     private fun observeViewModel() {
         viewModel.searchResults.observe(viewLifecycleOwner) { items ->
+            Log.d("iswork?","work")
+            Log.d("iswork?",items.toString())
+            adapter.clearItem()
             adapter.items.addAll(items)
             adapter.notifyDataSetChanged()
         }
@@ -164,17 +177,15 @@ class SearchFragment : Fragment(), OnClickListener {
                 totalItemCount = layoutManager.itemCount
                 pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
 
-                if(binding.fbSearch.visibility != View.VISIBLE && dy>0) // dy>0 : 아래로 스크롤 하는 경우, dy<0: 위로 스크롤 하는 경우
+                if (binding.fbSearch.visibility != View.VISIBLE && dy > 0) // dy>0 : 아래로 스크롤 하는 경우, dy<0: 위로 스크롤 하는 경우
                     binding.fbSearch.show()
 
-                if(!recyclerView.canScrollVertically(-1)) { // 최상단 기준(-1) 위쪽으로 스크롤이 안될 때 플로팅 버튼을 숨긴다.
+                if (!recyclerView.canScrollVertically(-1)) { // 최상단 기준(-1) 위쪽으로 스크롤이 안될 때 플로팅 버튼을 숨긴다.
                     binding.fbSearch.hide()
                 }
 
-                if(!recyclerView.canScrollVertically(1)) {
-                    // 최하단 기준(1) 아래쪽으로 스크롤이 안되는 경우 → 뷰모델에 추가 데이터를 요청한다.
-                    viewModel.currentPageCount += 1
-                    viewModel.loadNextPage(lastQuery)
+                if (visibleItemCount + pastVisibleItems >= totalItemCount) {
+                    viewModel.getNextPage(lastQuery)
                 }
             }
         }
