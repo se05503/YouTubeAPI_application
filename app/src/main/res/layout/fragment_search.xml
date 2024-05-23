@@ -20,38 +20,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="@string/btn_search"
         android:textAllCaps="true"
+        android:background="@drawable/custom_ripple_effect"
         app:layout_constraintBottom_toBottomOf="@+id/etSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/etSearch" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnPopular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/bg_color"
         android:text="@string/popular"
         android:textColor="@color/black"
+        android:background="@drawable/custom_ripple_effect"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etSearch" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnRecent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/black"
         android:text="@string/recent"
+        android:textColor="@color/black"
+        android:background="@drawable/custom_ripple_effect"
         app:layout_constraintStart_toEndOf="@+id/btnPopular"
+        app:layout_constraintTop_toBottomOf="@+id/etSearch" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="평점순"
+        android:textColor="@color/black"
+        android:background="@drawable/custom_ripple_effect"
+        app:layout_constraintStart_toEndOf="@+id/btnRecent"
         app:layout_constraintTop_toBottomOf="@+id/etSearch" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -66,15 +80,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnPopular" />
 
-    <Button
-        android:id="@+id/btnRating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="평점순"
-        app:layout_constraintStart_toEndOf="@+id/btnRecent"
-        app:layout_constraintTop_toBottomOf="@+id/etSearch" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fbSearch"
