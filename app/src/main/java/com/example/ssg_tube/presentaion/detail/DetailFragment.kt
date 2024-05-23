@@ -31,7 +31,7 @@ class DetailFragment : Fragment() {
         fun newInstance(videoModel: VideoModel): DetailFragment {
             val fragment = DetailFragment()
             val args = Bundle()
-            args.putParcelable("detailModel", videoModel)
+            args.putParcelable("detail_key", videoModel)
             fragment.arguments = args
             return fragment
         }
@@ -49,7 +49,7 @@ class DetailFragment : Fragment() {
 
     private fun setupViews() {
         //받아온 데이터를 번들에있는걸 꺼냄, shareVideo에 데이터 전달
-        detailPageItem = arguments?.getParcelable("detailModel")
+        detailPageItem = arguments?.getParcelable("detail_key")
         detailPageItem?.let {
             detailViewModel.loadChannelData(it)
             bindItem(it)
