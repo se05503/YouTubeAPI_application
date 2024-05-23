@@ -124,8 +124,6 @@ class SearchFragment : Fragment(), OnClickListener {
 
     private fun observeViewModel() {
         viewModel.searchResults.observe(viewLifecycleOwner) { items ->
-            Log.d("iswork?","work")
-            Log.d("iswork?",items.toString())
             mAdapter.clearItem()
             mAdapter.items.addAll(items)
             mAdapter.notifyDataSetChanged()
@@ -172,11 +170,6 @@ class SearchFragment : Fragment(), OnClickListener {
     private var onScrollListener: RecyclerView.OnScrollListener =
         object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-
-                visibleItemCount = layoutManager.childCount
-                totalItemCount = layoutManager.itemCount
-                pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
-
                 if (binding.fbSearch.visibility != View.VISIBLE && dy > 0) // dy>0 : 아래로 스크롤 하는 경우, dy<0: 위로 스크롤 하는 경우
                     binding.fbSearch.show()
 
@@ -184,7 +177,7 @@ class SearchFragment : Fragment(), OnClickListener {
                     binding.fbSearch.hide()
                 }
 
-                if (visibleItemCount + pastVisibleItems >= totalItemCount) {
+                if(!recyclerView.canScrollVertically(1)) {
                     viewModel.getNextPage(lastQuery)
                 }
             }
