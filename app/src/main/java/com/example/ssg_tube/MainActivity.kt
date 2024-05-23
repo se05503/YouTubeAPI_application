@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         // bottomNavigationView가 가려지는 부분이 있어 코드 변경
         ViewCompat.setOnApplyWindowInsetsListener(binding.clMain) { view, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemGestures())
-            view.updatePadding(0, insets.top, 0, insets.bottom)
+            view.updatePadding(0, insets.top, 0, 0)
             WindowInsetsCompat.CONSUMED
         }
         setupBottomNavigation()
