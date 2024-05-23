@@ -29,7 +29,7 @@ class SearchFragment : Fragment(), OnClickListener {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: SearchAdapter
+    private lateinit var mAdapter: SearchAdapter
     private lateinit var layoutManager: GridLayoutManager
     private var lastQuery = "" // 사용자가 검색창에 입력한 값
 
@@ -67,10 +67,10 @@ class SearchFragment : Fragment(), OnClickListener {
         layoutManager = GridLayoutManager(requireContext(), 2)
 
         binding.rvSearch.layoutManager = layoutManager
-        adapter = SearchAdapter(this)
+        mAdapter = SearchAdapter(this)
 
         binding.rvSearch.apply {
-            adapter = adapter
+            adapter = mAdapter
             itemAnimator = null
             addOnScrollListener(onScrollListener)
         }
@@ -82,7 +82,7 @@ class SearchFragment : Fragment(), OnClickListener {
                 Toast.makeText(requireContext(), "검색어를 입력하세요!", Toast.LENGTH_SHORT).show()
             else {
                 // 사용자가 검색어를 입력한 경우
-                adapter.clearItem() // 검색어를 저장하기 전에 일단 전 데이터 삭제하기
+                mAdapter.clearItem() // 검색어를 저장하기 전에 일단 전 데이터 삭제하기
                 lastQuery = binding.etSearch.text.toString()
                 viewModel.currentOrder = "relevance" // infinite scroll
                 viewModel.getSearch(
@@ -97,13 +97,13 @@ class SearchFragment : Fragment(), OnClickListener {
         }
 
         binding.btnPopular.setOnClickListener {
-            adapter.clearItem()
+            mAdapter.clearItem()
             viewModel.currentOrder = "viewCount"
             viewModel.getSearch(lastQuery, "viewCount") // viewCount: 리소스가 조회수가 높은 순에서 낮은 순으로 정렬됩니다.
         }
 
         binding.btnRecent.setOnClickListener {
-            adapter.clearItem()
+            mAdapter.clearItem()
             viewModel.currentOrder = "date"
             viewModel.getSearch(
                 lastQuery,
@@ -112,7 +112,7 @@ class SearchFragment : Fragment(), OnClickListener {
         }
 
         binding.btnRating.setOnClickListener {
-            adapter.clearItem()
+            mAdapter.clearItem()
             viewModel.currentOrder = "rating"
             viewModel.getSearch(lastQuery, "rating") // rating: 높은 평점에서 낮은 평점순으로 리소스가 정렬됩니다.
         }
@@ -126,18 +126,18 @@ class SearchFragment : Fragment(), OnClickListener {
         viewModel.searchResults.observe(viewLifecycleOwner) { items ->
             Log.d("iswork?","work")
             Log.d("iswork?",items.toString())
-            adapter.clearItem()
-            adapter.items.addAll(items)
-            adapter.notifyDataSetChanged()
+            mAdapter.clearItem()
+            mAdapter.items.addAll(items)
+            mAdapter.notifyDataSetChanged()
         }
 
         sharedViewModel.unlikedItemsId.observe(viewLifecycleOwner) { videoIds ->
             videoIds.forEach { videoId ->
-                val targetItem = adapter.items.find { it.videoId == videoId }
+                val targetItem = mAdapter.items.find { it.videoId == videoId }
                 targetItem?.let {
                     it.liked = false
-                    val targetItemIndex = adapter.items.indexOf(it)
-                    adapter.notifyItemChanged(targetItemIndex)
+                    val targetItemIndex = mAdapter.items.indexOf(it)
+                    mAdapter.notifyItemChanged(targetItemIndex)
                 }
             }
             sharedViewModel.clearItemUrl()
