@@ -39,7 +39,7 @@
 `주성현` : Home Fragment, Bottom navigation View, MVVM, Repository Pattern, API ... 각자 더 추가해주시면 됩니다!<br>
 `안진혁` : 공통된 ID 를 통한 서로 다른 API 값 연결, Detail Fragment ... 각자 더 추가해주시면 됩니다!<br>
 `박세영` : Search Fragment, MyPage Fragment, Infinite ScrollView, Shared View Model<br>
-`유혜정` : PPT 제작 및 디자인 개선 
+`유혜정` : PPT 제작 및 디자인 개선 ... 각자 더 추가해주시면 됩니다! 
 
 ## 참고 자료
 - [노션 자료](https://teamsparta.notion.site/88-8-920d10d4dd5f4ee5a6efb8e28e00e61b)
