@@ -22,7 +22,9 @@
     - `Bottom Navigation View`
     - `Shared Preference`
     - `Coroutine`
+
 - 기술 스택<br>
+<br>
 <img src="https://img.shields.io/badge/android-34A853?style=for-the-badge&logo=android&logoColor=white">
 <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=Git&logoColor=white">
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
