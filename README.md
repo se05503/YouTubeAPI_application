@@ -35,13 +35,26 @@
 
  
 ## 기능 설명
-- 가가가
+<img src="https://github.com/juseonghyun/SSGtube/assets/115936076/d4fabdd7-7bc3-4e86-a007-67203285c288" width="200" height="400"/><br>
+<img src="https://github.com/juseonghyun/SSGtube/assets/115936076/0362b40f-5a6b-49a7-b4ac-f3e542947fe6" width="200" height="400"/><br>
+<img src="https://github.com/juseonghyun/SSGtube/assets/115936076/bf93add9-6859-4b37-8174-53c8fba5d190" width="200" height="400"/><br>
+<img src="https://github.com/juseonghyun/SSGtube/assets/115936076/5fe79faf-c7b5-47e6-8cf6-cc6df3dd82a1" width="200" height="400"/><br>
+<img src="https://github.com/juseonghyun/SSGtube/assets/115936076/39c0665e-bc20-4d88-b807-e7393ee11613" width="200" height="400"/><br>
+<img src="https://github.com/juseonghyun/SSGtube/assets/115936076/b271327b-12a3-4a19-a332-e189c3aaec23" width="200" height="400"><br>
+<img src="https://github.com/juseonghyun/SSGtube/assets/115936076/b1ff5e75-a868-494d-8729-222aad97d4ba" width="200" height="400">
 
 ## 팀원 소개
-`주성현` : Home Fragment, Bottom navigation View, MVVM, Repository Pattern, API ... 각자 더 추가해주시면 됩니다!<br>
-`안진혁` : 공통된 ID 를 통한 서로 다른 API 값 연결, Detail Fragment ... 각자 더 추가해주시면 됩니다!<br>
-`박세영` : Search Fragment, MyPage Fragment, Infinite ScrollView, Shared View Model<br>
-`유혜정` : PPT 제작 및 디자인 개선 ... 각자 더 추가해주시면 됩니다! 
+`주성현`
+>  Home Fragment, Bottom navigation View, MVVM, Repository Pattern, API ... 각자 더 추가해주시면 됩니다!<br>
+
+`안진혁`
+>  공통된 ID 를 통한 서로 다른 API 값 연결, Detail Fragment ... 각자 더 추가해주시면 됩니다!<br>
+
+`박세영`
+> Search Fragment, MyPage Fragment, Infinite ScrollView, Shared View Model<br>
+
+`유혜정` 
+> PPT 제작 및 앱 디자인 개선 ... 각자 더 추가해주시면 됩니다! 
 
 ## 참고 자료
 - [노션 자료](https://teamsparta.notion.site/88-8-920d10d4dd5f4ee5a6efb8e28e00e61b)
