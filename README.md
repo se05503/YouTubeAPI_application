@@ -37,40 +37,72 @@
 
  
 ## 기능 설명
-<div>
-<img src="https://github.com/juseonghyun/SSGtube/assets/115936076/d4fabdd7-7bc3-4e86-a007-67203285c288" width="200" height="400"/>
-<p align="right">안녕</p>
-</div>
 
-<div>
-<img src="https://github.com/juseonghyun/SSGtube/assets/115936076/0362b40f-5a6b-49a7-b4ac-f3e542947fe6" width="200" height="400"/><br>
-<p align="right">설명</p>
-</div>
-
-<div>
-<img src="https://github.com/juseonghyun/SSGtube/assets/115936076/bf93add9-6859-4b37-8174-53c8fba5d190" width="200" height="400"/><br>
-<p align="right">설명</p>
-</div>
-
-<div>
-<img src="https://github.com/juseonghyun/SSGtube/assets/115936076/5fe79faf-c7b5-47e6-8cf6-cc6df3dd82a1" width="200" height="400"/><br>
-<p align="right">설명</p>
-</div>
-
-<div>
-<img src="https://github.com/juseonghyun/SSGtube/assets/115936076/39c0665e-bc20-4d88-b807-e7393ee11613" width="200" height="400"/><br>
-<p align="right">설명</p>
-</div>
-
-<div>
-<img src="https://github.com/juseonghyun/SSGtube/assets/115936076/b271327b-12a3-4a19-a332-e189c3aaec23" width="200" height="400"><br>
-<p align="right">설명</p>
-</div>
-
-<div>
-<img src="https://github.com/juseonghyun/SSGtube/assets/115936076/b1ff5e75-a868-494d-8729-222aad97d4ba" width="200" height="400">
-<p align="right">설명</p>
-</div>
+<table>
+    <tr>
+        <td>
+            <img src="https://github.com/juseonghyun/SSGtube/assets/115936076/d4fabdd7-7bc3-4e86-a007-67203285c288" width="200" height="400"/>
+            <p align="center">GIF이미지1</p>
+        </td>
+        <td>
+            <p align="center">GIF이미지1 설명</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="https://github.com/juseonghyun/SSGtube/assets/115936076/0362b40f-5a6b-49a7-b4ac-f3e542947fe6" width="200" height="400"/>
+            <p align="center">GIF이미지2</p>
+        </td>
+        <td>
+            <p align="center">GIF이미지2 설명</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="https://github.com/juseonghyun/SSGtube/assets/115936076/bf93add9-6859-4b37-8174-53c8fba5d190" width="200" height="400"/>
+            <p align="center">GIF이미지3</p>
+        </td>
+        <td>
+            <p align="center">GIF이미지3 설명></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="https://github.com/juseonghyun/SSGtube/assets/115936076/5fe79faf-c7b5-47e6-8cf6-cc6df3dd82a1" width="200" height="400"/>
+            <p align="center">GIF이미지4</p>
+        </td>
+        <td>
+            <p align="center">GIF이미지4 설명</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="https://github.com/juseonghyun/SSGtube/assets/115936076/39c0665e-bc20-4d88-b807-e7393ee11613" width="200" height="400"/>
+            <p align="center">GIF이미지5</p>
+        </td>
+        <td>
+            <p align="center">GIF이미지5 설명</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="https://github.com/juseonghyun/SSGtube/assets/115936076/b271327b-12a3-4a19-a332-e189c3aaec23" width="200" height="400"/>
+            <p align="center">GIF이미지6</p>
+        </td>
+        <td>
+            <p align="center">GIF이미지6 설명</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="https://github.com/juseonghyun/SSGtube/assets/115936076/b1ff5e75-a868-494d-8729-222aad97d4ba" width="200" height="400"/>
+            <p align="center">GIF이미지7</p>
+        </td>
+        <td>
+            <p align="center">GIF이미지7 설명</p>
+        </td>
+    </tr>   
+</table>
 
 ## 팀원 소개 
 |이름|역할 및 기능 분담|
